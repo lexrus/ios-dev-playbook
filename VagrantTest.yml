@@ -1,0 +1,12 @@
+---
+# A playbook for testing all roles.
+- hosts: test
+  sudo: yes
+
+  roles:
+    - role: common
+    
+    - role: laggyluke.add-ssh-keys-from-github
+      add_ssh_keys_from_github:
+        usernames:
+          - lexrus

@@ -1,0 +1,6 @@
+---
+- hosts: all
+  roles:
+    - role: laggyluke.add-ssh-keys-from-github
+      add_ssh_keys_from_github:
+        usernames: "{{ github_usernames }}"

@@ -1,0 +1,5 @@
+---
+name: 'default'
+ssh_user: 'root'
+upgrade_to_wheezy: true
+upgrade_to_testing: false

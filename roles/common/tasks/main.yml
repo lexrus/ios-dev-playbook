@@ -1,0 +1,90 @@
+---
+
+# Upgrade
+
+- name: upgrade sources list to wheezy
+  action: replace dest=/etc/apt/sources.list regexp='(\s+)squeeze(\s+.*)?$' replace='\1wheezy\2' backup=yes
+  when: upgrade_to_wheezy
+  tags:
+    - common
+    - upgrade
+
+- name: upgrade sources list to testing(jessie)
+  action: replace dest=/etc/apt/sources.list regexp='(\s+)(squeeze|wheezy)(\s+.*)?$' replace='\1testing\3' backup=yes
+  when: upgrade_to_testing
+  tags:
+    - common
+    - upgrade
+
+# Update all packages to the latest version
+- apt: upgrade=dist
+  when: upgrade_to_wheezy or upgrade_to_testing
+  tags:
+    - common
+    - upgrade
+
+# Update apt cache
+
+- apt: update_cache=yes
+  tags:
+    - common
+    - upgrade
+
+# Setup default DNS
+
+- name: setup default dns
+  action: lineinfile dest=/etc/resolv.conf line="nameserver=8.8.8.8" backup=yes
+  tags:
+    - common
+    - dns
+
+# Install common packages
+
+- name: install editor
+  action: apt pkg={{ item }} state=installed
+  with_items:
+    - vim
+  tags:
+    - common
+    - editor
+
+- name: install version control tools
+  action: apt pkg={{ item }} state=installed
+  with_items:
+    - git
+  tags:
+    - common
+    - vcs
+
+- name: install common python packages
+  action: apt pkg={{ item }} state=installed
+  with_items:
+    - python-setuptools
+    - python-pip
+  tags:
+    - common
+    - python
+
+
+- name: install supervisor
+  action: apt pkg={{ item }} state=installed
+  with_items:
+    - supervisor
+  tags:
+    - common
+    - python
+    - supervisor
+
+- name: install virtualenv
+  action: pip name={{ item }} state=present
+  with_items:
+    - virtualenv
+  tags:
+    - common
+    - python
+
+# Install auto authorize keys
+- name: add keys to remote
+  authorized_key: user={{ ssh_user }} key="{{ item }}"
+  with_file:
+    - ../../../public_keys/id_rsa.pub
