@@ -1,1 +1,2 @@
 laggyluke.add-ssh-keys-from-github
+hiddentao.swapmem
