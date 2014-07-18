@@ -1,2 +1,11 @@
 laggyluke.add-ssh-keys-from-github
 hiddentao.swapmem
+
+# https://galaxy.ansible.com/list#/roles/1068
+# ktosiek.supervisord,v1.0.0
+
+# https://galaxy.ansible.com/list#/roles/984
+# kevinlebrun.common
+
+# https://galaxy.ansible.com/list#/roles/781
+# mtpereira.docker-debian

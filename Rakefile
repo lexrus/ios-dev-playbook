@@ -1,6 +1,6 @@
 desc "Install dependencies"
 task :init do
-  exec "sudo ansible-galaxy install --role-file=ansible_galaxy_dependencies.txt"
+  exec "sudo ansible-galaxy install --role-file=ansible_galaxy_dependencies.txt --ignore-errors"
 end
 
 desc "Upgrade to wheezy"
