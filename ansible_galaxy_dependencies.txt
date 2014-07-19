@@ -1,6 +1,28 @@
 laggyluke.add-ssh-keys-from-github
 hiddentao.swapmem
 
+# Redis
+
+# MySQL
+
+# Nginx
+
+# Countly
+
+# Redmine
+
+# https://galaxy.ansible.com/list#/roles/715
+# rafaltrojniak.munin
+
+# https://github.com/inboxapp/inbox
+
+# https://github.com/strongloop/loopback
+
+# https://github.com/TheRealKerni/QuincyKit/tree/develop/server
+
+# https://galaxy.ansible.com/list#/roles/1042
+# raulkite.gitlab
+
 # https://galaxy.ansible.com/list#/roles/1068
 # ktosiek.supervisord,v1.0.0
 
