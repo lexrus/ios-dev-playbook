@@ -9,6 +9,7 @@ localhost              ansible_connection=local
 
 [cloud]
 cloud001.example.com  ansible_ssh_user=root  ansible_ssh_private_key_file=~/.ssh/some_key
+cloud002.aliyun.com upgrade_source_use_template=true debian_release=testing
 
 [digitalocean]
 do001.example.com

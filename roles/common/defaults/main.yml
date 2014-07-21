@@ -1,5 +1,10 @@
 ---
 name: 'default'
 ssh_user: 'root'
-upgrade_to_wheezy: true
-upgrade_to_testing: false
+
+upgrade_source_use_template: false
+debian_release: 'wheezy'
+debian_mirror_host: 'mirrors.aliyun.com'
+
+replace_source_to_testing: fasle
+replace_source_to_wheezy: false

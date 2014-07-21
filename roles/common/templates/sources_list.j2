@@ -1,0 +1,6 @@
+deb http://{{ debian_mirror_host }}/debian/ {{ debian_release }} main non-free contrib
+deb http://{{ debian_mirror_host }}/debian/ {{ debian_release }}-proposed-updates main non-free contrib
+deb-src http://{{ debian_mirror_host }}/debian/ {{ debian_release }} main non-free contrib
+deb-src http://{{ debian_mirror_host }}/debian/ {{ debian_release }}-proposed-updates main non-free contrib
+deb http://ftp.debian.org/debian/ {{ debian_release }}-updates main contrib non-free
+deb http://security.debian.org/ {{ debian_release }}/updates main contrib non-free
