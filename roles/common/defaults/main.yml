@@ -1,10 +1,11 @@
 ---
 name: 'default'
 ssh_user: 'root'
+use_google_dns: false
 
 upgrade_source_use_template: false
 debian_release: 'wheezy'
 debian_mirror_host: 'mirrors.aliyun.com'
 
-replace_source_to_testing: fasle
+replace_source_to_testing: false
 replace_source_to_wheezy: false
