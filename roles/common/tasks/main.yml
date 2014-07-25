@@ -37,6 +37,14 @@
     - common
     - update
 
+# Setup hostname
+
+- name: setup hostname
+  hostname: name={{ inventory_hostname }}
+  tags:
+    - common
+    - hostname
+
 # Setup default DNS
 
 - name: setup default dns
