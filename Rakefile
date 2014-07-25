@@ -15,12 +15,22 @@ end
 
 desc "Add SSH keys from GitHub"
 task :github_keys do
-  exec "ansible_playbook 002_add_ssh_keys_from_github.yml -l cloud"
+  exec "ansible-playbook 002_add_ssh_keys_from_github.yml -l cloud"
 end
 
 desc "Set swap on"
 task :swapon do
   exec "ansible-playbook 003_swapon.yml"
+end
+
+desc "Install cow server"
+task :cow do
+  exec "ansible-playbook 020_cow_backend.yml"
+end
+
+desc "Install shadowsocks server"
+task :shadowsocks do
+  exec "ansible-playbook 022_shadowsocks.yml"
 end
 
 namespace :test do
