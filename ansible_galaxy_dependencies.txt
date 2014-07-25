@@ -1,6 +1,9 @@
 laggyluke.add-ssh-keys-from-github
 hiddentao.swapmem
 
+geerlingguy.munin-node
+# https://galaxy.ansible.com/list#/roles/554
+
 # Redis
 
 # MySQL
