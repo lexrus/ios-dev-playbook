@@ -22,13 +22,19 @@ ln001.example.com
 do00[1..3].example.com
 
 [cow_backend:vars]
-cow_backend_port: 9635
-cow_password: "cow-very-long-password-5123561"
+cow_backend_port=9635
+cow_password=cow-very-long-password-5123561
 
 [cow_frontend]
 localhost
 
 [cow_frontend:vars]
-cow_frontend_port: 9820
-cow_password: "cow-very-long-password-5123561"
-cow_backend_servers: ["do001.example.com", "do002.example.com", "do003.example.com"]
+cow_frontend_port=9820
+cow_password=cow-very-long-password-5123561
+cow_backend_servers=["do001.example.com", "do002.example.com", "do003.example.com"]
+
+[shadowsocks]
+ln001.example.com
+
+[shadowsocks:vars]
+password=superlongpassword203985

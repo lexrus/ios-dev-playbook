@@ -1,0 +1,6 @@
+---
+- hosts: shadowsocks
+
+  roles:
+    - common
+    - shadowsocks

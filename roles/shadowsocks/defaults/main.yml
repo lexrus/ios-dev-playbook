@@ -1,0 +1,5 @@
+---
+name: 'default'
+port : 5367
+password: "ssserver-very-long-password-875261451"
+method: "aes-256-cfb"
