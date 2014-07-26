@@ -1,0 +1,10 @@
+---
+- hosts: all
+
+  roles:
+    - common
+    - role: geerlingguy.munin-node
+      munin_node_plugins:
+        - name: uptime
+        - name: if_eth0
+          plugin: if_

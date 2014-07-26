@@ -1,6 +1,6 @@
 desc "Install dependencies"
 task :init do
-  exec "sudo ansible-galaxy install --role-file=ansible_galaxy_dependencies.txt --ignore-errors"
+  exec "sudo ansible-galaxy install --role-file=ansible_galaxy_dependencies.txt --ignore-errors --force"
 end
 
 desc "Upgrade to wheezy"
@@ -37,8 +37,7 @@ namespace :test do
 
   desc "Test all"
   task :all do
-    `vagrant up`
-    `vagrant provision`
+    exec "vagrant up || vagrant provision"
   end
 
 end

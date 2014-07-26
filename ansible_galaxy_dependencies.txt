@@ -4,6 +4,9 @@ hiddentao.swapmem
 geerlingguy.munin-node
 # https://galaxy.ansible.com/list#/roles/554
 
+rafaltrojniak.munin
+# https://galaxy.ansible.com/list#/roles/715
+
 # Redis
 
 # MySQL
@@ -13,9 +16,6 @@ geerlingguy.munin-node
 # Countly
 
 # Redmine
-
-# https://galaxy.ansible.com/list#/roles/715
-# rafaltrojniak.munin
 
 # https://github.com/inboxapp/inbox
 

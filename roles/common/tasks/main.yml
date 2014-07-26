@@ -104,9 +104,3 @@
   tags:
     - common
     - python
-
-# Install auto authorize keys
-- name: add keys to remote
-  authorized_key: user={{ ssh_user }} key="{{ item }}"
-  with_file:
-    - ../../../public_keys/id_rsa.pub
