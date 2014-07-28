@@ -1,0 +1,20 @@
+---
+
+- name: install nginx
+  action: apt pkg=nginx state=installed
+  tags:
+    - countly
+    - nginx
+
+- name: install build-essential
+  action: apt pkg=build-essential state=installed
+  tags:
+    - countly
+    - build-essential
+
+- name: clone countly
+  git: repo=https://github.com/Countly/countly-server
+       dest=/opt/countly
+  tags:
+    - countly
+    - clone

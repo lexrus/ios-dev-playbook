@@ -2,6 +2,7 @@
 name: 'default'
 ssh_user: 'root'
 use_google_dns: false
+set_hostname: true
 
 upgrade_source_use_template: false
 debian_release: 'wheezy'

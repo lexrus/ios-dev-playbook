@@ -1,6 +1,12 @@
 laggyluke.add-ssh-keys-from-github
 hiddentao.swapmem
 
+Ansibles.nodejs
+# https://galaxy.ansible.com/list#/roles/557
+
+lesmyrmidons.mongodb
+# https://galaxy.ansible.com/list#/roles/959
+
 RaulKite.gitlab
 # https://galaxy.ansible.com/list#/roles/1042
 

@@ -1,6 +1,6 @@
 desc "Install dependencies"
 task :init do
-  exec "sudo ansible-galaxy install --role-file=ansible_galaxy_dependencies.txt --ignore-errors --force"
+  exec "sudo ansible-galaxy install --role-file=ansible_galaxy_dependencies.txt --ignore-errors"
 end
 
 desc "Upgrade to wheezy"
@@ -21,6 +21,11 @@ end
 desc "Set swap on"
 task :swapon do
   exec "ansible-playbook 003_swapon.yml"
+end
+
+desc "Install Countly server"
+task :countly do
+  exec "ansible-playbook 012_countly.yml -l countly"
 end
 
 desc "Install GitLab server"

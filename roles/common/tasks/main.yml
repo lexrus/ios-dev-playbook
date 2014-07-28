@@ -41,6 +41,7 @@
 
 - name: setup hostname
   hostname: name={{ inventory_hostname }}
+  when: set_hostname
   tags:
     - common
     - hostname
@@ -83,6 +84,12 @@
   tags:
     - common
     - ranger
+
+- name: install imagemagick
+  action: apt pkg=imagemagick state=installed
+  tags:
+    - common
+    - imagemagick
 
 - name: install common python packages
   action: apt pkg={{ item }} state=installed

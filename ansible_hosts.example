@@ -18,6 +18,9 @@ do001.example.com
 [linode]
 ln001.example.com
 
+[countly]
+countly.A_HOST_WITH_LARGE_MEMORY.com ansible_ssh_user=root set_hostname=false
+
 [gitlab]
 git.A_HOST_WITH_LARGE_MEMORY.com ansible_ssh_user=root gitlab_db_passwd=94572qcniow13
 

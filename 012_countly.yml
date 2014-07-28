@@ -1,0 +1,8 @@
+---
+- hosts: all
+
+  roles:
+    - common
+    - Ansibles.nodejs
+    - lesmyrmidons.mongodb
+    - countly
