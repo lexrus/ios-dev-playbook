@@ -4,5 +4,5 @@
     - role: bcoe.nagios
       nagios_user: admin
       nagios_password: super_long_passwd_5284351
-      nagios_host: {{ nagios_host }}
+      nagios_host: "{{ nagios_host }}"
         usernames: "{{ github_usernames }}"

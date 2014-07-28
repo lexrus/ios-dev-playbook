@@ -1,0 +1,7 @@
+---
+- hosts: sensu_server
+
+  roles:
+    - common
+    - role: mayeu.sensu
+      sensu_install_client: false

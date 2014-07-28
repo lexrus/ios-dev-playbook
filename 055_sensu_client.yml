@@ -1,0 +1,8 @@
+---
+- hosts: all
+
+  roles:
+    - common
+    - role: mayeu.sensu
+      sensu_install_server: false
+      sensu_client_hostname: {{ inventory_hostname }}

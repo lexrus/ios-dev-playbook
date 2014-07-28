@@ -7,6 +7,9 @@ geerlingguy.munin-node
 rafaltrojniak.munin
 # https://galaxy.ansible.com/list#/roles/715
 
+Mayeu.sensu
+# https://github.com/Mayeu/ansible-playbook-sensu
+
 # Redis
 
 # MySQL
