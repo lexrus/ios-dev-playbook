@@ -78,6 +78,12 @@
     - common
     - mosh
 
+- name: install ranger
+  action: apt pkg=ranger state=installed
+  tags:
+    - common
+    - ranger
+
 - name: install common python packages
   action: apt pkg={{ item }} state=installed
   with_items:

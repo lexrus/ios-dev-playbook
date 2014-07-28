@@ -23,6 +23,11 @@ task :swapon do
   exec "ansible-playbook 003_swapon.yml"
 end
 
+desc "Install GitLab server"
+task :gitlab do
+  exec "ansible-playbook 010_gitlab.yml -l gitlab"
+end
+
 desc "Install cow server"
 task :cow do
   exec "ansible-playbook 020_cow_backend.yml"

@@ -18,6 +18,9 @@ do001.example.com
 [linode]
 ln001.example.com
 
+[gitlab]
+git.A_HOST_WITH_LARGE_MEMORY.com ansible_ssh_user=root gitlab_db_passwd=94572qcniow13
+
 [cow_backend]
 do00[1..3].example.com
 

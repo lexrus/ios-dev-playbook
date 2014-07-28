@@ -1,0 +1,12 @@
+---
+- hosts: all
+
+  pre_tasks:
+    - name: apt get update
+      apt: update_cache=yes
+
+  vars:
+    gitlab_hostname: "{{ inventory_hostname }}"
+
+  roles:
+    - role: RaulKite.gitlab
