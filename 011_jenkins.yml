@@ -1,0 +1,16 @@
+---
+- hosts: all
+
+  roles:
+    - Stouts.jenkins
+
+  vars:
+      jenkins_proxy: nginx
+      jenkins_proxy_hostname: "{{ inventory_hostname }}"
+      jenkins_ssh_key_file: "{{resources_to}}/resources/jenkins/ssh_key"
+      jenkins_ssh_known_hosts:
+        - bitbucket.org
+        - github.com
+      jenkins_jobs:
+        - name: test
+          action: delete

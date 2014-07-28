@@ -28,6 +28,11 @@ task :gitlab do
   exec "ansible-playbook 010_gitlab.yml -l gitlab"
 end
 
+desc "Install Jenkins server"
+task :jenkins do
+  exec "ansible-playbook 011_jenkins.yml -l jenkins"
+end
+
 desc "Install cow server"
 task :cow do
   exec "ansible-playbook 020_cow_backend.yml"

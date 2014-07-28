@@ -21,6 +21,9 @@ ln001.example.com
 [gitlab]
 git.A_HOST_WITH_LARGE_MEMORY.com ansible_ssh_user=root gitlab_db_passwd=94572qcniow13
 
+[jenkins]
+jenkins.A_HOST_WITH_LARGE_MEMORY.com jenkins_ssh_known_hosts=["git.A_HOST_WITH_LARGE_MEMORY.com", "github.com", "bitbucket.com"]
+
 [cow_backend]
 do00[1..3].example.com
 

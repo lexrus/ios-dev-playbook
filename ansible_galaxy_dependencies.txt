@@ -4,6 +4,11 @@ hiddentao.swapmem
 RaulKite.gitlab
 # https://galaxy.ansible.com/list#/roles/1042
 
+Stouts.jenkins
+# https://galaxy.ansible.com/list#/roles/858
+
+Stouts.resources
+
 geerlingguy.munin-node
 # https://galaxy.ansible.com/list#/roles/554
 
