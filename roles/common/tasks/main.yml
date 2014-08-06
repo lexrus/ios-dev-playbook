@@ -57,6 +57,12 @@
 
 # Install common packages
 
+- name: install build-essential
+  action: apt pkg=build-essential state=installed
+  tags:
+    - common
+    - build
+
 - name: install editor
   action: apt pkg={{ item }} state=installed
   with_items:
@@ -91,6 +97,15 @@
     - common
     - imagemagick
 
+- name: install sendmail
+  action: apt pkg={{ item }} state=installed
+  with_items:
+    - sendmail-bin
+    - sendmail
+  tags:
+    - common
+    - sendmail
+
 - name: install common python packages
   action: apt pkg={{ item }} state=installed
   with_items:
@@ -99,7 +114,6 @@
   tags:
     - common
     - python
-
 
 - name: install supervisor
   action: apt pkg={{ item }} state=installed

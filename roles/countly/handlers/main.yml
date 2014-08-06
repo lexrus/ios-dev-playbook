@@ -1,0 +1,16 @@
+- name: reload supervisor
+  shell: /etc/init.d/supervisor force-reload
+  notify:
+    - "restart countly-server"
+  tags:
+    - countly
+
+- name: restart countly-server
+  action: supervisorctl name=countly-server state=restarted
+  tags:
+    - countly
+
+- name: reload nginx
+  service: name=nginx state=reloaded
+  tags:
+    - countly
