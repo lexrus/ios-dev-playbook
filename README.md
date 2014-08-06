@@ -1,6 +1,6 @@
 # ios-dev-playbook
 
-这是一个 [Ansible](http://www.ansible.com) playbook 的仓库，可以用它们快速地配置好你的 Debian Wheezy(当然 testing 一般也行)，安装如下服务：
+这是一个 [Ansible](http://www.ansible.com) playbook 的仓库，可以用它们快速地配置好你的 Debian Wheezy(当然 testing 也行)，同时可以用来安装以下服务端：
 
 - [x] Countly Server (master)
 - [x] GitLab 7.1
@@ -23,19 +23,24 @@
 
 ## 已知问题
 
-1. 从源码安装 nodejs 非常慢。
+1. 从源码安装 nodejs 非常慢
 
 ## 测试
 
-测试需要 Vagrant/VirtualBox，直接 ```rake test``` 就会拉一个 ubuntu/trusty64 的镜像试着跑大部分配置。
+测试需要 Vagrant，直接 ```rake test``` 就会拉一个 ubuntu/trusty64 的镜像试着跑大部分配置。
 
 ## 赞助
 
 欢迎你使用我的推广链接注册自己的虚拟服务器：
 
 [我的 DigitalOcean 推广链接](https://www.digitalocean.com/?refcode=3eb5cf371fc9) (使用优惠码 ```10TOSHIP``` 注册就送 10 刀)
+
 [我的 Lindoe 推广链接](http://www.linode.com/?r=9f144941e797d495a10c2841c3137ce1acde5f15)
 
 ## 为什么不用 Chef 或 Puppet?
 
 因为 Ansible 好上手，我写着写着才发现 Chef 做这事更合适。
+
+## 反馈
+
+请发 issue 或者在 Twitter 上 [@lexrus](https://twitter.com/lexrus)。
