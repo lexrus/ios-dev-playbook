@@ -10,9 +10,11 @@
     - role: "cow/frontend"
     - role: shadowsocks
     # - role: hiddentao.swapmem
-    - role: geerlingguy.munin-node
-
     - role: laggyluke.add-ssh-keys-from-github
       add_ssh_keys_from_github:
         usernames:
           - lexrus
+    - role: geerlingguy.munin-node
+    - Ansibles.nodejs
+    - lesmyrmidons.mongodb
+    - countly
