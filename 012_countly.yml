@@ -3,6 +3,6 @@
 
   roles:
     - common
-    - Ansibles.nodejs
+    - nodejs
     - lesmyrmidons.mongodb
     - countly

@@ -1,0 +1,37 @@
+---
+
+- name: install curl
+  apt: pkg=curl state=present
+  tags:
+    - nodejs
+    - curl
+
+- name: check node
+  raw: which nodejs
+  register: node_path
+  tags:
+    - nodejs
+    - check
+
+- name: setup nodejs from nodesource
+  raw: curl -sL https://deb.nodesource.com/setup | sudo bash -
+  when: node_path.stdout.find('nodejs') == -1
+  tags:
+    - nodejs
+    - nodesource
+
+- name: install nodejs
+  apt: pkg={{ item }} state=installed
+  when: node_path.stdout.find('nodejs') == -1
+  with_items:
+    - nodejs
+    - npm
+  tags:
+    - nodejs
+    - install
+
+- name: link nodejs to node
+  file: src=/usr/bin/nodejs dest=/usr/bin/node state=link mode=755
+  tags:
+    - nodejs
+    - link

@@ -6,15 +6,9 @@
   roles:
     - role: common
     - role: cow
-    - role: "cow/backend"
-    - role: "cow/frontend"
+    - role: cow/backend
+    - role: cow/frontend
     - role: shadowsocks
-    # - role: hiddentao.swapmem
-    - role: laggyluke.add-ssh-keys-from-github
-      add_ssh_keys_from_github:
-        usernames:
-          - lexrus
-    - role: geerlingguy.munin-node
-    - Ansibles.nodejs
-    - lesmyrmidons.mongodb
-    - countly
+    - role: nodejs
+    - role: lesmyrmidons.mongodb
+    - role: countly

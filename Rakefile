@@ -10,7 +10,7 @@ end
 
 desc "Install common utitilies"
 task :common do
-  exec "ansible-playbook 001_install_common_utilities.yml"
+  exec "ansible-playbook 001_common_utilities.yml"
 end
 
 desc "Add SSH keys from GitHub"
@@ -48,11 +48,7 @@ task :shadowsocks do
   exec "ansible-playbook 022_shadowsocks.yml"
 end
 
-namespace :test do
-
-  desc "Test all"
-  task :all do
-    exec "vagrant up || vagrant provision"
-  end
-
+desc "Test"
+task :test do
+  exec "vagrant up --no-provision && vagrant provision"
 end

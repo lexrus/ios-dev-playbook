@@ -8,5 +8,4 @@ upgrade_source_use_template: false
 debian_release: 'wheezy'
 debian_mirror_host: 'mirrors.aliyun.com'
 
-replace_source_to_testing: false
 replace_source_to_wheezy: false

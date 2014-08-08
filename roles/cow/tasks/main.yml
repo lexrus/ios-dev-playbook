@@ -10,30 +10,38 @@
     - cow
     - python
 
-
 - name: install supervisor
   action: apt pkg={{ item }} state=installed
   with_items:
     - supervisor
   tags:
     - cow
-    - python
     - supervisor
 
 - name: install curl
   action: apt pkg=curl state=installed
   tags:
     - cow
+    - curl
+
+- name: check cow
+  raw: which /usr/local/bin/cow
+  register: cow_path
+  tags:
+    - cow
+    - check
 
 - name: install cow
   raw: export COW_INSTALLDIR=/usr/local/bin/; curl -L git.io/cow | bash
+  when: cow_path.stdout.find('cow') == -1
   tags:
     - cow
-
+    - install
 
 - name: add cow.conf to supervisor
   template: src=cow.conf.j2 dest=/etc/supervisor/conf.d/cow.conf
   tags:
     - cow
+    - config
   notify:
     - reload supervisor

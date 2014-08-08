@@ -16,23 +16,16 @@
     - common
     - upgrade
 
-- name: upgrade sources list to testing(jessie)
-  action: replace dest=/etc/apt/sources.list regexp='(\s+)(wheezy)(\s+.*)?$' replace='\1testing\3' backup=yes
-  when: upgrade_source_use_template == false and replace_source_to_testing
-  tags:
-    - common
-    - upgrade
-
 # Update all packages to the latest version
 - apt: upgrade=dist
-  when: upgrade_source_use_template or replace_source_to_testing or replace_source_to_wheezy 
+  when: upgrade_source_use_template or replace_source_to_wheezy 
   tags:
     - common
     - upgrade
 
 # Update apt cache
 
-- apt: update_cache=yes
+- apt: update_cache=yes cache_valid_time=3600
   tags:
     - common
     - update
