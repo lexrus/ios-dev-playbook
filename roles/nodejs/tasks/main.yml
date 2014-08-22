@@ -9,6 +9,7 @@
 - name: check node
   raw: which nodejs
   register: node_path
+  ignore_errors: yes
   tags:
     - nodejs
     - check

@@ -25,8 +25,9 @@
     - curl
 
 - name: check cow
-  raw: which /usr/local/bin/cow
+  raw: which cow
   register: cow_path
+  ignore_errors: yes
   tags:
     - cow
     - check
