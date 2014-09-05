@@ -1,13 +1,12 @@
 ---
 - hosts: all
 
-  pre_tasks:
-    - name: apt get update
-      apt: update_cache=yes
-
   vars:
-    gitlab_hostname: "{{ inventory_hostname }}"
-    gitlab_branch: "7-1-stable"
+    gitlab_version: '7.2'
+    gitlab_auto_upgrade: True
+    gitlab_domain: [ '{{ inventory_hostname }}' ]
+    gitlab_signup_enabled: 'false'
+    gitlab_default_theme: '2'
 
   roles:
-    - role: RaulKite.gitlab
+    - role: debops.gitlab

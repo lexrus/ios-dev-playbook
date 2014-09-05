@@ -4,30 +4,30 @@ hiddentao.swapmem
 lesmyrmidons.mongodb
 # https://galaxy.ansible.com/list#/roles/959
 
-RaulKite.gitlab
-# https://galaxy.ansible.com/list#/roles/1042
+debops.gitlab
+# https://github.com/debops/ansible-gitlab
+debops.secret
+debops.etc_services
+debops.ruby
+debops.redis
+debops.mysql
+debops.postgresql
+debops.nginx
+debops.tcpwrappers
 
 Stouts.jenkins
 # https://galaxy.ansible.com/list#/roles/858
 
 Stouts.resources
 
-geerlingguy.munin-node
+# geerlingguy.munin-node
 # https://galaxy.ansible.com/list#/roles/554
 
-rafaltrojniak.munin
+# rafaltrojniak.munin
 # https://galaxy.ansible.com/list#/roles/715
 
-Mayeu.sensu
+# Mayeu.sensu
 # https://github.com/Mayeu/ansible-playbook-sensu
-
-# Redis
-
-# MySQL
-
-# Nginx
-
-# Countly
 
 # Redmine
 
