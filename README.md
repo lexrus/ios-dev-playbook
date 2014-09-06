@@ -3,20 +3,17 @@
 这是一个 [Ansible](http://www.ansible.com) playbook 的仓库，可以用它快速配置好你的 Debian 或 Ubuntu，同时可以用来安装以下服务端(没勾勾的还没好)：
 
 - [x] Countly Server (master)
-- [x] GitLab 7.1
+- [x] GitLab 7.2
 - [x] Shadowsocks
 - [x] COW
 - [ ] Jenkins - 还没测试过
 - [ ] Redmine
-- [ ] Ghost
 - [ ] Wordpress
 - [ ] LoopBack
 - [ ] APNS
 - [ ] Seafile / ownCloud
 - [ ] QuincyKit Server
-- [ ] Munin - 需要么？
-- [ ] Nagios - 不需要么？
-- [ ] Sensu - 真的要这么强大么？
+- [ ] Munin / Sensu
 
 请先阅读 [Ansible 的入门文档](http://docs.ansible.com)，不然遇到问题可能会没有方向。
 如果你用 Mac OS X，建议你在 [Dash](http://kapeli.com/dash) 里安装 Ansible 的文档。
@@ -34,7 +31,8 @@
 ## 已知问题
 
 1. 没有备份功能；
-2. 使用方法应该更无脑，Rakefile 有待改进。
+2. 使用方法应该更无脑，Rakefile 有待改进；
+3. GitLab 可能有问题，最好改用官方的 omni 包。
 
 
 ## 测试
@@ -48,14 +46,14 @@ Vagrant 测试的 roles 都写在 [VagrantTest.yml](https://github.com/lexrus/io
 
 欢迎你使用我的推广链接注册自己的虚拟服务器：
 
-[我的 DigitalOcean 推广链接](https://www.digitalocean.com/?refcode=3eb5cf371fc9) (使用优惠码 ```10TOSHIP``` 注册就送 10 刀) 新加坡和旧金山节点延时都很低，每月 5 刀起。
+[我的 DigitalOcean 推广链接](https://www.digitalocean.com/?refcode=3eb5cf371fc9) 新加坡和旧金山节点延时都很低，每月 5 刀起，通过推广链接注册就送 10 刀。
 
 [我的 Linode 推广链接](http://www.linode.com/?r=9f144941e797d495a10c2841c3137ce1acde5f15) Linode 虽然贵一点(每月 10 刀起)，但是服务非常稳定，性能也不错。
 
 
 ## 为什么不用 Chef 或 Puppet?
 
-Chef 做这事更合适，但是 Ansible 的 YML 相对更容易编写，上手快。
+Chef 做这事更合适，但是 Ansible 的 YAML 相对更容易编写，上手快。
 
 
 ## 反馈
