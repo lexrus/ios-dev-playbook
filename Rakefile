@@ -15,7 +15,7 @@ end
 
 desc "Add SSH keys from GitHub"
 task :github_keys do
-  exec "ansible-playbook 002_add_ssh_keys_from_github.yml -l cloud"
+  exec "ansible-playbook 002_ssh_keys_from_github.yml -l cloud"
 end
 
 desc "Set swap on"
