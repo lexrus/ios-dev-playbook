@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: 'all:!localhost'
 
   vars:
     gitlab_version: '7.2'
@@ -9,4 +9,5 @@
     gitlab_default_theme: '2'
 
   roles:
+    - role: debops.auth
     - role: debops.gitlab

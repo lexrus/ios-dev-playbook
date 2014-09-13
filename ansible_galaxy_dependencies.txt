@@ -6,6 +6,7 @@ lesmyrmidons.mongodb
 
 debops.gitlab
 # https://github.com/debops/ansible-gitlab
+debops.auth
 debops.secret
 debops.etc_services
 debops.ruby
