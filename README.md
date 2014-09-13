@@ -6,7 +6,7 @@
 - [x] [GitLab](https://github.com/gitlabhq/gitlabhq) 7.2 (用户名: "root", 初始密码: "5iveL!fe")
 - [x] [Shadowsocks](https://github.com/clowwindy/shadowsocks)
 - [x] [COW](https://github.com/cyfdecyf/cow)
-- [x] [Jenkins](http://jenkins-ci.org)
+- [x] [Jenkins](http://jenkins-ci.org) (默认在 8080 端口，设置在 `011_jenkins.yml`)
 - [ ] [Wordpress](http://wordpress.org)
 - [ ] [Ghost](https://github.com/TryGhost/Ghost)
 - [ ] [LoopBack](http://loopback.io)
@@ -32,7 +32,8 @@
 
 1. 暂时没有备份策略;
 2. 各个服务的使用方法这里就不赘述了，我在上面的列表里加了相应的链接;
-3. GitLab 对内存有一定要求，建议使用最少 1G 内存的主机，不过我在执行 GitLab 的 role 前加了设置 swap 等于两倍内存的 role，一般 512M 内存的 VPS 也能撑住 5 人以下的小团队。
+3. GitLab 对内存有一定要求，建议使用最少 1G 内存的主机，不过我在执行 GitLab 的 role 前加了设置 swap 等于两倍内存的 role，一般 512M 内存的 VPS 也能撑住 5 人以下的小团队;
+4. 建议 Web 服务不要装在一起。
 
 
 ## 测试
