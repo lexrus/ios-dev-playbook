@@ -1,6 +1,7 @@
 desc "Install dependencies"
 task :init do
-  exec "sudo ansible-galaxy install --role-file=ansible_galaxy_dependencies.txt --ignore-errors"
+  exec "ansible-galaxy install --ignore-errors --force " \
+    " --role-file=ansible_galaxy_dependencies.txt"
 end
 
 desc "Upgrade to wheezy"
@@ -46,6 +47,11 @@ end
 desc "Install shadowsocks server"
 task :shadowsocks do
   exec "ansible-playbook 022_shadowsocks.yml"
+end
+
+desc "Install Ghost"
+task :ghost do
+  exec "ansible-playbook 030_ghost.yml -l ghost"
 end
 
 desc "Test"

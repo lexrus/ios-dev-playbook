@@ -2,18 +2,18 @@
 
 这是一个 [Ansible](http://www.ansible.com) playbook 的仓库，可以用它快速配置好你的 Debian 或 Ubuntu，同时可以用来安装以下服务端(没勾勾的还没好)：
 
-- [x] Countly Server (master)
-- [x] GitLab 7.2
-- [x] Shadowsocks
-- [x] COW
-- [ ] Jenkins - 还没测试过
-- [ ] Redmine
-- [ ] Wordpress
-- [ ] LoopBack
-- [ ] APNS
-- [ ] Seafile / ownCloud
-- [ ] QuincyKit Server
-- [ ] Munin / Sensu
+- [x] [Countly Server](https://github.com/Countly/countly-server)
+- [x] [GitLab](https://github.com/gitlabhq/gitlabhq) 7.2 (用户名: "root", 初始密码: "5iveL!fe")
+- [x] [Shadowsocks](https://github.com/clowwindy/shadowsocks)
+- [x] [COW](https://github.com/cyfdecyf/cow)
+- [x] [Jenkins](http://jenkins-ci.org)
+- [ ] [Wordpress](http://wordpress.org)
+- [ ] [Ghost](https://github.com/TryGhost/Ghost)
+- [ ] [LoopBack](http://loopback.io)
+- [ ] [Uniqush](http://uniqush.org) (APNS)
+- [ ] [QuincyKit](https://github.com/therealkerni/QuincyKit)
+- [ ] [Mail-in-a-Box](https://github.com/mail-in-a-box/mailinabox)
+- [ ] [Munin](http://munin-monitoring.org) / [Nagios](http://www.nagios.org) / [Sensu](http://sensuapp.org)
 
 请先阅读 [Ansible 的入门文档](http://docs.ansible.com)，不然遇到问题可能会没有方向。
 如果你用 Mac OS X，建议你在 [Dash](http://kapeli.com/dash) 里安装 Ansible 的文档。
@@ -22,17 +22,16 @@
 ## 使用方法
 
 1. 先安装 Ansible: ```sudo pip install ansible```;
-2. 用 [Ansible Galaxy](https://galaxy.ansible.com) 安装本仓库中的依赖([ansible_galaxy_dependencies.txt](https://github.com/lexrus/ios-dev-playbook/blob/master/ansible_galaxy_dependencies.txt)): ```rake init```;
-3. 复制 ansible_hosts.example 到 ansible_hosts 后修改相应的服务器地址;
-4. 确保你的服务器可以用 [SSH key 验证登录](http://www.debian-administration.org/article/530/SSH_with_authentication_key_instead_of_password);
-5. 安装相应的服务，如 GitLab: ```rake gitlab```，更多命令用 ```rake -T``` 列出。
+2. 复制 ansible_hosts.example 到 ansible_hosts 后修改相应的服务器地址;
+3. 确保你的服务器可以用 [SSH key 验证登录](http://www.debian-administration.org/article/530/SSH_with_authentication_key_instead_of_password);
+4. 安装相应的服务，如 GitLab: ```rake countly```，更多命令用 ```rake -T``` 列出。
+5. 如果遇到问题可以试着更新第三方 roles，用 [Ansible Galaxy](https://galaxy.ansible.com) 更新依赖的 roles([ansible_galaxy_dependencies.txt](https://github.com/lexrus/ios-dev-playbook/blob/master/ansible_galaxy_dependencies.txt)): ```rake init```;</del>
 
 
 ## 已知问题
 
 1. 没有备份功能；
-2. 使用方法应该更无脑，Rakefile 有待改进；
-3. GitLab 可能有问题，最好改用官方的 omni 包。
+2. 使用方法应该更无脑，Rakefile 有待改进。
 
 
 ## 测试
@@ -49,11 +48,6 @@ Vagrant 测试的 roles 都写在 [VagrantTest.yml](https://github.com/lexrus/io
 [我的 DigitalOcean 推广链接](https://www.digitalocean.com/?refcode=3eb5cf371fc9) 新加坡和旧金山节点延时都很低，每月 5 刀起，通过推广链接注册就送 10 刀。
 
 [我的 Linode 推广链接](http://www.linode.com/?r=9f144941e797d495a10c2841c3137ce1acde5f15) Linode 虽然贵一点(每月 10 刀起)，但是服务非常稳定，性能也不错。
-
-
-## 为什么不用 Chef 或 Puppet?
-
-Chef 做这事更合适，但是 Ansible 的 YAML 相对更容易编写，上手快。
 
 
 ## 反馈

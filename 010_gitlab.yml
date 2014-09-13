@@ -1,13 +1,6 @@
 ---
 - hosts: 'all:!localhost'
 
-  vars:
-    gitlab_version: '7.2'
-    gitlab_auto_upgrade: True
-    gitlab_domain: [ '{{ inventory_hostname }}' ]
-    gitlab_signup_enabled: 'false'
-    gitlab_default_theme: '2'
-
   roles:
-    - role: debops.auth
-    - role: debops.gitlab
+    - role: hiddentao.swapmem
+    - role: gitlab

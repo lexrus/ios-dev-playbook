@@ -1,0 +1,25 @@
+---
+- name: Add Jenkins repository's apt key
+  action: apt_key url=http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key
+          state=present
+
+- name: Add Jenkins repository
+  action: apt_repository repo="deb http://pkg.jenkins-ci.org/debian binary/"
+          update_cache=yes
+
+- name: Install Jenkins
+  action: apt pkg={{ item }} state=latest
+  with_items:
+    - jenkins
+
+- name: Configure
+  template: src="{{ item.src }}"
+            dest="{{ item.dest }}"
+            owner=root
+            group=root
+            mode=0644
+  with_items:
+    - { src: "jenkins.j2", dest: "/etc/default/jenkins" }
+
+- name: Restart Jenkins
+  service: name=jenkins state=restarted

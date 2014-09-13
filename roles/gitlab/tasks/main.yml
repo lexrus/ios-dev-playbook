@@ -1,0 +1,49 @@
+---
+
+- name: download GitLab for Debian 7.6
+  get_url: >
+    url=https://downloads-packages.s3.amazonaws.com/debian-7.6/gitlab_7.2.1-omnibus-1_amd64.deb
+    dest=/tmp/
+  when: ansible_os_family == "Debian"
+  tags:
+    - gitlab
+    - download
+
+- name: download GitLab for Ubuntu
+  get_url: >
+    url=https://downloads-packages.s3.amazonaws.com/ubuntu-{{ ansible_distribution_version }}/gitlab_7.2.1-omnibus-1_amd64.deb
+    dest=/tmp/
+  when: ansible_os_family == "Ubuntu"
+  tags:
+    - gitlab
+    - download
+
+- name: install OpenSSH server
+  apt: pkg=openssh-server state=installed
+  tags:
+    - gitlab
+    - openssh-server
+
+- name: install Postfix
+  apt: pkg=postfix state=installed
+  tags:
+    - gitlab
+    - postfix
+
+- name: install GitLab
+  apt: deb=/tmp/gitlab_7.2.1-omnibus-1_amd64.deb state=installed
+  tags:
+    - gitlab
+    - install
+
+- name: copy gitlab config
+  template: src=gitlab.rb.j2 dest=/etc/gitlab/gitlab.rb
+  tags:
+    - gitlab
+    - config
+
+- name: reconfigure
+  command: gitlab-ctl reconfigure
+  tags:
+    - gitlab
+    - reconfigure

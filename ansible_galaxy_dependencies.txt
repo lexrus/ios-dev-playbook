@@ -4,22 +4,8 @@ hiddentao.swapmem
 lesmyrmidons.mongodb
 # https://galaxy.ansible.com/list#/roles/959
 
-debops.gitlab
-# https://github.com/debops/ansible-gitlab
-debops.auth
-debops.secret
-debops.etc_services
-debops.ruby
-debops.redis
-debops.mysql
-debops.postgresql
-debops.nginx
-debops.tcpwrappers
-
-Stouts.jenkins
-# https://galaxy.ansible.com/list#/roles/858
-
-Stouts.resources
+avanov.jenkins
+# https://galaxy.ansible.com/list#/roles/849
 
 # geerlingguy.munin-node
 # https://galaxy.ansible.com/list#/roles/554
@@ -30,19 +16,8 @@ Stouts.resources
 # Mayeu.sensu
 # https://github.com/Mayeu/ansible-playbook-sensu
 
-# Redmine
-
 # https://github.com/inboxapp/inbox
 
 # https://github.com/strongloop/loopback
 
 # https://github.com/TheRealKerni/QuincyKit/tree/develop/server
-
-# https://galaxy.ansible.com/list#/roles/1068
-# ktosiek.supervisord,v1.0.0
-
-# https://galaxy.ansible.com/list#/roles/984
-# kevinlebrun.common
-
-# https://galaxy.ansible.com/list#/roles/781
-# mtpereira.docker-debian
