@@ -28,10 +28,11 @@
 5. 如果遇到问题可以试着更新第三方 roles，用 [Ansible Galaxy](https://galaxy.ansible.com) 更新依赖的 roles([ansible_galaxy_dependencies.txt](https://github.com/lexrus/ios-dev-playbook/blob/master/ansible_galaxy_dependencies.txt)): ```rake init```;</del>
 
 
-## 已知问题
+## 注意事项
 
-1. 没有备份功能；
-2. 使用方法应该更无脑，Rakefile 有待改进。
+1. 暂时没有备份策略;
+2. 各个服务的使用方法这里就不赘述了，我在上面的列表里加了相应的链接;
+3. GitLab 对内存有一定要求，建议使用最少 1G 内存的主机，不过我在执行 GitLab 的 role 前加了设置 swap 等于两倍内存的 role，一般 512M 内存的 VPS 也能撑住 5 人以下的小团队。
 
 
 ## 测试
@@ -45,7 +46,7 @@ Vagrant 测试的 roles 都写在 [VagrantTest.yml](https://github.com/lexrus/io
 
 欢迎你使用我的推广链接注册自己的虚拟服务器：
 
-[我的 DigitalOcean 推广链接](https://www.digitalocean.com/?refcode=3eb5cf371fc9) 新加坡和旧金山节点延时都很低，每月 5 刀起，通过推广链接注册就送 10 刀。
+[我的 DigitalOcean 推广链接](https://www.digitalocean.com/?refcode=3eb5cf371fc9) 新加坡节点延时都很低，每月 5 刀起，通过推广链接注册就送 10 刀。
 
 [我的 Linode 推广链接](http://www.linode.com/?r=9f144941e797d495a10c2841c3137ce1acde5f15) Linode 虽然贵一点(每月 10 刀起)，但是服务非常稳定，性能也不错。
 
