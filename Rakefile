@@ -49,11 +49,6 @@ task :shadowsocks do
   exec "ansible-playbook 022_shadowsocks.yml"
 end
 
-desc "Install Ghost"
-task :ghost do
-  exec "ansible-playbook 030_ghost.yml -l ghost"
-end
-
 desc "Test"
 task :test do
   exec "vagrant up --no-provision && vagrant provision"

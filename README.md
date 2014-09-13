@@ -1,9 +1,11 @@
 # ios-dev-playbook
 
-这是一个 [Ansible](http://www.ansible.com) playbook 的仓库，可以用它快速配置好你的 Debian 或 Ubuntu，同时可以用来安装以下服务端(没勾勾的还没好)：
+这是一个 [Ansible](http://www.ansible.com) playbook 的仓库，可以用它快速配置(`rake common`)好你的 Debian 或 Ubuntu。请先阅读 [Ansible 的入门文档](http://docs.ansible.com)，不然遇到问题可能会没有方向。如果你用 Mac OS X，建议在 [Dash](http://kapeli.com/dash) 里安装 Ansible 的文档。
+
+目前可以安装的服务有(没勾勾的还没好)：
 
 - [x] [Countly Server](https://github.com/Countly/countly-server)
-- [x] [GitLab](https://github.com/gitlabhq/gitlabhq) 7.2 (用户名: "root", 初始密码: "5iveL!fe")
+- [x] [GitLab](https://github.com/gitlabhq/gitlabhq) 7.2.1 (用户名: `root`, 初始密码: `5iveL!fe`)
 - [x] [Shadowsocks](https://github.com/clowwindy/shadowsocks)
 - [x] [COW](https://github.com/cyfdecyf/cow)
 - [x] [Jenkins](http://jenkins-ci.org) (默认在 8080 端口，设置在 `011_jenkins.yml`)
@@ -14,9 +16,6 @@
 - [ ] [QuincyKit](https://github.com/therealkerni/QuincyKit)
 - [ ] [Mail-in-a-Box](https://github.com/mail-in-a-box/mailinabox)
 - [ ] [Munin](http://munin-monitoring.org) / [Nagios](http://www.nagios.org) / [Sensu](http://sensuapp.org)
-
-请先阅读 [Ansible 的入门文档](http://docs.ansible.com)，不然遇到问题可能会没有方向。
-如果你用 Mac OS X，建议你在 [Dash](http://kapeli.com/dash) 里安装 Ansible 的文档。
 
 
 ## 使用方法

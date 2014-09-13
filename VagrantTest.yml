@@ -12,3 +12,4 @@
     - role: nodejs
     - role: lesmyrmidons.mongodb
     - role: countly
+    - role: gitlab
