@@ -8,14 +8,24 @@
     - ghost
     - directory
 
+- name: check ghost
+  raw: ls /usr/local/ghost/config.js
+  register: ghost_path
+  ignore_errors: yes
+  tags:
+    - ghost
+    - check
+
 - name: download ghost package
   get_url: url=https://ghost.org/zip/ghost-{{ ghost_version }}.zip dest=/tmp/
+  when: ghost_path.stdout.find('config.js') == -1
   tags:
     - ghost
     - download
 
 - name: unzip ghost package
   unarchive: src=/tmp/ghost-{{ ghost_version }}.zip dest=/usr/local/ghost copy=no
+  when: ghost_path.stdout.find('config.js') == -1
   tags:
     - ghost
     - unarchive
@@ -53,3 +63,40 @@
     - link_nginx_config
   notify:
     - reload nginx
+
+- name: install ghostium theme
+  git: repo=https://github.com/oswaldoacauan/ghostium/ dest=/usr/local/ghost/content/themes/ghostium
+  tags:
+    - ghost
+    - ghostium
+
+- name: install ghostrayder theme
+  git: repo=https://github.com/k9ordon/ghostrayder.git dest=/usr/local/ghost/content/themes/ghostrayder
+  tags:
+    - ghost
+    - ghostrayder
+
+- name: install ghostwriter theme
+  git: repo=https://github.com/roryg/ghostwriter.git dest=/usr/local/ghost/content/themes/ghostwriter
+  tags:
+    - ghost
+    - ghostwriter
+
+- name: install GhostScroll theme
+  git: repo=https://github.com/grmmph/GhostScroll.git dest=/usr/local/ghost/content/themes/GhostScroll
+  tags:
+    - ghost
+    - GhostScroll
+
+- name: install readium theme
+  git: repo=https://github.com/starburst1977/readium.git dest=/usr/local/ghost/content/themes/readium
+  tags:
+    - ghost
+    - readium
+
+- name: restart ghost
+  action: supervisorctl name=ghost state=restarted
+  tags:
+    - ghost
+    - restart
+

@@ -9,7 +9,7 @@
 - [x] [Shadowsocks](https://github.com/clowwindy/shadowsocks)
 - [x] [COW](https://github.com/cyfdecyf/cow)
 - [x] [Jenkins](http://jenkins-ci.org) (默认在 8080 端口，设置在 `011_jenkins.yml`)
-- [x] [Ghost](https://ghost.org/) (装完后管理界面在 `http://yourhost.com/ghost/`)
+- [x] [Ghost](https://ghost.org/)
 - [ ] [Wordpress](http://wordpress.org)
 - [ ] [LoopBack](http://loopback.io)
 - [ ] [Uniqush](http://uniqush.org) (APNS)
@@ -33,6 +33,7 @@
 2. 各个服务的使用方法这里就不赘述了，我在上面的列表里加了相应的链接;
 3. GitLab 对内存有一定要求，建议使用最少 1G 内存的主机，不过我在执行 GitLab 的 role 前加了设置 swap 等于两倍内存的 role，一般 512M 内存的 VPS 也能撑住 5 人以下的小团队;
 4. 建议 Web 服务不要装在一起。
+5. Ghost 的 role 会自动装上这些 themes: [ghostium](https://github.com/oswaldoacauan/ghostium)、[ghostrayder](https://github.com/k9ordon/ghostrayder)、[ghostwriter](https://github.com/roryg/ghostwriter)、[GhostScroll](https://github.com/grmmph/GhostScroll)、[Readium](https://github.com/starburst1977/Readium)
 
 
 ## 测试
