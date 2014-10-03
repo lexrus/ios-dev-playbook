@@ -21,6 +21,9 @@ git.MY_SRV.com ansible_ssh_user=root
 [jenkins]
 jenkins.MY_SRV.com
 
+[ghost]
+ghost.MY_SRV.com
+
 [cow_backend]
 cow[1:3].MY_SRV.com
 

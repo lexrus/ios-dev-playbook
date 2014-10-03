@@ -39,6 +39,11 @@ task :jenkins do
   exec "ansible-playbook 011_jenkins.yml -l jenkins"
 end
 
+desc "Install Ghost server"
+task :ghost do
+  exec "ansible-playbook 030_ghost.yml"
+end
+
 desc "Install cow server"
 task :cow do
   exec "ansible-playbook 020_cow_backend.yml"

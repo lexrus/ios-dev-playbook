@@ -1,0 +1,7 @@
+---
+- hosts: ghost
+
+  roles:
+    - common
+    - nodejs
+    - ghost

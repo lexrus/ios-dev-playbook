@@ -1,0 +1,10 @@
+[program:ghost]
+command=/usr/bin/env npm start --production
+numprocs=1
+directory=/usr/local/ghost
+autostart=true
+autorestart=unexpected
+startsecs=2
+startretries=3
+stdout_logfile=/var/log/ghost.log
+stdout_logfile_maxbytes=5MB
