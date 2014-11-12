@@ -1,8 +1,8 @@
 ---
 
-- name: download GitLab for Debian 7.6
+- name: download GitLab for Debian 7
   get_url: >
-    url=https://downloads-packages.s3.amazonaws.com/debian-7.6/gitlab_7.3.2-omnibus-1_amd64.deb
+    url=https://downloads-packages.s3.amazonaws.com/debian-7.6/gitlab_7.4.3-omnibus.5.1.0.ci-1_amd64.deb
     dest=/tmp/
   when: ansible_os_family == "Debian"
   tags:
@@ -11,7 +11,7 @@
 
 - name: download GitLab for Ubuntu
   get_url: >
-    url=https://downloads-packages.s3.amazonaws.com/ubuntu-{{ ansible_distribution_version }}/gitlab_7.3.2-omnibus-1_amd64.deb
+    url=https://downloads-packages.s3.amazonaws.com/ubuntu-{{ ansible_distribution_version }}/gitlab_7.4.3-omnibus.5.1.0.ci-1_amd64.deb
     dest=/tmp/
   when: ansible_os_family == "Ubuntu"
   tags:
@@ -31,7 +31,7 @@
     - postfix
 
 - name: install GitLab
-  apt: deb=/tmp/gitlab_7.3.2-omnibus-1_amd64.deb state=installed
+  apt: deb=/tmp/gitlab_7.4.3-omnibus.5.1.0.ci-1_amd64.deb state=installed
   tags:
     - gitlab
     - install

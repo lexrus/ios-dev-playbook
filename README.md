@@ -5,7 +5,7 @@
 目前可以安装的服务有(没勾勾的还没好)：
 
 - [x] [Countly Server](https://github.com/Countly/countly-server)
-- [x] [GitLab](https://github.com/gitlabhq/gitlabhq) 7.3.2 (用户名: `root`, 初始密码: `5iveL!fe`)
+- [x] [GitLab](https://github.com/gitlabhq/gitlabhq) 7.4.3 (用户名: `root`, 初始密码: `5iveL!fe`)
 - [x] [Shadowsocks](https://github.com/clowwindy/shadowsocks)
 - [x] [COW](https://github.com/cyfdecyf/cow)
 - [x] [Jenkins](http://jenkins-ci.org) (默认在 8080 端口，设置在 `011_jenkins.yml`)
