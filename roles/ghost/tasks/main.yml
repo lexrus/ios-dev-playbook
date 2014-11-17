@@ -2,30 +2,26 @@
 
 # install & config ghost server
 
+- name: install nginx
+  apt: pkg=nginx
+  tags:
+    - ghost
+    - nginx
+
 - name: create ghost folder
   file: path=/usr/local/ghost state=directory
   tags:
     - ghost
     - directory
 
-- name: check ghost
-  raw: ls /usr/local/ghost/config.js
-  register: ghost_path
-  ignore_errors: yes
-  tags:
-    - ghost
-    - check
-
 - name: download ghost package
   get_url: url=https://ghost.org/zip/ghost-{{ ghost_version }}.zip dest=/tmp/
-  when: ghost_path.stdout.find('config.js') == -1
   tags:
     - ghost
     - download
 
 - name: unzip ghost package
   unarchive: src=/tmp/ghost-{{ ghost_version }}.zip dest=/usr/local/ghost copy=no
-  when: ghost_path.stdout.find('config.js') == -1
   tags:
     - ghost
     - unarchive
