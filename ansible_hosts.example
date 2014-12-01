@@ -38,6 +38,7 @@ apn.MY_SRV.com
 cow_frontend_port=9820
 cow_password=cow-very-long-password-5123561
 cow_backend_servers=["do001.MY_SRV.com", "do002.MY_SRV.com", "do003.MY_SRV.com"]
+cow_backend_port=9635
 
 [shadowsocks]
 ln001.MY_SRV.com
