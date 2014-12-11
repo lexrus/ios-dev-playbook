@@ -54,6 +54,11 @@ task :shadowsocks do
   exec "ansible-playbook 022_shadowsocks.yml"
 end
 
+desc "Install & config NewRelic agent"
+task :newrelic do
+  exec "ansible-playbook 053_newrelic.yml"
+end
+
 desc "Test"
 task :test do
   exec "vagrant up --no-provision && vagrant provision"

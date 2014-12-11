@@ -10,6 +10,7 @@
 - [x] [COW](https://github.com/cyfdecyf/cow)
 - [x] [Jenkins](http://jenkins-ci.org) (默认在 8080 端口，设置在 `011_jenkins.yml`)
 - [x] [Ghost](https://ghost.org/)
+- [x] [NewRelic](https://newrelic.com) agent
 - [ ] [Wordpress](http://wordpress.org)
 - [ ] [LoopBack](http://loopback.io)
 - [ ] [Uniqush](http://uniqush.org) (APNS)

@@ -1,23 +1,5 @@
 laggyluke.add-ssh-keys-from-github
 hiddentao.swapmem
-
 lesmyrmidons.mongodb
-# https://galaxy.ansible.com/list#/roles/959
-
 avanov.jenkins
-# https://galaxy.ansible.com/list#/roles/849
-
-# geerlingguy.munin-node
-# https://galaxy.ansible.com/list#/roles/554
-
-# rafaltrojniak.munin
-# https://galaxy.ansible.com/list#/roles/715
-
-# Mayeu.sensu
-# https://github.com/Mayeu/ansible-playbook-sensu
-
-# https://github.com/inboxapp/inbox
-
-# https://github.com/strongloop/loopback
-
-# https://github.com/TheRealKerni/QuincyKit/tree/develop/server
+Rackspace_Automation.newrelic
