@@ -19,6 +19,7 @@
 - [ ] [Mail-in-a-Box](https://github.com/mail-in-a-box/mailinabox)
 - [ ] [Munin](http://munin-monitoring.org) / [Nagios](http://www.nagios.org) / [Sensu](http://sensuapp.org)
 
+还有一些日常上网用的服务配置可以移步 [vpn-deploy-playbook 这个仓库](https://github.com/lexrus/vpn-deploy-playbook)。
 
 ## 使用方法
 
@@ -35,14 +36,14 @@
 
 1. 备份策略是: 永不备份;
 2. 各个服务的使用方法这里就不赘述了，我在上面的列表里加了相应的链接;
-3. GitLab 对内存有一定要求，建议使用最少 1G 内存的主机，不过我在执行 GitLab 的 role 前加了设置 swap 等于两倍内存的 role，一般 512M 内存的 VPS 也能撑住 5 人以下的小团队，但是一般运维会建议不要使用 swap；
-4. 建议 Web 服务不要装在一起。
+3. GitLab 对内存有一定要求，建议使用最少 1G 内存的主机，不过我在执行 GitLab 的 role 前加了设置 swap 等于两倍内存的 role，一般 512M 内存的 VPS 也能撑住 5 人以下的小团队，但是一般运维会建议不要使用 swap;
+4. 建议 Web 服务不要装在一起;
 5. Ghost 的 role 会自动装上这些 themes: [ghostium](https://github.com/oswaldoacauan/ghostium)、[ghostrayder](https://github.com/k9ordon/ghostrayder)、[ghostwriter](https://github.com/roryg/ghostwriter)、[GhostScroll](https://github.com/grmmph/GhostScroll)、[Readium](https://github.com/starburst1977/Readium)
 
 
 ## 测试
 
-测试需要 Vagrant，在本项目目录中 `rake test` 就会拉一个 ubuntu/trusty64 的镜像试着跑大部分配置。
+测试需要 [Vagrant](https://www.vagrantup.com/)，在本项目目录中 `rake test` 就会拉一个 ubuntu/trusty64 的镜像试着跑大部分配置。
 如果你用的是 Mac OS X，推荐先装 [Brew](http://brew.sh) 和 [Cask](http://caskroom.io)，然后运行 `brew cask install vagrant virtualbox`。
 Vagrant 测试的 roles 都写在 [VagrantTest.yml](https://github.com/lexrus/ios-dev-playbook/blob/master/VagrantTest.yml) 里了。
 
