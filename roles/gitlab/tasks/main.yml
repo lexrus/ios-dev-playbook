@@ -4,7 +4,7 @@
   get_url: >
     url=https://downloads-packages.s3.amazonaws.com/debian-7.6/gitlab_7.5.3-omnibus.5.2.1.ci-1_amd64.deb
     dest=/tmp/
-  when: ansible_os_family == "Debian"
+  when: ansible_distribution == "Debian"
   tags:
     - gitlab
     - download
@@ -13,7 +13,7 @@
   get_url: >
     url=https://downloads-packages.s3.amazonaws.com/ubuntu-{{ ansible_distribution_version }}/gitlab_7.5.3-omnibus.5.2.1.ci-1_amd64.deb
     dest=/tmp/
-  when: ansible_os_family == "Ubuntu"
+  when: ansible_distribution == "Ubuntu"
   tags:
     - gitlab
     - download
