@@ -62,4 +62,12 @@ end
 desc "Test"
 task :test do
   exec "vagrant up --no-provision && vagrant provision"
+desc "Test Ubuntu"
+task :test_ubuntu do
+  exec "VAGRANT_VAGRANTFILE=VagrantfileUbuntu vagrant up --no-provision && vagrant provision"
+end
+
+desc "Test Debian"
+task :test_debian do
+  exec "VAGRANT_VAGRANTFILE=VagrantfileDebian vagrant up --no-provision && vagrant provision"
 end
