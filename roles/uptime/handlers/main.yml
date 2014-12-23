@@ -1,0 +1,14 @@
+- name: reload uptime
+  shell: /etc/init.d/supervisor force-reload
+  tags:
+    - uptime
+
+- name: restart uptime monitor
+  action: supervisorctl name=app_monitor state=restarted
+  tags:
+    - uptime
+
+- name: restart uptime
+  action: supervisorctl name=app state=restarted
+  tags:
+    - uptime

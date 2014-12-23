@@ -59,9 +59,11 @@ task :newrelic do
   exec "ansible-playbook 053_newrelic.yml"
 end
 
-desc "Test"
-task :test do
-  exec "vagrant up --no-provision && vagrant provision"
+desc "Install uptime"
+task: :uptime do
+  exec "ansible-playbook 059_uptime.yml -l uptime"
+end
+
 desc "Test Ubuntu"
 task :test_ubuntu do
   exec "VAGRANT_VAGRANTFILE=VagrantfileUbuntu vagrant up --no-provision && vagrant provision"

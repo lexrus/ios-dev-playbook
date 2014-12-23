@@ -11,6 +11,7 @@
 - [x] [Jenkins](http://jenkins-ci.org) (默认在 8080 端口，设置在 `011_jenkins.yml`)
 - [x] [Ghost](https://ghost.org/)
 - [x] [NewRelic](https://newrelic.com) agent
+- [ ] [Uptime](http://www.redotheweb.com/uptime/) (默认 8082 端口)
 - [ ] [Phabricator](http://phabricator.org)
 - [ ] [Wordpress](http://wordpress.org)
 - [ ] [LoopBack](http://loopback.io)

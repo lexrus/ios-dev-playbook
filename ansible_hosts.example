@@ -45,3 +45,6 @@ ln001.MY_SRV.com
 
 [shadowsocks:vars]
 password=superlongpassword203985
+
+[uptime]
+uptime.MY_SRV.com

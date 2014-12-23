@@ -1,0 +1,45 @@
+---
+
+- name: Clone uptime source code
+  git: repo=git://github.com/fzaninotto/uptime.git dest=/usr/local/uptime
+  tag:
+    - uptime
+    - update
+
+- name: npm install
+  npm: path=/usr/local/uptime
+  tag:
+    - uptime
+    - npm
+
+- name: Setup default config
+  template: src=config.yaml
+            dest=/usr/local/uptime/config/default.yaml
+  tags:
+    - uptime
+    - config
+
+- name: Enable plugins
+  template: src=plugins_index.js
+            dest=/usr/local/uptime/plugins/index.js
+  tags:
+    - uptime
+    - plugins_index
+
+- name: Install uptime_monitor supervisorconfig
+  template: src=uptime_monitor.conf
+            dest=/etc/supervisor/conf.d/uptime_monitor.conf
+  notify:
+    - "restart uptime monitor"
+  tags:
+    - uptime
+    - monitor_config
+
+- name: Install uptime supervisorconfig
+  template: src=uptime.conf
+            dest=/etc/supervisor/conf.d/uptime.conf
+  notify:
+    - "restart uptime"
+  tags:
+    - uptime
+    - app_config

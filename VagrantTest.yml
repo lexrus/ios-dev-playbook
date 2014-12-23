@@ -13,3 +13,4 @@
     - role: lesmyrmidons.mongodb
     - role: countly
     - role: gitlab
+    - role: uptime
