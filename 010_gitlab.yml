@@ -2,5 +2,4 @@
 - hosts: all
 
   roles:
-    - role: hiddentao.swapmem
     - role: gitlab
