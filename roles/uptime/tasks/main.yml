@@ -2,13 +2,13 @@
 
 - name: Clone uptime source code
   git: repo=git://github.com/fzaninotto/uptime.git dest=/usr/local/uptime
-  tag:
+  tags:
     - uptime
     - update
 
 - name: npm install
   npm: path=/usr/local/uptime
-  tag:
+  tags:
     - uptime
     - npm
 

@@ -60,16 +60,18 @@ task :newrelic do
 end
 
 desc "Install uptime"
-task: :uptime do
+task :uptime do
   exec "ansible-playbook 059_uptime.yml -l uptime"
 end
 
 desc "Test Ubuntu"
 task :test_ubuntu do
-  exec "VAGRANT_VAGRANTFILE=VagrantfileUbuntu vagrant up --no-provision && vagrant provision"
+  system "VAGRANT_VAGRANTFILE=VagrantfileUbuntu vagrant up --no-provision"
+  system "VAGRANT_VAGRANTFILE=VagrantfileUbuntu vagrant provision"
 end
 
 desc "Test Debian"
 task :test_debian do
-  exec "VAGRANT_VAGRANTFILE=VagrantfileDebian vagrant up --no-provision && vagrant provision"
+  system "VAGRANT_VAGRANTFILE=VagrantfileDebian vagrant up --no-provision"
+  system "VAGRANT_VAGRANTFILE=VagrantfileDebian vagrant provision"
 end
