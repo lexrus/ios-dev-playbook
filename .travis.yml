@@ -3,12 +3,9 @@ python: '2.7'
 cache:
   directories:
     - $HOME/.pip-cache/
-before_install:
-  - apt-get update -qq
 install:
   - pip install ansible --download-cache $HOME/.pip-cache
 script:
-  - rake test_Ubuntu
   - rake test_Debian
 notifications:
   email:

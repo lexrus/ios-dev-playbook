@@ -1,5 +1,5 @@
 desc "Install dependencies"
-task :init do
+task :deps do
   exec "ansible-galaxy install --ignore-errors --force " \
     " --role-file=ansible_galaxy_dependencies.txt"
 end
