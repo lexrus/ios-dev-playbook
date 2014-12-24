@@ -1,12 +1,13 @@
 language: python
 python: '2.7'
+sudo: false
 cache:
   directories:
     - $HOME/.pip-cache/
 install:
-  - pip install ansible --download-cache $HOME/.pip-cache
+  - pip install ansible -q --download-cache $HOME/.pip-cache
 script:
-  - rake test_Debian
+  - rake test_debian
 notifications:
   email:
     recipients:
