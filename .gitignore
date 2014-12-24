@@ -2,6 +2,7 @@ ansible_hosts
 group_vars/*.yml
 host_vars/*.yml
 public_keys/*.pub
+.galaxy_install_info
 *.sw*
 
 # Created by http://www.gitignore.io
