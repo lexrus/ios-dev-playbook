@@ -30,21 +30,19 @@ script:
   - ansible-playbook -i ansible_localhost.ini 022_shadowsocks.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 030_ghost.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 053_newrelic.yml --syntax-check
-  - ansible-playbook -i ansible_localhost.ini 030_uptime.yml --syntax-check
+  - ansible-playbook -i ansible_localhost.ini 039_uptime.yml --syntax-check
 
   # Run the role/playbook with ansible-playbook.
-  - ansible-playbook -i ansible_localhost.ini 001_common_utilities.yml -c local --sudo
-  # - ansible-playbook -i ansible_localhost.ini 010_gitlab.yml -c local --sudo
-  # - ansible-playbook -i ansible_localhost.ini 011_jenkins.yml -c local --sudo
-  # - ansible-playbook -i ansible_localhost.ini 012_countly.yml -c local --sudo
-  - ansible-playbook -i ansible_localhost.ini 020_cow_backend.yml -c local --sudo
-  - ansible-playbook -i ansible_localhost.ini 022_shadowsocks.yml -c local --sudo
-  - ansible-playbook -i ansible_localhost.ini 030_ghost.yml -c local --sudo
-  # - ansible-playbook -i ansible_localhost.ini 030_uptime.yml -c local --sudo
+  - >
+    ansible-playbook -i ansible_localhost.ini 001_common_utilities.yml -c local --sudo
+    | grep -q 'changed=0.*failed=0'
+    && (echo 'Test: pass' && exit 0)
+    || (echo 'Test: fail' && exit 1)
+  - ansible-playbook -i ansible_localhost.ini 020_cow_backend.yml -c local --sudo --skip-tags sysctl
+  - ansible-playbook -i ansible_localhost.ini 022_shadowsocks.yml -c local --sudo --skip-tags sysctl
 
   # Requests to make sure web respond.
-  - "curl --retry 3 --connect-timeout 5 --max-time 120 -s -o /dev/null http://localhost/"
-  # - "curl --retry 3 --connect-timeout 5 --max-time 120 -s -o /dev/null http://localhost:8082/"
+  # - "curl --retry 3 --connect-timeout 5 --max-time 120 -s -o /dev/null http://localhost/"
 
 notifications:
   email:

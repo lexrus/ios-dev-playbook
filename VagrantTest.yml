@@ -5,10 +5,6 @@
 
   roles:
     - role: common
-    - role: cow
-    - role: cow/backend
-    - role: cow/frontend
-    - role: shadowsocks
     - role: nodejs
     - role: lesmyrmidons.mongodb
     - role: countly

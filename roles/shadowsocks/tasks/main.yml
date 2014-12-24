@@ -42,6 +42,7 @@
     - {"name" : "net.ipv4.tcp_congestion_control", "value" : "hybla"}
   tags:
     - ss-server
+    - sysctl
 
 - name: ensure working dir exists
   action: file path=/opt/ss-server/ state=directory
@@ -79,5 +80,5 @@
   tags:
     - ss-server
 
-- name: make shadowssocks-server is present 
+- name: make shadowssocks-server is present
   supervisorctl: name=ss-server-{{ name }} state=present
