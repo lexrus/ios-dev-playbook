@@ -3,3 +3,4 @@ hiddentao.swapmem
 lesmyrmidons.mongodb
 avanov.jenkins
 Rackspace_Automation.newrelic
+yoshzz.docker

@@ -1,0 +1,1 @@
+docker_options: "-H unix:///var/run/docker.sock"
