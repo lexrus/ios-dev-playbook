@@ -33,11 +33,7 @@ script:
   - ansible-playbook -i ansible_localhost.ini 059_uptime.yml --syntax-check
 
   # Run the role/playbook with ansible-playbook.
-  - >
-    ansible-playbook -i ansible_localhost.ini 001_common_utilities.yml -c local --sudo
-    | grep -q 'changed=0.*failed=0'
-    && (echo 'Test: pass' && exit 0)
-    || (echo 'Test: fail' && exit 1)
+  - ansible-playbook -i ansible_localhost.ini 001_common_utilities.yml -c local --sudo
   - ansible-playbook -i ansible_localhost.ini 020_cow_backend.yml -c local --sudo --skip-tags sysctl
   - ansible-playbook -i ansible_localhost.ini 022_shadowsocks.yml -c local --sudo --skip-tags sysctl
 
