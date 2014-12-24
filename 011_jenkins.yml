@@ -1,5 +1,5 @@
 ---
-- hosts: 'all:!localhost'
+- hosts: all
 
   roles:
     - common

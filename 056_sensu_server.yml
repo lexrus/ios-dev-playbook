@@ -1,5 +1,5 @@
 ---
-- hosts: sensu_server
+- hosts: all
 
   roles:
     - common

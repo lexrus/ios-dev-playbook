@@ -1,5 +1,5 @@
 ---
-- hosts: cloud
+- hosts: all
 
   roles:
     - Rackspace_Automation.newrelic

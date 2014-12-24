@@ -1,13 +1,51 @@
+---
 language: python
-python: '2.7'
-sudo: false
-cache:
-  directories:
-    - $HOME/.pip-cache/
+python: "2.7"
+
+before_install:
+
+  # Remove MySQL.
+  - sudo apt-get -y purge 'mysql*'
+  - sudo apt-get -y autoremove
+  - sudo apt-get -y autoclean
+  - sudo rm -rf /var/lib/mysql
+  - sudo truncate -s 0 /var/log/mysql/error.log
+
+  - sudo apt-get update
+
 install:
-  - pip install ansible -q --download-cache $HOME/.pip-cache
+
+  # Install Ansible.
+  - pip install ansible
+
 script:
-  - rake test_debian
+
+  # Check the role/playbook's syntax.
+  - ansible-playbook -i ansible_localhost.ini 001_common_utilities.yml --syntax-check
+  - ansible-playbook -i ansible_localhost.ini 010_gitlab.yml --syntax-check
+  - ansible-playbook -i ansible_localhost.ini 011_jenkins.yml --syntax-check
+  - ansible-playbook -i ansible_localhost.ini 012_countly.yml --syntax-check
+  - ansible-playbook -i ansible_localhost.ini 020_cow_backend.yml --syntax-check
+  - ansible-playbook -i ansible_localhost.ini 021_cow_frontend.yml --syntax-check
+  - ansible-playbook -i ansible_localhost.ini 022_shadowsocks.yml --syntax-check
+  - ansible-playbook -i ansible_localhost.ini 030_ghost.yml --syntax-check
+  - ansible-playbook -i ansible_localhost.ini 053_newrelic.yml --syntax-check
+  - ansible-playbook -i ansible_localhost.ini 030_uptime.yml --syntax-check
+
+  # Run the role/playbook with ansible-playbook.
+  - ansible-playbook -i ansible_localhost.ini 001_common_utilities.yml -c local --sudo
+  # - ansible-playbook -i ansible_localhost.ini 010_gitlab.yml -c local --sudo
+  # - ansible-playbook -i ansible_localhost.ini 011_jenkins.yml -c local --sudo
+  # - ansible-playbook -i ansible_localhost.ini 012_countly.yml -c local --sudo
+  - ansible-playbook -i ansible_localhost.ini 020_cow_backend.yml -c local --sudo
+  - ansible-playbook -i ansible_localhost.ini 022_shadowsocks.yml -c local --sudo
+  - ansible-playbook -i ansible_localhost.ini 030_ghost.yml -c local --sudo
+  # - ansible-playbook -i ansible_localhost.ini 030_uptime.yml -c local --sudo
+
+  # Requests to make sure web respond.
+  - "curl --retry 3 --connect-timeout 5 --max-time 120 -s -o /dev/null http://localhost/"
+  # - "curl --retry 3 --connect-timeout 5 --max-time 120 -s -o /dev/null http://localhost:8082/"
+
 notifications:
   email:
     recipients:

@@ -41,17 +41,17 @@ end
 
 desc "Install Ghost server"
 task :ghost do
-  exec "ansible-playbook 030_ghost.yml"
+  exec "ansible-playbook 030_ghost.yml -l ghost"
 end
 
 desc "Install cow server"
 task :cow do
-  exec "ansible-playbook 020_cow_backend.yml"
+  exec "ansible-playbook 020_cow_backend.yml -l cow_backend"
 end
 
 desc "Install shadowsocks server"
 task :shadowsocks do
-  exec "ansible-playbook 022_shadowsocks.yml"
+  exec "ansible-playbook 022_shadowsocks.yml -l shadowsocks"
 end
 
 desc "Install & config NewRelic agent"

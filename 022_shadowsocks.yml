@@ -1,5 +1,5 @@
 ---
-- hosts: shadowsocks
+- hosts: all
 
   roles:
     - common
