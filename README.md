@@ -1,11 +1,11 @@
 # ios-dev-playbook [![Build Status](https://travis-ci.org/lexrus/ios-dev-playbook.svg?branch=master)](https://travis-ci.org/lexrus/ios-dev-playbook) [![GitHub tag](https://img.shields.io/github/tag/lexrus/ios-dev-playbook.svg?style=flat)](https://github.com/lexrus/ios-dev-playbook)
 
-这是一个 [Ansible](http://www.ansible.com) playbook 的仓库，可以用它快速配置 iOS 开发需要的服务器，仅支持 Debian 和 Ubuntu。请先阅读 [Ansible 的入门文档](http://docs.ansible.com)，不然遇到问题可能会没有方向。如果你用 Mac OS X，建议在 [Dash](http://kapeli.com/dash) 里安装 Ansible 的文档。
+这是一个 [Ansible](http://www.ansible.com) Playbook 的仓库，可以用它快速配置 iOS 开发需要的服务器，仅支持 Debian 和 Ubuntu。请先阅读 [Ansible 的入门文档](http://docs.ansible.com)，不然遇到问题可能会没有方向。如果你用 Mac OS X，建议在 [Dash](http://kapeli.com/dash) 里安装 Ansible 的文档。
 
 目前可以安装的服务有(没勾勾的还没好)：
 
 - [x] [Countly Server](https://github.com/Countly/countly-server)
-- [x] [GitLab](https://github.com/gitlabhq/gitlabhq) 7.5.3 (用户名: `root`, 初始密码: `5iveL!fe`)
+- [x] [GitLab](https://github.com/gitlabhq/gitlabhq) 7.6.1 (用户名: `root`, 初始密码: `5iveL!fe`)
 - [x] [Shadowsocks](https://github.com/clowwindy/shadowsocks)
 - [x] [COW](https://github.com/cyfdecyf/cow)
 - [x] [Jenkins](http://jenkins-ci.org) (默认在 8080 端口，设置在 `011_jenkins.yml`)
@@ -24,7 +24,7 @@
 
 ## 使用方法
 
-1. `sudo pip install ansible` - 安装 Ansible
+1. `sudo pip install ansible` - 安装 Ansible (版本至少 1.8 以上)
 1. `git clone https://github.com/lexrus/ios-dev-playbook.git` - 下载项目
 1. `cd ios-dev-playbook` - 进入目录
 1. `cp ansible_hosts.ini{.example,}` - 复制 ansible_hosts.ini.example 到 ansible_hosts.ini，然后修改相应的服务器地址
@@ -37,7 +37,7 @@
 
 1. 备份策略是: 永不备份;
 2. 各个服务的使用方法这里就不赘述了，我在上面的列表里加了相应的链接;
-3. GitLab 对内存有一定要求，建议使用最少 1G 内存的主机，不过我在执行 GitLab 的 role 前加了设置 swap 等于两倍内存的 role，一般 512M 内存的 VPS 也能撑住 5 人以下的小团队，但是一般运维会建议不要使用 swap;
+3. GitLab 对内存有一定要求，建议使用最少 1G 内存的主机，不过我在执行 GitLab 的 role 前加了设置 swap 等于两倍内存的 role，一般 512M 内存的 VPS 也能撑住 5 人以下的小团队，但是一般运维会建议不要使用 swap; 另外，旧的 omnibus 版本在安装时会被自动备份、升级，详见 `roles/gitlab/tasks/main.yml`，手动操作可以看[这里](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/update.md);
 4. 建议 Web 服务不要装在一起;
 5. Ghost 的 role 会自动装上这些 themes: [ghostium](https://github.com/oswaldoacauan/ghostium)、[ghostrayder](https://github.com/k9ordon/ghostrayder)、[ghostwriter](https://github.com/roryg/ghostwriter)、[GhostScroll](https://github.com/grmmph/GhostScroll)、[Readium](https://github.com/starburst1977/Readium)
 

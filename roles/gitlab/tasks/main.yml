@@ -1,19 +1,26 @@
 ---
 
+- name: check download
+  stat: path=/tmp/{{ gitlab_deb_filename }}.deb
+  register: deb
+  tags:
+    - gitlab
+    - check_download
+
 - name: download GitLab for Debian 7
   get_url: >
-    url=https://downloads-packages.s3.amazonaws.com/debian-7.6/gitlab_7.5.3-omnibus.5.2.1.ci-1_amd64.deb
+    url=https://downloads-packages.s3.amazonaws.com/debian-7.7/{{ gitlab_deb_filename }}.deb
     dest=/tmp/
-  when: ansible_distribution == "Debian"
+  when: ansible_distribution == "Debian" and not deb.stat.exists
   tags:
     - gitlab
     - download
 
 - name: download GitLab for Ubuntu
   get_url: >
-    url=https://downloads-packages.s3.amazonaws.com/ubuntu-{{ ansible_distribution_version }}/gitlab_7.5.3-omnibus.5.2.1.ci-1_amd64.deb
+    url=https://downloads-packages.s3.amazonaws.com/ubuntu-{{ ansible_distribution_version }}/{{ gitlab_deb_filename }}.deb
     dest=/tmp/
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_distribution == "Ubuntu" and not deb.stat.exists
   tags:
     - gitlab
     - download
@@ -30,8 +37,29 @@
     - gitlab
     - postfix
 
+- name: check installation
+  stat: path=/etc/gitlab
+  register: gitlab_config
+
+- name: stop existing server
+  when: gitlab_config.stat.exists and gitlab_config.stat.isdir and upgrade_gitlab
+  command: gitlab-ctl stop {{ item }}
+  with_items:
+    - unicorn
+    - sidekiq
+  tags:
+    - gitlab
+    - stop_server
+
+- name: backup database
+  when: gitlab_config.stat.exists and gitlab_config.stat.isdir and upgrade_gitlab
+  command: gitlab-rake gitlab:backup:create
+  tags:
+    - gitlab
+    - backup
+
 - name: install GitLab
-  apt: deb=/tmp/gitlab_7.4.3-omnibus.5.1.0.ci-1_amd64.deb state=installed
+  apt: deb=/tmp/{{ gitlab_deb_filename }}.deb state=installed
   tags:
     - gitlab
     - install
@@ -47,3 +75,9 @@
   tags:
     - gitlab
     - reconfigure
+
+- name: restart all gitlab services
+  command: gitlab-ctl restart
+  tags:
+    - gitlab
+    - restart
