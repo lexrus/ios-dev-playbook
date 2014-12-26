@@ -18,7 +18,6 @@
 - [ ] [LoopBack](http://loopback.io)
 - [ ] [Uniqush](http://uniqush.org) (APNS)
 - [ ] [QuincyKit](https://github.com/therealkerni/QuincyKit)
-- [ ] [Mail-in-a-Box](https://github.com/mail-in-a-box/mailinabox)
 - [ ] [Munin](http://munin-monitoring.org) / [Nagios](http://www.nagios.org) / [Sensu](http://sensuapp.org)
 
 还有一些日常上网用的服务配置可以移步 [vpn-deploy-playbook 这个仓库](https://github.com/lexrus/vpn-deploy-playbook)。

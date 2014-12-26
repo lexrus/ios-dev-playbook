@@ -7,23 +7,22 @@
     - curl
 
 - name: check node
-  raw: which nodejs
-  register: node_path
-  ignore_errors: yes
+  stat: path=/usr/bin/node
+  register: node
   tags:
     - nodejs
     - check
 
 - name: setup nodejs from nodesource
   raw: curl -sL https://deb.nodesource.com/setup | sudo bash -
-  when: node_path.stdout.find('nodejs') == -1
+  when: not node.stat.exists
   tags:
     - nodejs
     - nodesource
 
 - name: install nodejs
   apt: pkg={{ item }} state=installed
-  when: node_path.stdout.find('nodejs') == -1
+  when: not node.stat.exists
   with_items:
     - nodejs
     - npm

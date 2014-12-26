@@ -70,16 +70,15 @@
     - curl
 
 - name: check cow
-  raw: which cow
-  register: cow_path
-  ignore_errors: yes
+  stat: path=/usr/local/bin/cow
+  register: cow
   tags:
     - cow
     - check
 
 - name: install cow
   raw: export COW_INSTALLDIR=/usr/local/bin/; curl -L git.io/cow | bash
-  when: cow_path.stdout.find('cow') == -1
+  when: not cow.stat.exists
   tags:
     - cow
     - install
