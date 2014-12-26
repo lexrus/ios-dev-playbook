@@ -15,9 +15,6 @@
 - [x] [Uptime](http://www.redotheweb.com/uptime/) (默认 8082 端口，用户 `root`，密码 `admin`)
 - [ ] [Phabricator](http://phabricator.org)
 - [ ] [Wordpress](http://wordpress.org)
-- [ ] [LoopBack](http://loopback.io)
-- [ ] [Uniqush](http://uniqush.org) (APNS)
-- [ ] [QuincyKit](https://github.com/therealkerni/QuincyKit)
 - [ ] [Munin](http://munin-monitoring.org) / [Nagios](http://www.nagios.org) / [Sensu](http://sensuapp.org)
 
 还有一些日常上网用的服务配置可以移步 [vpn-deploy-playbook 这个仓库](https://github.com/lexrus/vpn-deploy-playbook)。
