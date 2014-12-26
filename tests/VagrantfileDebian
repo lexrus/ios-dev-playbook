@@ -121,12 +121,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   chef.validation_client_name = "ORGNAME-validator"
 
   config.vm.provision "shell", inline: "sudo locale-gen en_US.UTF-8"
+  config.vm.provision "shell", inline: "sudo apt-get update"
   config.vm.provision "shell", inline: "sudo apt-get install ansible -y --force-yes"
 
   config.vm.provision "ansible" do |ansible|
     ansible.limit = 'all'
-    ansible.playbook = "VagrantTest.yml"
-    ansible.inventory_path = "ansible_hosts_vagrant.ini"
+    ansible.playbook = "tests/VagrantTest.yml"
+    ansible.inventory_path = "tests/ansible_hosts_vagrant.ini"
     ansible.host_key_checking = false
     ansible.extra_vars = { ssh_user: 'vagrant' }
   end
