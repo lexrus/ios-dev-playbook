@@ -10,7 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "puphpet/debian75-x64"
+  config.vm.box = "ubuntu/trusty64"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -121,12 +121,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   chef.validation_client_name = "ORGNAME-validator"
 
   config.vm.provision "shell", inline: "sudo locale-gen en_US.UTF-8"
-  config.vm.provision "shell", inline: "sudo apt-get update"
   config.vm.provision "shell", inline: "sudo apt-get install ansible -y --force-yes"
 
   config.vm.provision "ansible" do |ansible|
     ansible.limit = 'all'
-    ansible.playbook = "tests/VagrantTest.yml"
+    ansible.playbook = "tests/vagrant_test.yml"
     ansible.inventory_path = "tests/ansible_hosts_vagrant.ini"
     ansible.host_key_checking = false
     ansible.extra_vars = { ssh_user: 'vagrant' }
