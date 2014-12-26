@@ -5,6 +5,7 @@
 
   roles:
     - role: common
+    - role: ajenti
     - role: nodejs
     - role: lesmyrmidons.mongodb
     - role: countly

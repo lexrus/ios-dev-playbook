@@ -11,6 +11,7 @@
 - [x] [Jenkins](http://jenkins-ci.org) (默认在 8080 端口，设置在 `011_jenkins.yml`)
 - [x] [Ghost](https://ghost.org/)
 - [x] [NewRelic](https://newrelic.com) agent
+- [x] [Ajenti](http://ajenti.org) (默认在 8000 端口，用户 `root`，密码 `admin`)
 - [ ] [Uptime](http://www.redotheweb.com/uptime/) (默认 8082 端口)
 - [ ] [Phabricator](http://phabricator.org)
 - [ ] [Wordpress](http://wordpress.org)
@@ -40,6 +41,7 @@
 3. GitLab 对内存有一定要求，建议使用最少 1G 内存的主机，不过我在执行 GitLab 的 role 前加了设置 swap 等于两倍内存的 role，一般 512M 内存的 VPS 也能撑住 5 人以下的小团队，但是一般运维会建议不要使用 swap; 另外，旧的 omnibus 版本在安装时会被自动备份、升级，详见 `roles/gitlab/tasks/main.yml`，手动操作可以看[这里](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/update.md);
 4. 建议 Web 服务不要装在一起;
 5. Ghost 的 role 会自动装上这些 themes: [ghostium](https://github.com/oswaldoacauan/ghostium)、[ghostrayder](https://github.com/k9ordon/ghostrayder)、[ghostwriter](https://github.com/roryg/ghostwriter)、[GhostScroll](https://github.com/grmmph/GhostScroll)、[Readium](https://github.com/starburst1977/Readium)
+6. Ajenti 强烈建议使用 SSL 连接，但是 Safari 访问非 443 端口使用自签证书的服务器会比较麻烦，所以我暂时禁用了，可以进管理界面打开。不使用 SSL 有安全隐患，请避免在生产环境使用这样的配置。另外，重签证书可以用 `ajenti-ssl-gen hostname.com -f; service ajenti restart`;
 
 
 ## 测试

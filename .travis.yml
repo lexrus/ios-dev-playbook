@@ -21,7 +21,9 @@ install:
 script:
 
   # Check the role/playbook's syntax.
+  - ansible-playbook -i ansible_localhost.ini 000_prepare_wheezy.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 001_common_utilities.yml --syntax-check
+  - ansible-playbook -i ansible_localhost.ini 009_ajenti.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 010_gitlab.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 011_jenkins.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 012_countly.yml --syntax-check

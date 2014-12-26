@@ -24,6 +24,11 @@ task :swapon do
   exec "ansible-playbook 003_swapon.yml"
 end
 
+desc "Install Ajenti"
+task :ajenti do
+  exec "ansible-playbook 009_ajenti.yml"
+end
+
 desc "Install Countly server"
 task :countly do
   exec "ansible-playbook 012_countly.yml -l countly"

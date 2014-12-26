@@ -1,0 +1,67 @@
+---
+
+- name: Install OpenSSL
+  apt: name=openssl
+  tags:
+    - ajenti
+    - openssl
+
+- name: Add key
+  apt_key: url=http://repo.ajenti.org/debian/key
+  tags:
+    - ajenti
+    - add_key
+
+- name: Update source list
+  apt_repository: repo="deb http://repo.ajenti.org/ng/debian main main {{ ansible_distribution | lower}}"
+  tags:
+    - ajenti
+    - add_source
+
+- name: Update apt cache
+  apt: update_cache=yes cache_valid_time=3600
+  tags:
+    - ajenti
+    - update_cache
+
+- name: Install Ajenti
+  apt: name=ajenti
+  notify: restart ajenti server
+  tags:
+    - ajenti
+    - install
+
+# - name: create self-signed SSL cert
+#   command: openssl req -new -nodes -x509 -subj "/C=US/ST=Oregon/L=Portland/O=IT/CN=${ansible_fqdn}" -days 3650 -keyout /etc/ajenti/server.key -out /etc/ajenti/server.crt -extensions v3_ca creates=/etc/ajenti/server.crt
+#   notify: gen key
+#   tags:
+#     - ajenti
+#     - self_sign
+
+- name: Disable SSL
+  replace: dest=/etc/ajenti/config.json regexp='(ssl.*[\r\n]+.*enable.*)true(.*)' replace='\1false\2'
+  notify: restart ajenti server
+  tags:
+    - ajenti
+    - disable_ssl
+
+- name: Disable Feedback
+  replace: dest=/etc/ajenti/config.json regexp='(.+enable_feedback.+\:\s*)true' replace='\1false'
+  notify: restart ajenti server
+  tags:
+    - ajenti
+    - disable_feedback
+
+- name: Allow port 8000 for Ubuntu
+  ufw: rule=allow port=8000
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - ajenti
+    - ufw
+
+- name: Allow port 8000 for debian
+  raw: iptables -A INPUT -p tcp --dport 8000 -j ACCEPT
+  when: ansible_distribution == "Debian"
+  tags:
+    - ajenti
+    - iptables

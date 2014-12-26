@@ -1,0 +1,14 @@
+---
+
+- name: restart ajenti server
+  service: name=ajenti state=restarted
+  tags:
+    - ajenti
+    - restart
+
+- name: gen key
+  command: cat /etc/ajenti/server.key /etc/ajenti/server.crt > /etc/ajenti/ajenti.pem
+  notify: restart ajenti server
+  tags:
+    - ajenti
+    - gen_key
