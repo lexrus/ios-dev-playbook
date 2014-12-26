@@ -28,7 +28,7 @@
 1. `cp ansible_hosts.ini{.example,}` - 复制 ansible_hosts.ini.example 到 ansible_hosts.ini，然后修改相应的服务器地址
 1. 确保你的服务器可以用 [SSH key 验证登录](http://www.debian-administration.org/article/530/SSH_with_authentication_key_instead_of_password)
 1. 安装相应的服务，如 GitLab: `rake countly`，更多命令用 `rake -T` 列出
-1. 如果遇到问题可以试着用 `rake deps` 更新第三方 roles，用 [Ansible Galaxy](https://galaxy.ansible.com) 更新依赖的 roles([ansible_galaxy_dependencies.txt](https://github.com/lexrus/ios-dev-playbook/blob/master/ansible_galaxy_dependencies.txt))
+1. 如果遇到问题可以试着用 `rake deps` 更新第三方 roles，用 [Ansible Galaxy](https://galaxy.ansible.com) 更新依赖的 roles([.ansible_galaxy_dependencies](https://github.com/lexrus/ios-dev-playbook/blob/master/.ansible_galaxy_dependencies))
 
 
 ## 注意事项

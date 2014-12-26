@@ -1,7 +1,7 @@
 desc "Install dependencies"
 task :deps do
   exec "ansible-galaxy install --ignore-errors --force " \
-    " --role-file=ansible_galaxy_dependencies.txt"
+    " --role-file=.ansible_galaxy_dependencies"
 end
 
 desc "Upgrade to wheezy"
