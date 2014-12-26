@@ -1,35 +1,46 @@
 ---
 
+- name: Create dir
+  file: path={{ item }} state=directory
+  with_items:
+    - /opt
+    - /var/log/uptime
+  tags:
+    - uptime
+    - opt
+
+- name: Check source code
+  stat: path=/opt/uptime
+  register: uptime
+  tags:
+    - uptime
+    - dir
+
 - name: Clone uptime source code
-  git: repo=git://github.com/fzaninotto/uptime.git dest=/usr/local/uptime
+  git: repo=https://github.com/fzaninotto/uptime.git dest=/opt/uptime
+  when: not uptime.stat.exists
   tags:
     - uptime
     - update
 
 - name: npm install
-  npm: path=/usr/local/uptime
+  npm: path=/opt/uptime
   tags:
     - uptime
     - npm
 
 - name: Setup default config
   template: src=config.yaml
-            dest=/usr/local/uptime/config/default.yaml
+            dest=/opt/uptime/config/default.yaml
   tags:
     - uptime
     - config
-
-- name: Enable plugins
-  template: src=plugins_index.js
-            dest=/usr/local/uptime/plugins/index.js
-  tags:
-    - uptime
-    - plugins_index
 
 - name: Install uptime_monitor supervisorconfig
   template: src=uptime_monitor.conf
             dest=/etc/supervisor/conf.d/uptime_monitor.conf
   notify:
+    - "reload supervisor"
     - "restart uptime monitor"
   tags:
     - uptime
@@ -39,6 +50,7 @@
   template: src=uptime.conf
             dest=/etc/supervisor/conf.d/uptime.conf
   notify:
+    - "reload supervisor"
     - "restart uptime"
   tags:
     - uptime

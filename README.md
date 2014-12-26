@@ -12,7 +12,7 @@
 - [x] [Ghost](https://ghost.org/)
 - [x] [NewRelic](https://newrelic.com) agent
 - [x] [Ajenti](http://ajenti.org) (默认在 8000 端口，用户 `root`，密码 `admin`)
-- [ ] [Uptime](http://www.redotheweb.com/uptime/) (默认 8082 端口)
+- [x] [Uptime](http://www.redotheweb.com/uptime/) (默认 8082 端口，用户 `root`，密码 `admin`)
 - [ ] [Phabricator](http://phabricator.org)
 - [ ] [Wordpress](http://wordpress.org)
 - [ ] [LoopBack](http://loopback.io)

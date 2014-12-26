@@ -1,4 +1,4 @@
-- name: reload uptime
+- name: reload supervisor
   shell: /etc/init.d/supervisor force-reload
   tags:
     - uptime
