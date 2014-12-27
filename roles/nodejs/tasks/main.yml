@@ -13,25 +13,58 @@
     - nodejs
     - check
 
+- name: check setup script
+  stat: path=/tmp/nodesource_setup.sh
+  register: nodesource_script
+  tags:
+    - nodejs
+    - check_nodesource
+
 - name: setup nodejs from nodesource
-  raw: curl -sL https://deb.nodesource.com/setup | sudo bash -
-  when: not node.stat.exists
+  raw: curl https://deb.nodesource.com/setup -o /tmp/nodesource_setup.sh
+  when: not nodesource_script.stat.exists and not node.stat.exists
   tags:
     - nodejs
     - nodesource
 
-- name: install nodejs
-  apt: pkg={{ item }} state=installed
+- name: run setup script
+  shell: bash /tmp/nodesource_setup.sh
   when: not node.stat.exists
-  with_items:
+  tags:
     - nodejs
-    - npm
+    - setup
+
+- name: install nodejs
+  apt: pkg=nodejs state=present
+  when: not node.stat.exists
   tags:
     - nodejs
     - install
 
+- name: check npm
+  stat: path=/usr/bin/npm
+  register: npm_bin
+  tags:
+    - nodejs
+    - check_bin
+
+- name: install npm
+  apt: pkg=npm state=present
+  when: not npm_bin.stat.exists and ansible_distribution == "Debian"
+  tags:
+    - nodejs
+    - install_npm
+
+- name: check node bin
+  stat: path=/usr/bin/nodejs
+  register: node_bin
+  tags:
+    - nodejs
+    - check_bin
+
 - name: link nodejs to node
   file: src=/usr/bin/nodejs dest=/usr/bin/node state=link mode=755
+  when: node_bin.stat.exists
   tags:
     - nodejs
     - link
