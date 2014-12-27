@@ -71,14 +71,14 @@ end
 
 desc "Test Ubuntu"
 task :test_ubuntu do
-  system "VAGRANT_VAGRANTFILE=tests/vagrant_ubuntu.rb vagrant up --no-provision"
-  system "VAGRANT_VAGRANTFILE=tests/vagrant_ubuntu.rb vagrant provision"
+  system "vagrant up ubuntu --no-provision"
+  system "vagrant provision ubuntu"
 end
 
 desc "Test Debian"
 task :test_debian do
-  system "VAGRANT_VAGRANTFILE=tests/vagrant_debian.rb vagrant up --no-provision"
-  system "VAGRANT_VAGRANTFILE=tests/vagrant_debian.rb vagrant provision"
+  system "vagrant up debian --no-provision"
+  system "vagrant provision debian"
 end
 
 task :default => [:common]
