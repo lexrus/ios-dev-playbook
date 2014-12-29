@@ -33,6 +33,7 @@ script:
   - ansible-playbook -i ansible_localhost.ini 030_ghost.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 053_newrelic.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 059_uptime.yml --syntax-check
+  - ansible-playbook -i ansible_localhost.ini 100_sync_with_dropbox.yml --syntax-check
 
   # Run the role/playbook with ansible-playbook.
   - ansible-playbook -i ansible_localhost.ini 001_common_utilities.yml -c local --sudo
