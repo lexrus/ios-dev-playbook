@@ -1,3 +1,8 @@
+desc "Sync to/with Dropbox"
+task :dropbox do
+  exec "ansible-playbook 100_sync_with_dropbox.yml -i ansible_localhost.ini"
+end
+
 desc "Install dependencies"
 task :deps do
   exec "ansible-galaxy install --ignore-errors --force " \

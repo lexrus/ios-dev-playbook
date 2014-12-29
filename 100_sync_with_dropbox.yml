@@ -1,0 +1,53 @@
+---
+
+- hosts: localhost
+  gather_facts: no
+  vars:
+    dropbox_folder: "~/Dropbox/.ios-dev-playbook"
+    hosts_file: "ansible_hosts.ini"
+  tasks:
+    - stat: path="{{ dropbox_folder }}/group_vars"
+      register: group_folder
+    - file: path="{{ dropbox_folder }}" state=directory
+      when: not group_folder.stat.exists
+
+    - stat: path="{{ dropbox_folder }}/host_vars"
+      register: host_folder
+    - file: path="{{ dropbox_folder }}" state=directory
+      when: not host_folder.stat.exists
+
+    - stat: path="{{ dropbox_folder }}/{{ hosts_file }}"
+      register: dropbox_hosts_config
+    - stat: path="{{ hosts_file }}"
+      register: hosts_config
+    - copy: src="{{ hosts_file }}" dest="{{ dropbox_folder }}/{{ hosts_file }}" backup=true
+      when: not dropbox_hosts_config.stat.exists and hosts_config.stat.exists
+
+    - stat: path="{{ dropbox_folder }}/{{ hosts_file }}"
+      register: dropbox_hosts_config
+    - stat: path="{{ hosts_file }}"
+      register: hosts_config
+    - command: "rm -rf {{ hosts_file }}"
+      when: dropbox_hosts_config.stat.exists
+    - file: src="{{ dropbox_folder }}/{{ hosts_file }}" dest="{{ hosts_file }}" state=link
+      when: dropbox_hosts_config.stat.exists
+
+    - copy: src={{ item }} dest={{ dropbox_folder }}/group_vars/
+      with_fileglob:
+        - group_vars/*.yml
+    - command: rm -rf {{ item }}
+      with_fileglob:
+        - group_vars/*.yml
+    - file: src="{{ item }}" dest="group_vars/{{ item | basename }}" state=link
+      with_fileglob:
+        - "{{ dropbox_folder }}/group_vars/*.yml"
+
+    - copy: src={{ item }} dest={{ dropbox_folder }}/host_vars/
+      with_fileglob:
+        - host_vars/*.yml
+    - command: rm -rf {{ item }}
+      with_fileglob:
+        - host_vars/*.yml
+    - file: src="{{ item }}" dest="host_vars/{{ item | basename }}" state=link
+      with_fileglob:
+        - "{{ dropbox_folder }}/host_vars/*.yml"
