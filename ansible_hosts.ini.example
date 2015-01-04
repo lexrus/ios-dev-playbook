@@ -18,6 +18,10 @@ countly.MY_SRV.com ansible_ssh_user=root set_hostname=false
 [gitlab]
 git.MY_SRV.com ansible_ssh_user=root
 
+[gitlab:vars]
+install_ci=True
+gitlab_ci_domain=ci.example.com
+
 [jenkins]
 jenkins.MY_SRV.com
 

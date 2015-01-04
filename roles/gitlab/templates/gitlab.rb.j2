@@ -1,1 +1,4 @@
 external_url 'http://{{ inventory_hostname }}'
+{% if install_ci|default(False) == True %}
+ci_external_url 'http://{{ gitlab_ci_domain }}'
+{% endif %}
