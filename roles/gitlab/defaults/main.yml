@@ -1,3 +1,5 @@
 ---
 upgrade_gitlab: true
-gitlab_deb_filename: gitlab_7.6.1-omnibus.5.3.0.ci.1-1_amd64
+gitlab_deb_filename: gitlab_7.6.2-omnibus.5.3.0.ci-1_amd64
+install_ci: False
+gitlab_ci_domain: ci.example.com
