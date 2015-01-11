@@ -13,6 +13,8 @@
 - [x] [NewRelic](https://newrelic.com) agent
 - [x] [Ajenti](http://ajenti.org) (默认在 8000 端口，用户 `root`，密码 `admin`)
 - [x] [Uptime](http://www.redotheweb.com/uptime/) (默认 8082 端口，用户 `root`，密码 `admin`)
+- [ ] [Huginn](https://github.com/cantino/huginn)
+- [ ] [Cachet](https://cachethq.io)
 - [ ] [Phabricator](http://phabricator.org)
 - [ ] [Wordpress](http://wordpress.org)
 - [ ] [RedMine](http://www.redmine.org)
