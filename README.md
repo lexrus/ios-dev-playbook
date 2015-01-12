@@ -44,8 +44,7 @@
 4. 建议 Web 服务不要装在一起;
 5. Ghost 的 role 会自动装上这些 themes: [ghostium](https://github.com/oswaldoacauan/ghostium)、[ghostrayder](https://github.com/k9ordon/ghostrayder)、[ghostwriter](https://github.com/roryg/ghostwriter)、[GhostScroll](https://github.com/grmmph/GhostScroll)、[Readium](https://github.com/starburst1977/Readium)
 6. Ajenti 强烈建议使用 SSL 连接，但是 Safari 访问非 443 端口使用自签证书的服务器会比较麻烦，所以我暂时禁用了，可以进管理界面打开。不使用 SSL 有安全隐患，请避免在生产环境使用这样的配置。另外，重签证书可以用 `ajenti-ssl-gen hostname.com -f; service ajenti restart`;
-7. 使用内网或本地 RubyGems 镜像时，一般不想修改 Gemfile，那么可以这样操作(注意替换地址): ```bundle config mirror.https://rubygems.org http://localhost:9922
-bundle config mirror.http://rubygems.org http://localhost:9922```
+7. 使用内网或本地 RubyGems 镜像时，一般不想修改 Gemfile，那么可以这样操作(注意替换地址): `bundle config mirror.https://rubygems.org http://localhost:9922 ; bundle config mirror.http://rubygems.org http://localhost:9922`
 
 
 ## 测试
