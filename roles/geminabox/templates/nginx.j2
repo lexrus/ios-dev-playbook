@@ -1,0 +1,24 @@
+upstream geminabox {
+    server 127.0.0.1:9292;
+}
+
+server {
+    listen 9922;
+    server_name  {{ inventory_hostname }};
+
+    access_log  off;
+
+    location / {
+        proxy_buffers 8 16k;
+        proxy_buffer_size 32k;
+
+        proxy_read_timeout 50s;
+
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_redirect off;
+        proxy_pass http://geminabox;
+        break;
+    }
+}

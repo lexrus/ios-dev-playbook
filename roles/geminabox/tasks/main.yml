@@ -6,6 +6,7 @@
     - ruby
     - python-setuptools
     - python-pip
+    - nginx
   tags:
     - rubygems
     - install
@@ -19,26 +20,28 @@
 - name: Gem install rubygems-mirror and geminabox
   gem: name={{ item }} state=present
   with_items:
+    - rack
     - rubygems-mirror
     - geminabox
+    - sinatra
   tags:
     - rubygems
     - install_gems
 
 - name: Create geminabox directory
-  file: path=/opt/geminabox/mirror state=directory
+  file: path=/root/.gem/mirror state=directory
   tags:
     - rubygems
     - directory
 
 - name: Create mirrorrc
-  template: src=mirrorrc.j2 dest=/opt/geminabox/.mirrorrc
+  template: src=mirrorrc.j2 dest=/root/.gem/.mirrorrc
   tags:
     - rubygems
     - mirrorrc
 
 - name: Create config.ru
-  template: src=config.ru.j2 dest=/opt/geminabox/mirror/config.ru
+  template: src=config.ru.j2 dest=/root/.gem/mirror/config.ru
   tags:
     - rubygems
     - config_ru
@@ -48,9 +51,20 @@
             dest=/etc/supervisor/conf.d/geminabox.conf
   notify:
     - reload supervisor
-    - restart geminabox
   tags:
     - rubygems
     - supervisor
 
+- name: Add nginx config
+  template: src=nginx.j2 dest=/etc/nginx/sites-available/geminabox.conf
+  tags:
+    - rubygems
+    - nginx_config
 
+- name: Enabled nginx config
+  file: src=/etc/nginx/sites-available/geminabox.conf dest=/etc/nginx/sites-enabled/geminabox.conf state=link
+  tags:
+    - rubygems
+    - link_nginx_config
+  notify:
+    - reload nginx

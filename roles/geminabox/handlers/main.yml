@@ -7,5 +7,12 @@
 
 - name: restart geminabox
   action: supervisorctl name=geminabox state=restarted
+  notify:
+    - restart geminabox
+  tags:
+    - rubygems
+
+- name: reload nginx
+  service: name=nginx state=reloaded
   tags:
     - rubygems
