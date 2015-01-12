@@ -1,0 +1,11 @@
+---
+
+- name: reload supervisor
+  shell: /etc/init.d/supervisor force-reload
+  tags:
+    - rubygems
+
+- name: restart geminabox
+  action: supervisorctl name=geminabox state=restarted
+  tags:
+    - rubygems

@@ -1,0 +1,56 @@
+---
+
+- name: Install Python and Ruby
+  apt: pkg={{ item }} state=installed
+  with_items:
+    - ruby
+    - python-setuptools
+    - python-pip
+  tags:
+    - rubygems
+    - install
+
+- name: Install supervisor
+  apt: pkg=supervisor state=installed
+  tags:
+    - rubygems
+    - supervisor
+
+- name: Gem install rubygems-mirror and geminabox
+  gem: name={{ item }} state=present
+  with_items:
+    - rubygems-mirror
+    - geminabox
+  tags:
+    - rubygems
+    - install_gems
+
+- name: Create geminabox directory
+  file: path=/opt/geminabox/mirror state=directory
+  tags:
+    - rubygems
+    - directory
+
+- name: Create mirrorrc
+  template: src=mirrorrc.j2 dest=/opt/geminabox/.mirrorrc
+  tags:
+    - rubygems
+    - mirrorrc
+
+- name: Create config.ru
+  template: src=config.ru.j2 dest=/opt/geminabox/mirror/config.ru
+  tags:
+    - rubygems
+    - config_ru
+
+- name: Install geminabox supervisor config
+  template: src=geminabox.conf.j2
+            dest=/etc/supervisor/conf.d/geminabox.conf
+  notify:
+    - reload supervisor
+    - restart geminabox
+  tags:
+    - rubygems
+    - supervisor
+
+

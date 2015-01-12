@@ -11,3 +11,4 @@
     - role: countly
     - role: gitlab
     - role: uptime
+    - role: geminabox

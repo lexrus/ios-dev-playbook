@@ -59,6 +59,11 @@ task :cow do
   exec "ansible-playbook 020_cow_backend.yml -l cow_backend"
 end
 
+desc "Install Gem in a Box"
+task :geminabox do
+  exec "ansible-playbook 040_geminabox.yml -l geminabox"
+end
+
 desc "Install shadowsocks server"
 task :shadowsocks do
   exec "ansible-playbook 022_shadowsocks.yml -l shadowsocks"
