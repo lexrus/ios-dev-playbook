@@ -53,5 +53,8 @@ password=superlongpassword203985
 [uptime]
 uptime.MY_SRV.com
 
+[huginn]
+huginn.MY_SRV.com
+
 [geminabox]
 gems.MY_SRV.com

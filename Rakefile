@@ -79,6 +79,11 @@ task :uptime do
   exec "ansible-playbook 059_uptime.yml -l uptime"
 end
 
+desc "Install Huginn"
+task :huginn do
+  exec "ansible-playbook 060_huginn.yml -l huginn"
+end
+
 desc "Test Ubuntu"
 task :test_ubuntu do
   system "vagrant up ubuntu --no-provision"
