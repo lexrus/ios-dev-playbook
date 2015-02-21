@@ -12,3 +12,5 @@
     - role: gitlab
     - role: uptime
     - role: geminabox
+    - role: yoshzz.docker
+    - role: huginn

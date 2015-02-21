@@ -1,18 +1,10 @@
 ---
 
-# - name: mkdir huginn
-#   file: path=/opt/huginn state=directory
-#   tags:
-#     - huginn
-
-# - name: Clone Huginn
-#   git: repo=git://github.com/cantino/huginn.git dest=/opt/huginn
-#   tags:
-#     - huginn
-#     - clone
-
-# - name: Bundle install
-#   command: /usr/local/rbenv/shims/bundle chdir=/opt/huginn
-#   tags:
-#     - huginn
-#     - bundle_install
+- name: Install Huginn container
+  docker:
+    image="cantino/huginn"
+    ports="5000:5000"
+    state=running
+    name="huginn"
+  tags:
+    - huginn
