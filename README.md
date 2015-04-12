@@ -6,7 +6,7 @@
 
 - [x] [Gem in a Box](https://github.com/geminabox/geminabox) (默认端口: 9922)
 - [x] [Countly Server](https://github.com/Countly/countly-server)
-- [x] [GitLab](https://github.com/gitlabhq/gitlabhq) 7.7.2 (用户名: `root`, 初始密码: `5iveL!fe`)
+- [x] [GitLab](https://github.com/gitlabhq/gitlabhq) 7.9.2 (用户名: `root`, 初始密码: `5iveL!fe`)
 - [x] [GitLab-CI](https://about.gitlab.com/gitlab-ci/) (依懒 GitLab，只要把 `install_ci` 设置成 True 就能安装，详见 `roles/gitlab/defaults/main.yml`)
 - [x] [Shadowsocks](https://github.com/clowwindy/shadowsocks)
 - [x] [COW](https://github.com/cyfdecyf/cow)
