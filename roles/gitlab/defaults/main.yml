@@ -1,5 +1,5 @@
 ---
 upgrade_gitlab: true
-gitlab_deb_filename: gitlab_7.9.2-omnibus-1_amd64
+gitlab_deb_filename: gitlab_7.9.4-omnibus.1-1_amd64
 install_ci: False
 gitlab_ci_domain: ci.example.com
