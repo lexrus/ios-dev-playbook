@@ -1,10 +1,13 @@
-# ios-dev-playbook [![Build Status](https://travis-ci.org/lexrus/ios-dev-playbook.svg?branch=master)](https://travis-ci.org/lexrus/ios-dev-playbook) [![GitHub tag](https://img.shields.io/github/tag/lexrus/ios-dev-playbook.svg?style=flat)](https://github.com/lexrus/ios-dev-playbook)
+# iOS Dev Playbook
+[![Build Status](https://travis-ci.org/lexrus/ios-dev-playbook.svg?branch=master)](https://travis-ci.org/lexrus/ios-dev-playbook)
+[![GitHub tag](https://img.shields.io/github/tag/lexrus/ios-dev-playbook.svg?style=flat)](https://github.com/lexrus/ios-dev-playbook)
+![License](https://img.shields.io/github/license/lexrus/ios-dev-playbook.svg)
+![Love](https://img.shields.io/badge/build%20with-%3C3-ff69b4.svg)
 
 这是一个 [Ansible](http://www.ansible.com) Playbook 的仓库，可以用它快速配置 iOS 开发需要的服务器，仅支持 Debian 和 Ubuntu。请先阅读 [Ansible 的入门文档](http://docs.ansible.com)，不然遇到问题可能会没有方向。如果你用 Mac OS X，建议在 [Dash](http://kapeli.com/dash) 里安装 Ansible 的文档。
 
 目前可以安装的服务有(没勾勾的还没好)：
 
-- [x] [Gem in a Box](https://github.com/geminabox/geminabox) (默认端口: 9922)
 - [x] [Countly Server](https://github.com/Countly/countly-server)
 - [x] [GitLab](https://github.com/gitlabhq/gitlabhq) 7.10.0 (用户名: `root`, 初始密码: `5iveL!fe`)
 - [x] [GitLab-CI](https://about.gitlab.com/gitlab-ci/) (依懒 GitLab，只要把 `install_ci` 设置成 True 就能安装，详见 `roles/gitlab/defaults/main.yml`)
@@ -16,14 +19,14 @@
 - [x] [Ajenti](http://ajenti.org) (默认在 8000 端口，用户 `root`，密码 `admin`)
 - [x] [Uptime](http://www.redotheweb.com/uptime/) (默认 8082 端口，用户 `root`，密码 `admin`)
 - [x] [Huginn](https://github.com/cantino/huginn) (默认 5000 端口，用户 `admin`，密码 `password`)
+- [ ] [Phabricator](http://phabricator.org)
+- [ ] [RedMine](http://www.redmine.org)
+- [ ] [Gem in a Box](https://github.com/geminabox/geminabox) (默认端口: 9922)
 - [ ] [Let's Chat](http://sdelements.github.io/lets-chat/)
 - [ ] [Cachet](https://cachethq.io)
-- [ ] [Phabricator](http://phabricator.org)
-- [ ] [Wordpress](http://wordpress.org)
-- [ ] [RedMine](http://www.redmine.org)
 - [ ] [Munin](http://munin-monitoring.org) / [Nagios](http://www.nagios.org) / [Sensu](http://sensuapp.org)
 
-还有一些日常上网用的服务配置可以移步 [vpn-deploy-playbook 这个仓库](https://github.com/lexrus/vpn-deploy-playbook)。
+还有一些日常上网用的服务配置可以移步 [vpn-deploy-playbook](https://github.com/lexrus/vpn-deploy-playbook)。
 
 ## 使用方法
 
@@ -33,9 +36,9 @@
 1. `cp ansible_hosts.ini{.example,}` - 复制 ansible_hosts.ini.example 到 ansible_hosts.ini，然后修改相应的服务器地址
 1. 如果要备份这些配置，可以用 `rake dropbox`，它会把重要的配置备份到 `~/Dropbox/.ios-dev-playbook` 目录下
 1. 确保你的服务器可以用 [SSH key 验证登录](http://www.debian-administration.org/article/530/SSH_with_authentication_key_instead_of_password)
-1. 安装相应的服务，如 GitLab: `rake countly`，更多命令用 `rake -T` 列出
+1. 安装相应的服务，如 GitLab: `rake gitlab`，更多命令用 `rake -T` 列出
 1. 如果遇到问题可以试着用 `rake deps` 更新第三方 roles，用 [Ansible Galaxy](https://galaxy.ansible.com) 更新依赖的 roles([.ansible_galaxy_dependencies](https://github.com/lexrus/ios-dev-playbook/blob/master/.ansible_galaxy_dependencies))
-
+1. `rake jessie` 自动升级 Debian Wheezy 没有经过测试，不保证能成功
 
 ## 注意事项
 

@@ -9,9 +9,9 @@ task :deps do
     " --role-file=.ansible_galaxy_dependencies"
 end
 
-desc "Upgrade to wheezy"
-task :prepare do
-  exec "ansible-playbook 000_prepare_wheezy.yml -l cloud"
+desc "Upgrade to jessie"
+task :jessie do
+  exec "ansible-playbook 000_prepare_jessie.yml -l cloud"
 end
 
 desc "Install common utitilies"

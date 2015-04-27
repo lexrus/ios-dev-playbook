@@ -5,7 +5,7 @@ use_google_dns: false
 set_hostname: true
 
 upgrade_source_use_template: false
-debian_release: 'wheezy'
+debian_release: 'jessie'
 debian_mirror_host: 'mirrors.aliyun.com'
 
-replace_source_to_wheezy: false
+replace_source_to_jessie: false
