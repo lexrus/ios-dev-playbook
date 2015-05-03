@@ -4,12 +4,12 @@
 ![License](https://img.shields.io/github/license/lexrus/ios-dev-playbook.svg)
 ![Love](https://img.shields.io/badge/build%20with-%3C3-ff69b4.svg)
 
-这是一个 [Ansible](http://www.ansible.com) Playbook 的仓库，可以用它快速配置 iOS 开发需要的服务器，仅支持 Debian 和 Ubuntu。请先阅读 [Ansible 的入门文档](http://docs.ansible.com)，不然遇到问题可能会没有方向。如果你用 Mac OS X，建议在 [Dash](http://kapeli.com/dash) 里安装 Ansible 的文档。
+这是一个 [Ansible](http://www.ansible.com) Playbook 的仓库，可以用它快速配置 iOS 开发需要的服务器，仅支持 Debian(8.0) 和 Ubuntu。请先阅读 [Ansible 的入门文档](http://docs.ansible.com)，不然遇到问题可能会没有方向。如果你用 Mac OS X，建议在 [Dash](http://kapeli.com/dash) 里安装 Ansible 的文档。
 
 目前可以安装的服务有(没勾勾的还没好)：
 
 - [x] [Countly Server](https://github.com/Countly/countly-server)
-- [x] [GitLab](https://github.com/gitlabhq/gitlabhq) 7.10.0 (用户名: `root`, 初始密码: `5iveL!fe`)
+- [x] [GitLab](https://github.com/gitlabhq/gitlabhq) 7.10.1 (用户名: `root`, 初始密码: `5iveL!fe`)
 - [x] [GitLab-CI](https://about.gitlab.com/gitlab-ci/) (依懒 GitLab，只要把 `install_ci` 设置成 True 就能安装，详见 `roles/gitlab/defaults/main.yml`)
 - [x] [Shadowsocks](https://github.com/clowwindy/shadowsocks)
 - [x] [COW](https://github.com/cyfdecyf/cow)
