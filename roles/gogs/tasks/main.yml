@@ -27,9 +27,16 @@
   with_items:
     - /var/log/gogs
     - /home/git/gogs/custom/conf/
+    - /home/git/.ssh
   tags:
     - gogs
     - dir
+
+- name: Touch authorized_keys
+  file: path=/home/git/.ssh/authorized_keys owner=git state=touch mode=0600
+  tags:
+    - gogs
+    - key
 
 - name: Generate certs
   shell: /home/git/gogs/gogs cert --host {{ inventory_hostname }} chdir=/home/git/gogs
