@@ -9,3 +9,9 @@
   action: supervisorctl name=gogs state=restarted
   tags:
     - gogs
+
+- name: reload nginx
+  service: name=nginx state=reloaded
+  tags:
+    - gogs
+    - nginx

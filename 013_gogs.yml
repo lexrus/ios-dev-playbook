@@ -1,7 +1,7 @@
 ---
 - hosts: all
-  gather_facts: yes
+  gather_facts: no
   roles:
     - role: common
-      skip_tags: ['build', 'upgrade', 'dns']
+      skip_tags: ['build', 'upgrade', 'dns', 'editor', 'vcs', 'mosh', 'ranger', 'imagemagick']
     - gogs

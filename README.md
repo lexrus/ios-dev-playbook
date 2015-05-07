@@ -17,7 +17,7 @@
 目前可以安装的服务有(没勾勾的还没好)：
 
 - [x] [Docker](https://docker.com)
-- [x] [Gogs](http://gogs.io)
+- [ ] [Gogs](http://gogs.io)
 - [x] [Countly Server](https://github.com/Countly/countly-server)
 - [x] [GitLab](https://github.com/gitlabhq/gitlabhq) (用户名: `root`, 初始密码: `5iveL!fe`) [GitLab-CI](https://about.gitlab.com/gitlab-ci/) 请设置 `install_ci` 设置成 `True`
 - [x] [Shadowsocks](https://github.com/clowwindy/shadowsocks)

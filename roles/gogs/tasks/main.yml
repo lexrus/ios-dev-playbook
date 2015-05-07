@@ -1,5 +1,11 @@
 ---
 
+- name: Install nginx
+  action: apt pkg=nginx state=installed
+  tags:
+    - gogs
+    - nginx
+
 - name: Add git user
   user: name=git home=/home/git state=present
   ignore_errors: yes
@@ -28,6 +34,7 @@
     - /var/log/gogs
     - /home/git/gogs/custom/conf/
     - /home/git/.ssh
+    - /home/git/gogs-repositories
   tags:
     - gogs
     - dir
@@ -38,20 +45,27 @@
     - gogs
     - key
 
-- name: Generate certs
-  shell: /home/git/gogs/gogs cert --host {{ inventory_hostname }} chdir=/home/git/gogs
-  tags:
-    - gogs
-    - cert
+# - name: Generate certs
+#   shell: /home/git/gogs/gogs cert --host {{ inventory_hostname }} chdir=/home/git/gogs
+#   tags:
+#     - gogs
+#     - cert
 
-- name: Set owner of certs
-  file: path={{ item }} owner=git
-  with_items:
-    - /home/git/gogs/cert.pem
-    - /home/git/gogs/key.pem
+# - name: Set owner of certs
+#   file: path={{ item }} owner=git
+#   with_items:
+#     - /home/git/gogs/cert.pem
+#     - /home/git/gogs/key.pem
+#   tags:
+#     - gogs
+#     - cert
+
+- name: Generate SECRET_KEY
+  shell: mkpasswd
+  register: SECRET_KEY
   tags:
     - gogs
-    - cert
+    - config
 
 - name: Copy Gogs config
   template: src=app.ini dest=/home/git/gogs/custom/conf/app.ini owner=git
@@ -75,7 +89,7 @@
     - restart
 
 - name: Wait for stop
-  wait_for: timeout=3
+  wait_for: timeout=2
   tags:
     - gogs
     - wait
@@ -86,3 +100,26 @@
   tags:
     - gogs
     - restart
+
+- name: Copy nginx config
+  template: src=nginx.j2 dest=/etc/nginx/sites-available/gogs
+  tags:
+    - gogs
+    - nginx
+
+- name: Enable nginx config
+  file: src=/etc/nginx/sites-available/gogs dest=/etc/nginx/sites-enabled/gogs state=link
+  notify:
+    - "reload nginx"
+  tags:
+    - gogs
+    - nginx
+
+- name: Set owner of all
+  file: path={{ item }} owner=git recurse=yes
+  with_items:
+    - /home/git/gogs
+    - /home/git/gogs-repositories
+  tags:
+    - gogs
+    - owner
