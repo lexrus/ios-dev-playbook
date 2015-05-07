@@ -1,0 +1,4 @@
+---
+name: default
+DISABLE_REGISTRATION: 'false'
+SHOW_REGISTRATION_BUTTON: 'true'

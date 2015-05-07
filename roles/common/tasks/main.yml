@@ -90,14 +90,22 @@
     - common
     - imagemagick
 
-- name: install sendmail
-  action: apt pkg={{ item }} state=installed
+- name: remove sendmail
+  apt: pkg={{ item }} state=absent
   with_items:
-    - sendmail-bin
     - sendmail
+    - sendmail-bin
   tags:
     - common
-    - sendmail
+    - exim4
+
+- name: install exim4
+  action: apt pkg={{ item }} state=installed
+  with_items:
+    - exim4
+  tags:
+    - common
+    - exim4
 
 - name: install common python packages
   action: apt pkg={{ item }} state=installed

@@ -5,6 +5,7 @@
 
   roles:
     - role: common
+    - role: docker
     - role: ajenti
     - role: nodejs
     - role: lesmyrmidons.mongodb
@@ -12,5 +13,4 @@
     - role: gitlab
     - role: uptime
     - role: geminabox
-    - role: yoshzz.docker
     - role: huginn

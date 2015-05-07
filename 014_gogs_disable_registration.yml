@@ -1,0 +1,7 @@
+---
+- hosts: all
+  gather_facts: no
+  roles:
+    - role: gogs
+      DISABLE_REGISTRATION: 'true'
+      SHOW_REGISTRATION_BUTTON: 'false'

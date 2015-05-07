@@ -29,14 +29,14 @@ task :swapon do
   exec "ansible-playbook 003_swapon.yml"
 end
 
+desc "Install docker"
+task :docker do
+  exec "ansible-playbook 004_docker.yml"
+end
+
 desc "Install Ajenti"
 task :ajenti do
   exec "ansible-playbook 009_ajenti.yml"
-end
-
-desc "Install Countly server"
-task :countly do
-  exec "ansible-playbook 012_countly.yml -l countly"
 end
 
 desc "Install GitLab server"
@@ -47,6 +47,21 @@ end
 desc "Install Jenkins server"
 task :jenkins do
   exec "ansible-playbook 011_jenkins.yml -l jenkins"
+end
+
+desc "Install Countly server"
+task :countly do
+  exec "ansible-playbook 012_countly.yml -l countly"
+end
+
+desc "Install Gogs server"
+task :gogs do
+  exec "ansible-playbook 013_gogs.yml -l gogs"
+end
+
+desc "Disable Registration of Gogs"
+task :gogsdr do
+  exec "ansible-playbook 014_gogs_disable_registration.yml --tags=config,wait,restart -l gogs"
 end
 
 desc "Install Ghost server"

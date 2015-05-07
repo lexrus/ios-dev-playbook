@@ -1,0 +1,11 @@
+- name: reload supervisor
+  shell: /etc/init.d/supervisor force-reload
+  notify:
+    - "restart gogs"
+  tags:
+    - gogs
+
+- name: restart gogs
+  action: supervisorctl name=gogs state=restarted
+  tags:
+    - gogs

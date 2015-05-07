@@ -2,18 +2,21 @@
 
 - name: "Install docker apt key"
   apt_key: keyserver=keyserver.ubuntu.com id=36A1D7869245C8950F966E92D8576A8BA88D21E9 state=present
+  tags:
+    - docker
+    - apt_key
 
 - name: "Install docker apt repository"
   apt_repository: repo="deb https://get.docker.com/ubuntu docker main" state=present
+  tags:
+    - docker
+    - apt_repository
 
 - name: "Install docker package"
   apt: name=lxc-docker state=present
-
-- name: "Install pip package"
-  apt: name=python-pip state=present
-
-- name: "Install python docker package"
-  pip: name=docker-py
+  tags:
+    - docker
+    - install
 
 - name: "Configure docker host"
   lineinfile: >
@@ -23,8 +26,6 @@
     line='DOCKER_OPTS="{{ docker_options }}"'
   when: docker_options is defined
   notify: restart docker
-
-- name: "Installing docker-enter"
-  shell: "docker run --rm -v /usr/local/bin:/target jpetazzo/nsenter"
-  args:
-    creates: /usr/local/bin/docker-enter
+  tags:
+    - docker
+    - config

@@ -1,0 +1,81 @@
+---
+
+- name: Add git user
+  user: name=git home=/home/git state=present
+  ignore_errors: yes
+  tags:
+    - gogs
+    - user
+
+- name: Download Gogs binary
+  get_url: >
+    url=https://github.com/gogits/gogs/releases/download/v0.6.1/linux_amd64.zip
+    dest=/tmp/gogs.zip
+    mode=0660
+  tags:
+    - gogs
+    - download
+
+- name: Unarchive Gogs
+  unarchive: src=/tmp/gogs.zip dest=/home/git/ copy=no
+  tags:
+    - gogs
+    - unarchive
+
+- name: Create directories
+  file: path={{ item }} owner=git state=directory
+  with_items:
+    - /var/log/gogs
+    - /home/git/gogs/custom/conf/
+  tags:
+    - gogs
+    - dir
+
+- name: Generate certs
+  shell: /home/git/gogs/gogs cert --host {{ inventory_hostname }} chdir=/home/git/gogs
+  tags:
+    - gogs
+    - cert
+
+- name: Set owner of certs
+  file: path={{ item }} owner=git
+  with_items:
+    - /home/git/gogs/cert.pem
+    - /home/git/gogs/key.pem
+  tags:
+    - gogs
+    - cert
+
+- name: Copy Gogs config
+  template: src=app.ini dest=/home/git/gogs/custom/conf/app.ini owner=git
+  tags:
+    - gogs
+    - config
+
+- name: Copy supervisor config
+  template: src=gogs_supervisor.conf dest=/etc/supervisor/conf.d/gogs.conf
+  notify:
+    - "reload supervisor"
+  tags:
+    - gogs
+    - supervisor
+
+- name: Force stop gogs
+  action: supervisorctl name=gogs state=stopped
+  when: DISABLE_REGISTRATION == 'true'
+  tags:
+    - gogs
+    - restart
+
+- name: Wait for stop
+  wait_for: timeout=3
+  tags:
+    - gogs
+    - wait
+
+- name: Force start gogs
+  action: supervisorctl name=gogs state=started
+  when: DISABLE_REGISTRATION == 'true'
+  tags:
+    - gogs
+    - restart
