@@ -7,9 +7,9 @@
     - gitlab
     - check_download
 
-- name: download GitLab for Debian 7
+- name: download GitLab for Debian 8
   get_url: >
-    url=https://downloads-packages.s3.amazonaws.com/debian-7.8/{{ gitlab_deb_filename }}.deb
+    url=https://downloads-packages.s3.amazonaws.com/debian-8.0/{{ gitlab_deb_filename }}.deb
     dest=/tmp/
   when: ansible_distribution == "Debian" and not deb.stat.exists
   tags:
