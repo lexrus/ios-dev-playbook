@@ -1,0 +1,5 @@
+- name: restart exim4
+  supervisorctl: name=exim4 state=restarted
+  tags:
+    - common
+    - exim4

@@ -107,6 +107,13 @@
     - common
     - exim4
 
+- name: copy exim4 config
+  template: src=exim4.conf dest=/etc/update-exim4.conf.conf mode=644
+  notify: restart exim4
+  tags:
+    - common
+    - exim4
+
 - name: install common python packages
   action: apt pkg={{ item }} state=installed
   with_items:
