@@ -1,0 +1,17 @@
+# {{ ansible_managed }}
+
+server {
+
+{% for key,value in item.server|dictsort if key != 'file_name' %}
+    {{ key }} {{ value }};
+{% endfor %} 
+{% if 'location' in item %}
+{% for location in item.location if 'location' in item %}
+    location {{ location.name }} { {% for key,value in location|dictsort if key != 'name' %} 
+        {{ key }} {{ value }}; {% endfor %}
+
+    }
+{% endfor %}
+{% endif %}
+}
+

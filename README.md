@@ -49,6 +49,9 @@
 #### [Shadowsocks](https://github.com/clowwindy/shadowsocks) `rake shadowsocks`
 知名的代理服务，iOS 开发上网必备。还有 `rake cow` 可以安装同类竞品 [COW](https://github.com/cyfdecyf/cow)。另外一些日常上网用的 VPN 服务配置可以移步 [vpn-deploy-playbook](https://github.com/lexrus/vpn-deploy-playbook)。
 
+#### [Seafile](http://seafile.com) :80 `rake seafile`
+开源的文件共享服务，有各种平台的客户端，适合网络比较慢的公司在内网搭着用来共享文件，我个人还是倾向于用 Dropbox。默认帐号: `seafile@localhost` 密码: `seafile`。[目前有一个 bug](https://github.com/ginsys/ansible-role-seafile/issues/8) 会造成文件目录没有创建，需要手动创建。
+
 #### [Gem in a Box](https://github.com/geminabox/geminabox) :9922 `rake geminabox`
 在内网建一个 RubyGems 镜像，加速 Rails 开发。这个 role 没有做全面的测试，可能无法正常使用。使用内网或本地 RubyGems 镜像时，一般不想修改 Gemfile，那么可以这样操作(注意替换地址): `bundle config mirror.https://rubygems.org http://localhost:9922 ; bundle config mirror.http://rubygems.org http://localhost:9922`
 

@@ -1,0 +1,36 @@
+---
+# - name: download release tarball
+#   sudo:                 yes
+#   sudo_user:            '{{ seafile_user }}'
+#   get_url:
+#     url:                '{{ seafile_tarball_url }}'
+#     validate_certs:     no
+#     dest:               '{{ seafile_org_dir + "/installed" }}'
+#   register:             seafile_tarball_dl
+#   notify:               restart_seafile
+#   always_run:           true
+
+# - name: untar tarball
+#   sudo:                 yes
+#   sudo_user:            '{{ seafile_user }}'
+#   unarchive:
+#     copy:               no
+#     src:                '{{ seafile_tarball_dl.dest }}'
+#     dest:               '{{ seafile_org_dir }}'
+#     creates:            '{{ seafile_distrib_dir }}'
+#   notify:               restart_seafile
+#   always_run:           true
+
+- name: link latest release
+  sudo:                 yes
+  sudo_user:            '{{ seafile_user }}'
+  file:
+    src:                '{{ seafile_distrib_dir }}'
+    dest:               '{{ item }}'
+    owner:              '{{ seafile_user }}'
+    group:              '{{ seafile_user }}'
+    state:              link
+  notify:               restart_seafile
+  with_items:
+                        - '{{ seafile_latest_dir }}'
+                        - '{{ seafile_latest2_dir }}'

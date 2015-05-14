@@ -1,0 +1,9 @@
+---
+- name: provision database
+  sudo:                 yes
+  sudo_user:            '{{ seafile_user }}'
+  shell:                '{{ SEAFILE_MANAGEPY }} syncdb'
+  environment:          SEAFILE_ENVIRONMENT
+  register:             seafile_syncdb
+  changed_when:         seafile_syncdb.stdout.find( "Creating table ") != -1
+

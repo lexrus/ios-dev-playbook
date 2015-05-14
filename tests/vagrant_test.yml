@@ -14,3 +14,4 @@
     - role: uptime
     - role: geminabox
     - role: huginn
+    - role: gogs

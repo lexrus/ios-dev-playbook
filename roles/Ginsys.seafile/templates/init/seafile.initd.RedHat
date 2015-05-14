@@ -1,0 +1,64 @@
+#!/bin/bash
+#
+# seafile
+
+# {{ ansible_managed }}
+
+#
+# chkconfig: - 68 32
+# description: seafile
+
+# Source function library.
+. /etc/init.d/functions
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+if [ -f /etc/sysconfig/seafile ];then
+        . /etc/sysconfig/seafile
+        else
+            echo "Config file /etc/sysconfig/seafile not found! Bye."
+            exit 200
+        fi
+
+RETVAL=0
+
+start() {
+        # Start daemons.
+        echo -n $"Starting seafile: "
+        ulimit -n 30000
+        su - ${user} -c"${script_path}/seafile.sh start >> ${seafile_init_log} 2>&1"
+        RETVAL=$?
+        echo
+        [ $RETVAL -eq 0 ] && touch /var/lock/subsys/seafile
+        return $RETVAL
+}
+
+stop() {
+        echo -n $"Shutting down seafile: "
+        su - ${user} -c"${script_path}/seafile.sh stop >> ${seafile_init_log} 2>&1"
+        RETVAL=$?
+        echo
+        [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/seafile
+        return $RETVAL
+}
+
+# See how we were called.
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  restart|reload)
+        stop
+        start
+        RETVAL=$?
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart}"
+        RETVAL=3
+esac
+
+exit $RETVAL

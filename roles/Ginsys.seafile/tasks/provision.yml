@@ -1,0 +1,31 @@
+---
+- name: provision seafile user
+  user:
+    name:               '{{ seafile_user }}'
+    state:              present
+    comment:            Seafile
+    createhome:         yes
+    generate_ssh_key:   no
+    home:               '{{ seafile_user_home }}'
+    move_home:          yes
+    system:             yes
+
+- name: provision directories
+  sudo:                 yes
+  sudo_user:            '{{ seafile_user }}'
+  file:
+    path:               '{{ item }}'
+    owner:              '{{ seafile_user }}'
+    group:              '{{ seafile_user }}'
+    mode:               0755
+    state:              directory
+  with_items:
+    - '{{ seafile_org_dir                   }}'
+    - '{{ seafile_org_dir + "/installed"    }}'
+    - '{{ seafile_ccnet_dir                 }}'
+    - '{{ seafile_conf_dir                  }}'
+    - '{{ seafile_log_dir                   }}'
+    - '{{ seafile_data_dir                  }}'
+    - '{{ seafile_seahubdata_dir            }}'
+    - '{{ seafile_mylib_dir                 }}'
+

@@ -1,0 +1,23 @@
+---
+galaxy_info:
+  author: Serge van Ginderachter
+  description: >
+    Install and configure Seafile, an Open Source Cloud Storage.
+    Homepage http://seafile.com
+  company: ginsys.eu
+  license: GPLv3
+  min_ansible_version: 1.6
+  platforms:
+  - name: EL
+    versions:
+    - 6
+  - name: Ubuntu
+    versions:
+    - all
+  - name: Debian
+    versions:
+    - all
+  categories:
+  - web
+dependencies: []
+

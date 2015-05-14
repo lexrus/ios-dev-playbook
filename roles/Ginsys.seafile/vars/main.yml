@@ -1,0 +1,62 @@
+---
+SEAFILE_SUPPORTED_DISTRIBUTIONS:
+  - 'Ubuntu'
+  - 'Debian'
+  - 'CentOS'
+SEAFILE_SUPPORTED_VERSIONS:
+  - '4.0'
+  - '4.1'
+SEAFILE_SUPPORTED_BACKENDS:
+  - 'sqlite'
+  - 'mysql'
+  #- 'postgresql'
+SEAFILE_EXTERNAL_BACKENDS: >
+    {{ SEAFILE_SUPPORTED_BACKENDS|difference(['sqlite']) }}
+SEAFILE_INIT_SCRIPTS:
+  - name: 'seafile'
+    os_family:
+      - 'Debian'
+      - 'RedHat'
+  - name: 'seahub'
+    os_family:
+      - 'RedHat'
+
+DEPENDENCY_PACKAGES_APT:
+- python-setuptools
+- python-simplejson
+- python-imaging
+- python-mysqldb
+- sqlite
+- rsync
+- sudo
+DEPENDENCY_PACKAGES_RPM:
+- python2.6-setuptools
+- python2.6-simplejson
+- python2.6-imaging
+- MYSQL-python
+- sqlite
+- rsync
+- sudo
+
+SEAFILE_ENVIRONMENT:
+  LD_LIBRARY_PATH: >
+    {{ seafile_latest_dir }}/seafile/lib/:{{ seafile_latest_dir }}/seafile/lib64:${LD_LIBRARY_PATH}
+  PYTHONPATH: >
+    {{ seafile_latest_dir }}/seafile/lib/python2.6/site-packages:{{ seafile_latest_dir }}/seafile/lib64/python2.6/site-packages:{{ seafile_latest_dir }}/seahub/thirdpart:{{ seafile_latest_dir }}/seafile/lib/python2.7/site-packages:{{ seafile_latest_dir }}/seafile/lib64/python2.7/site-packages:{{ ansible_env.PYTHONPATH | default('') }}
+  CCNET_CONF_DIR:       '{{ seafile_ccnet_dir }}'
+  SEAFILE_CONF_DIR:     '{{ seafile_data_dir }}'
+
+SEAFILE_CCNET_INIT:     '{{ seafile_latest_dir }}/seafile/bin/ccnet-init'
+SEAFILE_SERVER_INIT:    '{{ seafile_latest_dir }}/seafile/bin/seaf-server-init'
+SEAFILE_SECRET_KEYGEN:  'python {{ seafile_latest_dir }}/seahub/tools/secret_key_generator.py'
+SEAFILE_MANAGEPY:       'python {{ seafile_latest_dir }}/seahub/manage.py'
+SEAFILE_SEAHUB_SETTINGS_F:  'seahub_settings.py'
+SEAFILE_SEAHUB_SETTINGS:    '{{ seafile_org_dir }}/{{ SEAFILE_SEAHUB_SETTINGS_F }}'
+SEAFILE_AVATAR_SRC:     '{{ seafile_seahubdata_dir }}/avatars'
+SEAFILE_AVATAR_DEST:    '{{ seafile_latest_dir }}/seahub/media/avatars'
+SEAFILE_DOCS_SRC:       '{{ seafile_latest_dir }}/seafile/docs'
+SEAFILE_DOCS_DEST:      '{{ seafile_data_dir }}/library-template'
+
+# moved to vars, seems hardcoded in seafile scripts
+seafile_log_dir:            '{{ seafile_org_dir + "/logs" }}'
+

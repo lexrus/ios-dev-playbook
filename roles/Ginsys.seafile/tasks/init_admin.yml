@@ -1,0 +1,17 @@
+---
+- name: provision admin user creation script
+  sudo:                 yes
+  sudo_user:            '{{ seafile_user }}'
+  template:
+    src:                    bin/init_admin.py
+    dest:                   '{{ seafile_latest_dir }}/init_admin.py'
+    mode:                   0700
+
+- name: provision admin user
+  sudo:                 yes
+  sudo_user:            '{{ seafile_user }}'
+  command:              /usr/bin/env python {{ seafile_latest_dir }}/init_admin.py
+  environment:          '{{ SEAFILE_ENVIRONMENT }}'
+  register:             seafile_init_admin
+  changed_when:         seafile_init_admin.stdout.find("changed=false") == -1
+

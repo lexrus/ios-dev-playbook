@@ -25,6 +25,9 @@ gitlab_ci_domain=ci.example.com
 [gogs]
 g.MY_SRV.com
 
+[seafile]
+files.MY_SRV.com
+
 [jenkins]
 jenkins.MY_SRV.com
 

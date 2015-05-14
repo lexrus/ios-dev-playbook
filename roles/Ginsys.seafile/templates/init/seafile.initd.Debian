@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# {{ ansible_managed }}
+
+### BEGIN INIT INFO
+# Provides:          seafile-server
+# Required-Start:    $local_fs $remote_fs $network{% if seafile_backend == 'mysql' %} mysql{% endif %}
+
+# Required-Stop:     $local_fs
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Starts Seafile Server
+# Description:       starts Seafile Server
+### END INIT INFO
+
+
+user={{ seafile_user }}
+seafile_dir={{ seafile_org_dir }}
+script_path={{ seafile_latest_dir }}
+seafile_init_log={{ seafile_log_dir }}/seafile.init.log
+seahub_init_log={{ seafile_log_dir }}/seahub.init.log
+fastcgi={% if seafile_fastcgi_enabled %}true
+{% else %}false
+{% endif %}
+fastcgi_port={{ seafile_fastcgi_port }}
+
+case "$1" in
+        start)
+                sudo -u ${user} ${script_path}/seafile.sh start >> ${seafile_init_log}
+                if [  $fastcgi = true ];
+                then
+                        sudo -u ${user} ${script_path}/seahub.sh start-fastcgi ${fastcgi_port} >> ${seahub_init_log}
+                else
+                        sudo -u ${user} ${script_path}/seahub.sh start >> ${seahub_init_log}
+                fi
+        ;;
+        restart)
+                sudo -u ${user} ${script_path}/seafile.sh restart >> ${seafile_init_log}
+                if [  $fastcgi = true ];
+                then
+                        sudo -u ${user} ${script_path}/seahub.sh restart-fastcgi ${fastcgi_port} >> ${seahub_init_log}
+                else
+                        sudo -u ${user} ${script_path}/seahub.sh restart >> ${seahub_init_log}
+                fi
+        ;;
+        stop)
+                sudo -u ${user} ${script_path}/seafile.sh $1 >> ${seafile_init_log}
+                sudo -u ${user} ${script_path}/seahub.sh $1 >> ${seahub_init_log}
+        ;;
+        *)
+                echo "Usage: /etc/init.d/seafile {start|stop|restart}"
+                exit 1
+        ;;
+esac

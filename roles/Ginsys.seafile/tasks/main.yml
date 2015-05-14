@@ -1,0 +1,34 @@
+---
+- include:  prerequisites.yml
+  tags:
+  - seafile_prerequisites
+
+- include:  provision.yml
+  tags:
+  - seafile_provision
+
+- include:  download.yml
+  tags:
+  - seafile_download
+
+- include:  preconfigure.yml
+  tags:
+  - seafile_preconfigure
+  - seafile_configure
+
+- include:  configure.yml
+  tags:
+  - seafile_configure
+
+- include:  database.yml
+  tags:
+  - seafile_database
+
+- include:  init_admin.yml
+  tags:
+  - seafile_init_admin
+
+- include:  init.yml
+  tags:
+  - seafile_init
+

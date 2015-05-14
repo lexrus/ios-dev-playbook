@@ -64,6 +64,11 @@ task :gogsdr do
   exec "ansible-playbook 014_gogs_disable_registration.yml --tags=config,wait,restart -l gogs"
 end
 
+desc "Install Seafile server"
+task :seafile do
+  exec "ansible-playbook 015_seafile.yml -l seafile"
+end
+
 desc "Install Ghost server"
 task :ghost do
   exec "ansible-playbook 030_ghost.yml -l ghost"

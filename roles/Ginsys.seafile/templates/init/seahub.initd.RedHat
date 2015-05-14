@@ -1,0 +1,69 @@
+#!/bin/bash
+#
+# seahub
+
+# {{ ansible_managed }}
+
+#
+# chkconfig: - 69 31
+# description: seahub
+
+# Source function library.
+. /etc/init.d/functions
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+if [ -f /etc/sysconfig/seafile ];then
+        . /etc/sysconfig/seafile
+        else
+            echo "Config file /etc/sysconfig/seafile not found! Bye."
+            exit 200
+        fi
+
+RETVAL=0
+
+start() {
+        # Start daemons.
+        echo -n $"Starting seahub: "
+        ulimit -n 30000
+        if [  $fastcgi = true ];
+                then
+                su - ${user} -c"${script_path}/seahub.sh start-fastcgi ${fastcgi_port} >> ${seahub_init_log} 2>&1"
+                else
+                su - ${user} -c"${script_path}/seahub.sh start >> ${seahub_init_log} 2>&1"
+                fi
+        RETVAL=$?
+        echo
+        [ $RETVAL -eq 0 ] && touch /var/lock/subsys/seahub
+        return $RETVAL
+}
+
+stop() {
+        echo -n $"Shutting down seahub: "
+        su - ${user} -c"${script_path}/seahub.sh stop >> ${seahub_init_log} 2>&1"
+        RETVAL=$?
+        echo
+        [ $RETVAL -eq 0 ] && rm -f /var/lock/subsys/seahub
+        return $RETVAL
+}
+
+# See how we were called.
+case "$1" in
+  start)
+        start
+        ;;
+  stop)
+        stop
+        ;;
+  restart|reload)
+        stop
+        start
+        RETVAL=$?
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart}"
+        RETVAL=3
+esac
+
+exit $RETVAL

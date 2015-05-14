@@ -1,0 +1,61 @@
+---
+# handy environment file to be sourced when doing things manually
+- name:                 provision environment source file
+  sudo:                 yes
+  sudo_user:            '{{ seafile_user }}'
+  template:
+    src:                    bin/environment
+    dest:                   '{{ seafile_latest_dir }}/environment'
+    mode:                   0664
+
+
+# prepare ccnet config
+- name:                 generate ccnet config
+  sudo:                 yes
+  sudo_user:            '{{ seafile_user }}'
+  command:  >
+                        {{ SEAFILE_CCNET_INIT }} -c {{ seafile_mylib_dir }}/ccnet --name {{ seafile_user }} --port {{ seafile_ccnet_port }} --host {{ seafile_ip_or_domain }}
+                        creates={{ seafile_mylib_dir }}/ccnet/
+  environment:          '{{ SEAFILE_ENVIRONMENT }}'
+
+- name:                 register ccnet key ID
+  sudo:                 yes
+  sudo_user:            '{{ seafile_user }}'
+  shell:                grep ID {{ seafile_mylib_dir }}/ccnet/ccnet.conf | cut -d= -f2
+  register:             _seafile_ccnet_ID
+  always_run:           true
+  changed_when:         false
+  failed_when:          _seafile_ccnet_ID.stdout == "" or _seafile_ccnet_ID.stderr != ""
+
+- name:                 link ccnet peer key
+  sudo:                 yes
+  sudo_user:            '{{ seafile_user }}'
+  file:
+    src:                '{{ seafile_mylib_dir }}/ccnet/mykey.peer'
+    dest:               '{{ seafile_ccnet_dir }}/mykey.peer'
+    state:              link
+    force:              yes
+    owner:              '{{ seafile_user }}'
+    group:              '{{ seafile_user }}'
+    mode:               0640
+
+# prepare seahub_settings secret key
+- name:                 generate seahub_settings secret key
+  sudo:                 yes
+  sudo_user:            '{{ seafile_user }}'
+  shell:  >
+                        {{ SEAFILE_SECRET_KEYGEN }} > {{ seafile_mylib_dir }}/seahub_settings_secret_key
+                        creates={{ seafile_mylib_dir }}/seahub_settings_secret_key
+  environment:          '{{ SEAFILE_ENVIRONMENT }}'
+
+
+
+- name:                 register seahub_settings secret key
+  sudo:                 yes
+  sudo_user:            '{{ seafile_user }}'
+  command:              cat {{ seafile_mylib_dir }}/seahub_settings_secret_key
+  register:             _seafile_seahub_settings_secret_key
+  always_run:           true
+  changed_when:         false
+  failed_when:          _seafile_seahub_settings_secret_key.stdout == "" or _seafile_seahub_settings_secret_key.stderr != ""
+

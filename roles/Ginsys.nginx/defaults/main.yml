@@ -1,0 +1,15 @@
+---
+nginx_max_clients: 512
+
+nginx_http_params:
+  sendfile: "on"
+  tcp_nopush: "on"
+  tcp_nodelay: "on"
+  keepalive_timeout: "65"
+  access_log: "/var/log/nginx/access.log"
+  error_log: "/var/log/nginx/error.log"
+
+nginx_sites:
+  # no sites get deployed when value is null or variable not defined
+  # see README.md for examples
+

@@ -1,0 +1,12 @@
+# {{ ansible_managed }}
+
+user={{ seafile_user }}
+seafile_dir={{ seafile_org_dir }}
+script_path={{ seafile_latest_dir }}
+seafile_init_log={{ seafile_log_dir }}/seafile.init.log
+seahub_init_log={{ seafile_log_dir }}/seahub.init.log
+fastcgi={% if seafile_fastcgi_enabled %}true
+{% else %}false
+{% endif %}
+fastcgi_port={{ seafile_fastcgi_port }}
+
