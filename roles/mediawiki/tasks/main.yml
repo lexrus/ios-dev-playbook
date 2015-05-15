@@ -1,0 +1,47 @@
+---
+
+- name: Prepare directories
+  file: path={{ item }} state=directory mode=0755
+  with_items:
+    - /var/mediawiki/images
+    - /var/mediawiki/mysql
+  tags:
+    - mediawiki
+    - dir
+
+- name: Initiate MySQL container
+  docker:
+    name: mediawiki-mysql
+    image: mysql:5.7.7
+    state: started
+    env:
+      MYSQL_ROOT_PASSWORD: mediawiki
+      MYSQL_DATABASE: mediawiki
+  tags:
+    - mediawiki
+    - docker
+    - mysql
+
+
+- name: Touch LocalSettings.php
+  file: path=/var/mediawiki/LocalSettings.php state=touch mode=0755
+  tags:
+    - mediawiki
+    - settings
+
+- name: Initiate MediaWiki container
+  docker:
+    name: mediawiki
+    image: simplyintricate/mediawiki
+    state: started
+    links:
+      - 'mediawiki-mysql:db'
+    ports:
+      - 80:80
+    volumes:
+      /var/mediawiki/LocalSettings.php:/usr/share/nginx/html/LocalSettings.php:rw
+      /var/mediawiki/images:/usr/share/nginx/html/images:rw
+      /var/mediawiki/mysql:/var/lib/mysql:rw
+  tags:
+    - mediawiki
+    - docker

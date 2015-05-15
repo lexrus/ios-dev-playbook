@@ -52,6 +52,9 @@
 #### [Seafile](http://seafile.com) :80 `rake seafile`
 开源的文件共享服务，有各种平台的客户端，适合网络比较慢的公司在内网搭着用来共享文件，我个人还是倾向于用 Dropbox。默认帐号: `seafile@localhost` 密码: `seafile`。[目前有一个 bug](https://github.com/ginsys/ansible-role-seafile/issues/8) 会造成文件目录没有创建，需要手动创建。
 
+#### [MediaWiki](http://www.mediawiki.org/) :80 `rake mediawiki`
+最知名的 Wiki 程序。这个服务使用 docker 安装。
+
 #### [Gem in a Box](https://github.com/geminabox/geminabox) :9922 `rake geminabox`
 在内网建一个 RubyGems 镜像，加速 Rails 开发。这个 role 没有做全面的测试，可能无法正常使用。使用内网或本地 RubyGems 镜像时，一般不想修改 Gemfile，那么可以这样操作(注意替换地址): `bundle config mirror.https://rubygems.org http://localhost:9922 ; bundle config mirror.http://rubygems.org http://localhost:9922`
 
@@ -62,10 +65,12 @@
 - [Let's Chat](http://sdelements.github.io/lets-chat/) 或者 [friends](https://github.com/moose-team/friends) 团队在线聊天工具，可是为什么不用 Slack 呢？
 - [Cachet](https://cachethq.io) 服务状态页面，如果有不少 Web 服务的话，会需要这样的服务。
 - [Vault](https://github.com/hashicorp/vault) 密钥管理工具。
+- [Sparkler](https://github.com/mackuba/sparkler) 如果同时开发 OS X 程序并使用 Sparkle 来更新版本，这个服务可以用来收集升级数据。
+- [apt-cacher-ng](https://docs.docker.com/examples/apt-cacher-ng/) 使用 docker 必备的服务。
 
 ## 使用方法
 
-1. `sudo pip install ansible` - 安装 Ansible (版本至少 1.8 以上)
+1. `sudo pip install ansible docker-py` - 安装 Ansible (版本至少 1.8 以上)
 1. `git clone https://github.com/lexrus/ios-dev-playbook.git` - 下载项目
 1. `cd ios-dev-playbook` - 进入目录
 1. `cp ansible_hosts.ini{.example,}` - 复制 ansible_hosts.ini.example 到 ansible_hosts.ini，然后修改相应的服务器地址
