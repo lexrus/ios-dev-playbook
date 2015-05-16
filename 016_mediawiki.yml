@@ -1,7 +1,7 @@
 ---
 - hosts: all
   roles:
-    - role: docker
+    # - role: docker
     - role: mediawiki
     # - role: Ginsys.nginx
       # post_tasks:

@@ -71,7 +71,12 @@ end
 
 desc "Install MediaWiki server"
 task :mediawiki do
-  exec "ansible-playbook 016_mediawiki.yml -l mediawiki"
+  exec "ansible-playbook 016_mediawiki.yml -l mediawiki --skip-tags=upload_settings"
+end
+
+desc "Install MediaWiki server"
+task :mediawiki_settings do
+  exec "ansible-playbook 016_mediawiki.yml -l mediawiki --tags=upload_settings"
 end
 
 desc "Install Ghost server"
