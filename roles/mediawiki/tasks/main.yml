@@ -26,18 +26,6 @@
     - docker
     - mysql
 
-# - name: Touch LocalSettings.php
-#   file: path=/var/mediawiki/LocalSettings.php mode=0700 group=www-data owner=www-data state=touch
-#   tags:
-#     - mediawiki
-#     - settings
-
-# - name: Upload LocalSettings.php
-#   copy: src=LocalSettings.php dest=/var/mediawiki/LocalSettings.php mode=0700 backup=yes group=www-data owner=www-data
-#   tags:
-#     - mediawiki
-#     - settings
-
 - name: Initiate MediaWiki container
   docker:
     name: mediawiki
@@ -48,7 +36,6 @@
     ports:
       - 80:80
     volumes:
-      # - '/var/mediawiki/LocalSettings.php:/usr/share/nginx/html/LocalSettings.php:ro'
       - '/var/mediawiki/images:/usr/share/nginx/html/images'
       - '/var/mediawiki/extensions:/tmp/extensions'
   tags:
