@@ -9,7 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision "shell", inline: "sudo locale-gen en_US.UTF-8"
 
   config.vm.define "debian" do |debian|
-    debian.vm.box = "puphpet/debian75-x64"
+    debian.vm.box = "scratchpads/debian8"
     debian.vm.network "private_network", ip: "192.168.33.10"
     debian.vm.provision "ansible" do |ansible|
       ansible.limit = 'test_debian'
