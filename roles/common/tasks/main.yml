@@ -50,6 +50,12 @@
 
 # Install common packages
 
+- name: install apt-transport-https
+  apt: pkg=apt-transport-https state=installed
+  tags:
+    - common
+    - apt-transport-https
+
 - name: install build-essential
   action: apt pkg=build-essential state=installed
   tags:
