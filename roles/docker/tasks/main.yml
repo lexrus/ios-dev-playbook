@@ -13,7 +13,7 @@
     - apt_repository
 
 - name: Update apt-cache
-  apt: update_cache=yes cache_valid_time=3600
+  apt: update_cache=yes
   tags:
     - docker
     - apt_cache
