@@ -1,0 +1,107 @@
+---
+# version to install
+seafile_install_version:    '4.1.2'
+
+# names, files and directory locations
+seafile_user:               seafile
+seafile_user_home:          /home/seafile
+seafile_org_name:           Seafile
+seafile_server_name:        '{{ seafile_org_name }}'
+seafile_ip_or_domain:       '{{ inventory_hostname }}'
+seafile_service_url:        http://{{ seafile_ip_or_domain }}
+
+seafile_quota_enable:       false
+seafile_quota_default:      2
+
+seafile_history_keepall:    true # set to false to enable keep_days limit
+seafile_history_keep_days:  30
+
+seafile_max_upload_size_enable:         false # set to true to enable max
+seafile_max_upload_size:                200  # MB
+seafile_max_download_dir_size_enable:   false # set to true to enable max
+seafile_max_download_dir_size:          200  # MB
+
+seafile_email_enable:       enable
+seafile_email_use_tls:      false
+#seafile_email_host:        smtp.myisp.example
+seafile_email_user:         '{{ seafile_seahub_admin_email }}'
+seafile_email_password:     ''
+seafile_email_port:         25
+seafile_default_from_email: '{{ seafile_email_user }}'
+seafile_server_email:       '{{ seafile_email_user }}'
+
+seafile_time_zone:  'Asia/Shanghai'
+seafile_site_base:  'http://{{ seafile_ip_or_domain }}/'
+seafile_site_name:  '{{ seafile_org_name }}' # used in email notifications
+seafile_site_title: '{{ seafile_org_name }}'
+seafile_site_root:  '/'
+seafile_cloud_mode: true
+
+seafile_fastcgi_enabled:    true
+
+# webdav settings
+seafile_webdav_enabled:     true
+seafile_webdav_fastcgi:     true
+seafile_webdav_path:        /dav
+
+# seahub settings
+seafile_seahub_admin_email:     seafile@localhost
+seafile_seahub_admin_password:  seafile
+
+#nginx configuration
+#
+nginx_max_clients:          128
+nginx_http_params:
+  sendfile:                 "on"
+  tcp_nopush:               "on"
+  tcp_nodelay:              "on"
+  keepalive_timeout:        "65"
+  access_log:               "/var/log/nginx/access.log"
+  error_log:                "/var/log/nginx/error.log"
+  types_hash_max_size:      2048
+
+nginx_sites:
+ - server:
+     file_name:      '{{ seafile_ip_or_domain }}'
+     server_name:    '{{ seafile_ip_or_domain }}'
+     listen:         80
+   location:
+     - name:  /
+       fastcgi_pass:  127.0.0.1:{{ seafile_fastcgi_port }}
+       "fastcgi_param SCRIPT_FILENAME":     $document_root$fastcgi_script_name
+       "fastcgi_param PATH_INFO":           $fastcgi_script_name
+       "fastcgi_param SERVER_PROTOCOL":     $server_protocol
+       "fastcgi_param QUERY_STRING":        $query_string
+       "fastcgi_param REQUEST_METHOD":      $request_method
+       "fastcgi_param CONTENT_TYPE":        $content_type
+       "fastcgi_param CONTENT_LENGTH":      $content_length
+       "fastcgi_param SERVER_ADDR":         $server_addr
+       "fastcgi_param SERVER_PORT":         $server_port
+       "fastcgi_param SERVER_NAME":         $server_name
+       "fastcgi_param HTTPS":               on
+       "fastcgi_param HTTP_SCHEME":         https
+       access_log:    /var/log/nginx/seahub.access.log
+       error_log:     /var/log/nginx/seahub.error.log
+     - name: /seafhttp
+       rewrite:               ^/seafhttp(.*)$ $1 break
+       proxy_pass:            http://127.0.0.1:{{ seafile_httpserver_port }}
+       client_max_body_size:  0
+     - name: /media
+       root: '{{ seafile_latest_dir }}/seahub'
+     - name:  '{{ seafile_webdav_path }}'
+       fastcgi_pass:  127.0.0.1:{{ seafile_webdav_port }}
+       "fastcgi_param SCRIPT_FILENAME":     $document_root$fastcgi_script_name
+       "fastcgi_param PATH_INFO":           $fastcgi_script_name
+       "fastcgi_param SERVER_PROTOCOL":     $server_protocol
+       "fastcgi_param QUERY_STRING":        $query_string
+       "fastcgi_param REQUEST_METHOD":      $request_method
+       "fastcgi_param CONTENT_TYPE":        $content_type
+       "fastcgi_param CONTENT_LENGTH":      $content_length
+       "fastcgi_param SERVER_ADDR":         $server_addr
+       "fastcgi_param SERVER_PORT":         $server_port
+       "fastcgi_param SERVER_NAME":         $server_name
+       "fastcgi_param HTTPS":               on
+       "fastcgi_param HTTP_SCHEME":         https
+       client_max_body_size:                50m
+       access_log:    /var/log/nginx/seafdav.access.log
+       error_log:     /var/log/nginx/seafdav.error.log

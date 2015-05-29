@@ -1,6 +1,12 @@
 ---
 - hosts: all
-  sudo: true
 
   roles:
+    - role: common
+      tags:
+        - update
+        - hostname
+        - apt-transport-https
+        - git
+        - exim4
     - role: gitlab

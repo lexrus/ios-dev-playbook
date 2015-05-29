@@ -1,47 +1,42 @@
 ---
 
-- name: check download
-  stat: path=/tmp/{{ gitlab_deb_filename }}.deb
-  register: deb
-  tags:
-    - gitlab
-    - check_download
-
-- name: download GitLab for Debian 8
-  get_url: >
-    url=https://downloads-packages.s3.amazonaws.com/debian-8.0/{{ gitlab_deb_filename }}.deb
-    dest=/tmp/
-  when: ansible_distribution == "Debian" and not deb.stat.exists
-  tags:
-    - gitlab
-    - download
-
-- name: download GitLab for Ubuntu
-  get_url: >
-    url=https://downloads-packages.s3.amazonaws.com/ubuntu-{{ ansible_distribution_version }}/{{ gitlab_deb_filename }}.deb
-    dest=/tmp/
-  when: ansible_distribution == "Ubuntu" and not deb.stat.exists
-  tags:
-    - gitlab
-    - download
-
-- name: install OpenSSH server
-  apt: pkg=openssh-server state=installed
-  tags:
-    - gitlab
+- name: Install packages
+  apt: pkg={{ item }} state=present
+  with_items:
+    - curl
+    - apt-transport-https
     - openssh-server
-
-- name: install Postfix
-  apt: pkg=postfix state=installed
+    - ca-certificates
   tags:
     - gitlab
-    - postfix
+    - packages
 
-- name: check installation
+- name: Import GPG key
+  apt_key: url=https://packages.gitlab.com/gpg.key
+  tags:
+    - gitlab
+    - key
+
+- name: Add source list
+  apt_repository: repo='{{ item }} https://packages.gitlab.com/gitlab/gitlab-ce/{{ ansible_distribution|lower }}/ {{ ansible_distribution_release|lower }} main' state=present
+  with_items:
+    - deb
+    - deb-src
+  tags:
+    - gitlab
+    - source
+
+- name: Update apt cache
+  apt: update_cache=yes cache_valid_time=3600
+  tags:
+    - gitlab
+    - cache
+
+- name: Check installation
   stat: path=/etc/gitlab
   register: gitlab_config
 
-- name: stop existing server
+- name: Stop existing server
   when: gitlab_config.stat.exists and gitlab_config.stat.isdir and upgrade_gitlab
   command: gitlab-ctl stop {{ item }}
   with_items:
@@ -51,32 +46,32 @@
     - gitlab
     - stop_server
 
-- name: backup database
+- name: Backup database
   when: gitlab_config.stat.exists and gitlab_config.stat.isdir and upgrade_gitlab
   command: gitlab-rake gitlab:backup:create
   tags:
     - gitlab
     - backup
 
-- name: install GitLab
-  apt: deb=/tmp/{{ gitlab_deb_filename }}.deb state=installed
+- name: Install GitLab CE
+  apt: pkg=gitlab-ce state=latest
   tags:
     - gitlab
     - install
 
-- name: copy gitlab config
+- name: Copy gitlab config
   template: src=gitlab.rb.j2 dest=/etc/gitlab/gitlab.rb
   tags:
     - gitlab
     - config
 
-- name: reconfigure
+- name: Reconfigure
   command: gitlab-ctl reconfigure
   tags:
     - gitlab
     - reconfigure
 
-- name: restart all gitlab services
+- name: Restart all gitlab services
   command: gitlab-ctl restart
   tags:
     - gitlab

@@ -60,7 +60,7 @@
   action: apt pkg=build-essential state=installed
   tags:
     - common
-    - build
+    - build-essential
 
 - name: install editor
   action: apt pkg={{ item }} state=installed
@@ -76,7 +76,7 @@
     - git
   tags:
     - common
-    - vcs
+    - git
 
 - name: install mosh
   action: apt pkg=mosh state=installed

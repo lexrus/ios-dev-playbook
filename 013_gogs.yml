@@ -3,5 +3,10 @@
   gather_facts: no
   roles:
     - role: common
-      skip_tags: ['build', 'upgrade', 'dns', 'editor', 'vcs', 'mosh', 'ranger', 'imagemagick']
+      tags:
+        - update
+        - hostname
+        - apt-transport-https
+        - git
+        - exim4
     - gogs
