@@ -1,6 +1,6 @@
 ---
 # version to install
-seafile_install_version:    '4.0.6'
+seafile_install_version:    '3.1.2'
 
 # distribution download info
 seafile_tarball_url_base:   https://bitbucket.org/haiwen/seafile/downloads/
@@ -16,7 +16,6 @@ seafile_distrib_dir:        '{{ seafile_org_dir + "/seafile-server-" + seafile_i
 seafile_ccnet_dir:          '{{ seafile_org_dir + "/ccnet" }}'
 seafile_conf_dir:           '{{ seafile_org_dir + "/conf" }}'
 seafile_latest_dir:         '{{ seafile_org_dir + "/seafile-server-latest" }}'
-seafile_latest2_dir:        '{{ seafile_org_dir + "/latest" }}'
 seafile_data_dir:           '{{ seafile_org_dir + "/seafile-data" }}'
 seafile_seahubdata_dir:     '{{ seafile_org_dir + "/seahub-data" }}'
 seafile_mylib_dir:            '{{ seafile_org_dir + "/lib" }}'
@@ -64,7 +63,6 @@ seafile_session_expire_at_browser_close: false
 seafile_force_server_crypto: true
 seafile_logo_path:          # default none
 seafile_css_path:           # default none
-seafile_allowed_hosts:      # default none
 
 # network ports
 seafile_ccnet_port:         10001

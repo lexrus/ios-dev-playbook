@@ -77,7 +77,6 @@ Ajenti 强烈建议使用 SSL 连接，但是 Safari 访问非 443 端口使用�
 #### [Seafile](http://seafile.com) :80 `rake seafile`
 开源的文件共享服务，有各种平台的客户端，适合网络比较慢的公司在内网搭着用来共享文件，我个人还是倾向于用 Dropbox。
 默认帐号: `seafile@localhost` 密码: `seafile`。
-[目前有一个 bug](https://github.com/ginsys/ansible-role-seafile/issues/8) 会造成文件目录没有创建，需要手动创建。
 
 #### [MediaWiki](http://www.mediawiki.org/) :80 `rake mediawiki`
 最知名的 Wiki 程序。

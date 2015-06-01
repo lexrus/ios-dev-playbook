@@ -21,56 +21,16 @@
       dest:     '{{ SEAFILE_SEAHUB_SETTINGS }}'
   notify:              restart_seafile
 
-- name:       move the default avatars directory out of the way
-  command:    >
-              creates='{{ seafile_latest_dir }}/seahub/media/avatars.ori'
-              mv '{{ seafile_latest_dir }}/seahub/media/avatars' '{{ seafile_latest_dir }}/seahub/media/avatars.ori'
-
-- name:       provision and link customisation directories
-  sudo:       yes
-  sudo_user:  '{{ seafile_user }}'
-  file:
-    dest:     '{{ item.dest }}'
-    state:    '{{ item.state }}'
-    src:      '{{ item.src }}'
-    owner:    '{{ seafile_user }}'
-    group:    '{{ seafile_user }}'
-    mode:     0755
-    force:    yes
-  with_items:
-  - src:      '{{ seafile_seahubdata_dir }}/avatars'
-    dest:     '{{ seafile_latest_dir }}/seahub/media/avatars'
-    state:    link
-    force:    true
-  - src:      '{{ seafile_seahubdata_dir }}/custom'
-    dest:     '{{ seafile_latest_dir }}/seahub/media/custom'
-    state:    link
-    force:    true
-  tags:       seafile_custom
-
-# - name:       copy customisation files
-#   sudo:       yes
-#   sudo_user:  '{{ seafile_user }}'
-#   copy:
-#     src:              'files/seafile/custom'
-#     dest:             '{{ seafile_seahubdata_dir }}/'
-#     force:            yes
-#     owner:            '{{ seafile_user }}'
-#     group:            '{{ seafile_user }}'
-#     mode:             0644
-#     directory_mode:   0755
-#   ignore_errors: true
-
 - name: provision media folders
   sudo:                 yes
-  synchronize: >
-    src={{ item.src }}
-    dest={{ item.dest }}
-    owner='{{ seafile_user }}'
+  sudo_user:            '{{ seafile_user }}'
+  shell: >
+    creates={{ item.dest }}
+    rsync -a {{ item.src }}/ {{ item.dest }}/
   with_items:
     - src:              '{{ SEAFILE_AVATAR_SRC }}'
       dest:             '{{ SEAFILE_AVATAR_DEST }}'
     - src:              '{{ SEAFILE_DOCS_SRC }}'
       dest:             '{{ SEAFILE_DOCS_DEST }}'
   notify:              restart_seafile
-  ignore_errors:       true
+
