@@ -21,16 +21,36 @@
       dest:     '{{ SEAFILE_SEAHUB_SETTINGS }}'
   notify:              restart_seafile
 
-- name: provision media folders
-  sudo:                 yes
-  sudo_user:            '{{ seafile_user }}'
-  shell: >
-    creates={{ item.dest }}
-    rsync -a {{ item.src }}/ {{ item.dest }}/
+- name:       move the default avatars directory out of the way
+  sudo:       yes
+  sudo_user:  '{{ seafile_user }}'
+  shell:      >
+              ORI='{{ seafile_latest_dir }}/seahub/media/avatars';
+              test -e $ORI && (test -L $ORI || mv -v $ORI ${ORI}.ori)
+  register:     _shell
+  changed_when: _shell.stdout_lines|length > 0
+
+- name:       link media folders with local custom data
+  sudo:       yes
+  sudo_user:  '{{ seafile_user }}'
+  file:
+    src:      '{{ seafile_seahubdata_dir +"/"+ item }}'
+    dest:     '{{ seafile_latest_dir +"/seahub/media/" + item }}'
+    owner:    '{{ seafile_user }}'
+    group:    '{{ seafile_user }}'
+    mode:     0755
+    state:    link
+    force:    yes
   with_items:
-    - src:              '{{ SEAFILE_AVATAR_SRC }}'
-      dest:             '{{ SEAFILE_AVATAR_DEST }}'
-    - src:              '{{ SEAFILE_DOCS_SRC }}'
-      dest:             '{{ SEAFILE_DOCS_DEST }}'
-  notify:              restart_seafile
+  - avatars
+  - custom
+
+- name:       copy default avatars to custom data dir
+  sudo:       yes
+  sudo_user:  '{{ seafile_user }}'
+  shell:      |
+              ORI='{{ seafile_latest_dir }}/seahub/media/avatars';
+              rsync -ai ${ORI}.ori/ $ORI/
+  register:     _shell
+  changed_when: _shell.stdout_lines|length > 0
 

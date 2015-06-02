@@ -6,17 +6,17 @@ galaxy_info:
     Homepage http://seafile.com
   company: ginsys.eu
   license: GPLv3
-  min_ansible_version: 1.6
+  min_ansible_version: 1.9
   platforms:
   - name: EL
     versions:
     - 6
   - name: Ubuntu
     versions:
-    - all
+    - trusty
   - name: Debian
     versions:
-    - all
+    - jessie
   categories:
   - web
 dependencies: []

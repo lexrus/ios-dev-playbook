@@ -20,6 +20,10 @@
   tags:
   - seafile_configure
 
+- include:  customize.yml
+  tags:
+  - seafile_customize
+
 - include:  database.yml
   tags:
   - seafile_database

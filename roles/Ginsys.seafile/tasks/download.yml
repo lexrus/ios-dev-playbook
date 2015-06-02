@@ -19,17 +19,17 @@
     dest:               '{{ seafile_org_dir }}'
     creates:            '{{ seafile_distrib_dir }}'
   notify:               restart_seafile
-  always_run:           true
 
 - name: link latest release
   sudo:                 yes
   sudo_user:            '{{ seafile_user }}'
   file:
     src:                '{{ seafile_distrib_dir }}'
-    dest:               '{{ seafile_latest_dir }}'
+    dest:               '{{ item }}'
     owner:              '{{ seafile_user }}'
     group:              '{{ seafile_user }}'
     state:              link
   notify:               restart_seafile
-  always_run:           true
-
+  with_items:
+                        - '{{ seafile_latest_dir }}'
+                        - '{{ seafile_latest2_dir }}'

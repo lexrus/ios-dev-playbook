@@ -1,12 +1,12 @@
 ---
+min_ansible_version: 1.9
 SEAFILE_SUPPORTED_DISTRIBUTIONS:
   - 'Ubuntu'
   - 'Debian'
   - 'CentOS'
 SEAFILE_SUPPORTED_VERSIONS:
-  - '3.0'
-  - '3.1'
   - '4.0'
+  - '4.1'
   - '4.2'
 SEAFILE_SUPPORTED_BACKENDS:
   - 'sqlite'
@@ -30,6 +30,7 @@ DEPENDENCY_PACKAGES_APT:
 - python-mysqldb
 - sqlite
 - rsync
+- sudo
 DEPENDENCY_PACKAGES_RPM:
 - python2.6-setuptools
 - python2.6-simplejson
@@ -37,6 +38,7 @@ DEPENDENCY_PACKAGES_RPM:
 - MYSQL-python
 - sqlite
 - rsync
+- sudo
 
 SEAFILE_ENVIRONMENT:
   LD_LIBRARY_PATH: >
@@ -52,10 +54,11 @@ SEAFILE_SECRET_KEYGEN:  'python {{ seafile_latest_dir }}/seahub/tools/secret_key
 SEAFILE_MANAGEPY:       'python {{ seafile_latest_dir }}/seahub/manage.py'
 SEAFILE_SEAHUB_SETTINGS_F:  'seahub_settings.py'
 SEAFILE_SEAHUB_SETTINGS:    '{{ seafile_org_dir }}/{{ SEAFILE_SEAHUB_SETTINGS_F }}'
-SEAFILE_AVATAR_SRC:     '{{ seafile_latest_dir }}/seahub/media/avatars'
-SEAFILE_AVATAR_DEST:    '{{ seafile_seahubdata_dir }}/avatars'
+SEAFILE_AVATAR_SRC:     '{{ seafile_seahubdata_dir }}/avatars'
+SEAFILE_AVATAR_DEST:    '{{ seafile_latest_dir }}/seahub/media/avatars'
 SEAFILE_DOCS_SRC:       '{{ seafile_latest_dir }}/seafile/docs'
 SEAFILE_DOCS_DEST:      '{{ seafile_data_dir }}/library-template'
 
 # moved to vars, seems hardcoded in seafile scripts
 seafile_log_dir:            '{{ seafile_org_dir + "/logs" }}'
+

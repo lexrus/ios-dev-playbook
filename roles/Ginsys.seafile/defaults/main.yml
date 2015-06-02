@@ -1,9 +1,9 @@
 ---
 # version to install
-seafile_install_version:    '3.1.2'
+seafile_install_version:    '4.2.2'
 
 # distribution download info
-seafile_tarball_url_base:   https://bitbucket.org/haiwen/seafile/downloads/
+seafile_tarball_url_base:   https://bintray.com/artifact/download/seafile-org/seafile/
 seafile_tarball_name:       seafile-server_{{ seafile_install_version }}_{{ ansible_architecture|replace("_","-")}}.tar.gz
 seafile_tarball_url:        '{{ seafile_tarball_url_base + seafile_tarball_name }}'
 
@@ -16,13 +16,20 @@ seafile_distrib_dir:        '{{ seafile_org_dir + "/seafile-server-" + seafile_i
 seafile_ccnet_dir:          '{{ seafile_org_dir + "/ccnet" }}'
 seafile_conf_dir:           '{{ seafile_org_dir + "/conf" }}'
 seafile_latest_dir:         '{{ seafile_org_dir + "/seafile-server-latest" }}'
+seafile_latest2_dir:        '{{ seafile_org_dir + "/latest" }}'
 seafile_data_dir:           '{{ seafile_org_dir + "/seafile-data" }}'
 seafile_seahubdata_dir:     '{{ seafile_org_dir + "/seahub-data" }}'
 seafile_mylib_dir:            '{{ seafile_org_dir + "/lib" }}'
 seafile_server_name:        '{{ seafile_org_name }}'
 seafile_ip_or_domain:       seacloud.cc
 seafile_service_url:        http://{{ seafile_ip_or_domain }}:{{ seafile_fastcgi_port }}
-# when using an ssl termonating reverse proxy, you'' want to set this to:
+
+# the path to a local directory relative to your playbook, that holds
+# customisation files to be copied to
+# seafile-server-latest/seahub/media/custom/
+#seafile_custom_files_path:  custom # see tasks/configure.yml
+
+# when using an ssl terminating reverse proxy, you'' want to set this to:
 #seafile_service_url:        https://{{ seafile_ip_or_domain }}
 
 seafile_quota_enable:       false
@@ -63,6 +70,7 @@ seafile_session_expire_at_browser_close: false
 seafile_force_server_crypto: true
 seafile_logo_path:          # default none
 seafile_css_path:           # default none
+seafile_allowed_hosts:      # default none
 
 # network ports
 seafile_ccnet_port:         10001

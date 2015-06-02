@@ -2,6 +2,8 @@
 - name: check supported versions
   assert:
     that:
+      - ansible_version is defined
+      - ansible_version.full|version_compare(min_ansible_version, '>=')
       - ansible_distribution in SEAFILE_SUPPORTED_DISTRIBUTIONS
       - '".".join(seafile_install_version.split(".")[0:2]) in SEAFILE_SUPPORTED_VERSIONS'
       - seafile_backend in SEAFILE_SUPPORTED_BACKENDS

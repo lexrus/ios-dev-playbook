@@ -109,3 +109,10 @@ DATABASES = {
 }
 
 {% endif %}
+# For security consideration, please set to match the host/domain of your site,
+# e.g., ALLOWED_HOSTS = ['.example.com'].
+# Please refer to
+# https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts for
+# details.
+{% if not seafile_allowed_hosts %}#{% endif %}
+ALLOWED_HOSTS = {{ seafile_allowed_hosts }}

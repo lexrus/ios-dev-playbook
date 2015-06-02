@@ -1,0 +1,61 @@
+---
+# handle custom files outside the role upload
+
+- name: check for custom files folder
+  sudo: false
+  local_action:
+    module:   stat
+    path:     '{{ seafile_custom_files_path }}'
+    follow:   yes
+  when: seafile_custom_files_path is defined
+  register:   seafile_custom_files_folder_found
+
+- name: list custom dirs
+  sudo: false
+  local_action: command chdir="{{ seafile_custom_files_path }}" find . -mindepth 1 -type d
+
+  changed_when: false
+  always_run: yes
+  register: seafile_custom_files_path_dirs
+  when:
+  - not seafile_custom_files_folder_found|skipped
+  - seafile_custom_files_folder_found.stat.exists
+  - seafile_custom_files_folder_found.stat.isdir
+
+- name: list custom files
+  sudo: false
+  local_action: command chdir="{{ seafile_custom_files_path }}" find . -mindepth 1 -type f
+  changed_when: false
+  always_run: yes
+  register: seafile_custom_files_path_files
+  when:
+  - not seafile_custom_files_folder_found|skipped
+  - seafile_custom_files_folder_found.stat.exists
+  - seafile_custom_files_folder_found.stat.isdir
+
+- name: create custom files dirs
+  file:
+    dest:   '{{ seafile_seahubdata_dir +"/custom/" + item }}'
+    state:  directory
+    owner:  '{{ seafile_user }}'
+    group:  '{{ seafile_user }}'
+    mode:   0755
+  with_items: seafile_custom_files_path_dirs.stdout_lines
+  when:
+  - not seafile_custom_files_folder_found|skipped
+  - seafile_custom_files_folder_found.stat.exists
+  - seafile_custom_files_folder_found.stat.isdir
+
+- name: copy custom files
+  copy:
+    src:    '{{ seafile_custom_files_path +"/"+ item }}'
+    dest:   '{{ seafile_seahubdata_dir +"/custom/" + item }}'
+    owner:  '{{ seafile_user }}'
+    group:  '{{ seafile_user }}'
+    mode:   0644
+  with_items: seafile_custom_files_path_files.stdout_lines
+  when:
+  - not seafile_custom_files_folder_found|skipped
+  - seafile_custom_files_folder_found.stat.exists
+  - seafile_custom_files_folder_found.stat.isdir
+

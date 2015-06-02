@@ -20,12 +20,14 @@
     mode:               0755
     state:              directory
   with_items:
-    - '{{ seafile_org_dir                   }}'
-    - '{{ seafile_org_dir + "/installed"    }}'
-    - '{{ seafile_ccnet_dir                 }}'
-    - '{{ seafile_conf_dir                  }}'
-    - '{{ seafile_log_dir                   }}'
-    - '{{ seafile_data_dir                  }}'
-    - '{{ seafile_seahubdata_dir            }}'
-    - '{{ seafile_mylib_dir                 }}'
+    - '{{ seafile_org_dir                     }}'
+    - '{{ seafile_org_dir + "/installed"      }}'
+    - '{{ seafile_ccnet_dir                   }}'
+    - '{{ seafile_conf_dir                    }}'
+    - '{{ seafile_log_dir                     }}'
+    - '{{ seafile_data_dir                    }}'
+    - '{{ seafile_seahubdata_dir              }}'
+    - '{{ seafile_seahubdata_dir + "/avatars" }}'
+    - '{{ seafile_seahubdata_dir + "/custom"  }}'
+    - '{{ seafile_mylib_dir                   }}'
 
