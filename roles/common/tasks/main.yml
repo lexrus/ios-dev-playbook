@@ -32,7 +32,7 @@
 
 # locale-gen
 - name: set default locale
-  lineinfile: dest=/root/.bash_profile line='export LC_ALL="en_US.UTF-8"'
+  lineinfile: dest=/root/.bash_profile line='export LC_ALL="en_US.UTF-8"' state=present create=yes
   tags:
     - common
     - locale
