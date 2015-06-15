@@ -30,6 +30,23 @@
     - common
     - update
 
+# locale-gen
+- name: set default locale
+  lineinfile: dest=/root/.bash_profile line='export LC_ALL="en_US.UTF-8"'
+  tags:
+    - common
+    - locale
+
+- shell: locale-gen en_US.UTF-8
+  tags:
+    - common
+    - locale-gen
+
+- shell: update-locale en_US.UTF-8
+  tags:
+    - common
+    - update-locale
+
 # Setup hostname
 
 - name: setup hostname

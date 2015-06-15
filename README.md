@@ -99,7 +99,9 @@ Ajenti 强烈建议使用 SSL 连接，但是 Safari 访问非 443 端口使用�
 
 ## 使用方法
 
-1. `sudo pip install ansible docker-py` - 安装 Ansible (版本至少 1.8 以上)
+### 通过 SSH 远程配置，通常是用 Mac 操作远程服务器
+
+1. `sudo pip install ansible docker-py` - 安装 Ansible
 1. `git clone https://github.com/lexrus/ios-dev-playbook.git` - 下载项目
 1. `cd ios-dev-playbook` - 进入目录
 1. `cp ansible_hosts.ini{.example,}` - 复制 ansible_hosts.ini.example 到 ansible_hosts.ini，然后修改相应的服务器地址
@@ -108,6 +110,14 @@ Ajenti 强烈建议使用 SSL 连接，但是 Safari 访问非 443 端口使用�
 1. 安装相应的服务，如 GitLab: `rake gitlab`，更多命令用 `rake -T` 列出
 1. 如果遇到问题可以试着用 `rake deps` 更新第三方 roles，用 [Ansible Galaxy](https://galaxy.ansible.com) 更新依赖的 roles([.ansible_galaxy_dependencies](https://github.com/lexrus/ios-dev-playbook/blob/master/.ansible_galaxy_dependencies))
 1. `rake jessie` 自动升级 Debian Wheezy 没有经过测试，不保证能成功
+
+### 在当前主机上做本地配置，适合 Debian 或 Ubuntu 单机手动操作
+
+1. `sudo apt-get install ansible docker-py git python python-setuptools python-pip`
+1. `sudo pip install ansible docker-py` - 安装 Ansible
+1. `git clone https://github.com/lexrus/ios-dev-playbook.git` - 下载项目
+1. `cd ios-dev-playbook` - 进入目录
+1. `ansible-playbook 059_uptime.yml -i ansible_localhost.ini` - 安装相应的服务
 
 ## 注意事项
 
@@ -128,7 +138,9 @@ Travis 设置了测试 playbook 的语法是否正确，以及 `001_common_utili
 
 ## 赞助
 
-如果这个项目为你省下很多时间，那就请我喝一杯咖啡吧。我的 PayPal 和支付宝帐号都是: `lexrus@gmail.com`
+如果这个项目为你省下很多时间，那就请我喝一杯咖啡吧。我的支付宝帐号是: `lexrus@gmail.com`。我的微信收款二维码是：
+
+<img width="206" height="206" src="https://cloud.githubusercontent.com/assets/219689/8153217/cfbe5dcc-135c-11e5-9d07-8e8acefafc43.PNG" alt="Wechat"/>
 
 
 ## 上哪搞服务器?
