@@ -44,6 +44,13 @@
     - ss-server
     - sysctl
 
+- name: use hybla on ubuntu 14
+  sysctl: name="net.ipv4.tcp_congestion_control" value="hybla" state=present reload=yes
+  when: ansible_distribution == "Ubuntu" and ansible_lsb.major_release|int >= 14
+  tags:
+    - ss-server
+    - hybla
+
 - name: ensure working dir exists
   action: file path=/opt/ss-server/ state=directory
   tags:
