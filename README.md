@@ -91,11 +91,7 @@ Ajenti 强烈建议使用 SSL 连接，但是 Safari 访问非 443 端口使用�
 
 - [Phabricator](http://phabricator.org) Facebook 的项目管理工具。
 - [RedMine](http://www.redmine.org) 团队 WiKi 服务。
-- [Let's Chat](http://sdelements.github.io/lets-chat/) 或者 [friends](https://github.com/moose-team/friends) 团队在线聊天工具，可是为什么不用 Slack 呢？
 - [Cachet](https://cachethq.io) 服务状态页面，如果有不少 Web 服务的话，会需要这样的服务。
-- [Vault](https://github.com/hashicorp/vault) 密钥管理工具。
-- [Sparkler](https://github.com/mackuba/sparkler) 如果同时开发 OS X 程序并使用 Sparkle 来更新版本，这个服务可以用来收集升级数据。
-- [apt-cacher-ng](https://docs.docker.com/examples/apt-cacher-ng/) 使用 docker 必备的服务。
 
 ## 使用方法
 
@@ -142,6 +138,7 @@ Travis 设置了测试 playbook 的语法是否正确，以及 `001_common_utili
 
 <img width="206" height="206" src="https://cloud.githubusercontent.com/assets/219689/8153217/cfbe5dcc-135c-11e5-9d07-8e8acefafc43.PNG" alt="Wechat"/>
 
+如果你还没有用 Uber 叫过私家车，欢迎你使用我的推荐码 `lext13`，你将获得第一次坐车减免 ¥30 的优惠。[从 App Store 下载 Uber](https://itunes.apple.com/cn/app/uber/id368677368)。 
 
 ## 上哪搞服务器?
 
