@@ -15,7 +15,7 @@
     - directory
 
 - name: download ghost package
-  get_url: url=https://ghost.org/zip/ghost-{{ ghost_version }}.zip dest=/tmp/
+  get_url: url=https://github.com/TryGhost/Ghost/releases/download/0.6.4/Ghost-{{ ghost_version }}.zip dest=/tmp/
   tags:
     - ghost
     - download
@@ -95,4 +95,3 @@
   tags:
     - ghost
     - restart
-
