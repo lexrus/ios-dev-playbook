@@ -1,0 +1,10 @@
+---
+
+- name: Install haproxy
+  apt: name=haproxy state=present
+
+- name: Replace config file
+  template: src=haproxy.cfg dest=/etc/haproxy/haproxy.cfg backup=yes
+
+- name: Restart haproxy service
+  service: name=haproxy state=restarted

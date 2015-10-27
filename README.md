@@ -4,11 +4,6 @@
 [![GitHub tag](https://img.shields.io/github/tag/lexrus/ios-dev-playbook.svg?style=flat)](https://github.com/lexrus/ios-dev-playbook)
 ![License](https://img.shields.io/github/license/lexrus/ios-dev-playbook.svg?style=flat)
 
-[![Git](https://img.shields.io/badge/GitHub-lexrus-blue.svg?style=flat)](https://github.com/lexrus)
-[![Twitter](https://img.shields.io/badge/twitter-@lexrus-blue.svg?style=flat)](http://twitter.com/lexrus)
-[![LinkedIn](https://img.shields.io/badge/linkedin-Lex Tang-blue.svg?style=flat)](https://cn.linkedin.com/in/lexrus/en)
-[![eMail](https://img.shields.io/badge/email-lexrus@gmail.com-blue.svg?style=flat)](mailto:lexrus@gmail.com?SUBJECT=About iOS Dev Playbook)
-
 作为一个 iOS 开发人员，会一些基础的运维技术能使工作环境更加顺手，并且为创业团队节省不少运维成本。
 这个 [Ansible](http://www.ansible.com) Playbook 的仓库，可以用来快速配置 iOS 开发需要的一些服务。
 当然，如果经费充裕，直接使用优质的收费服务更省时间。
@@ -73,6 +68,14 @@ Ajenti 强烈建议使用 SSL 连接，但是 Safari 访问非 443 端口使用�
 #### [Shadowsocks](https://github.com/clowwindy/shadowsocks) `rake shadowsocks`
 知名的代理服务，iOS 开发上网必备。还有 `rake cow` 可以安装同类竞品 [COW](https://github.com/cyfdecyf/cow)。
 另外一些日常上网用的 VPN 服务配置可以移步 [vpn-deploy-playbook](https://github.com/lexrus/vpn-deploy-playbook)。
+
+#### [haproxy](http://www.haproxy.org) `rake haproxy`
+代理 Gmail，装完后设置本地的 `/etc/hosts`，加上:
+```
+__YOUR_SERVER_IP__   smtp.gmail.com
+__YOUR_SERVER_IP__   pop.gmail.com
+__YOUR_SERVER_IP__   imap.gmail.com
+```
 
 #### [Seafile](http://seafile.com) :80 `rake seafile`
 开源的文件共享服务，有各种平台的客户端，适合网络比较慢的公司在内网搭着用来共享文件，我个人还是倾向于用 Dropbox。

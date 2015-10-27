@@ -35,6 +35,7 @@ script:
   - ansible-playbook -i ansible_localhost.ini 020_cow_backend.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 021_cow_frontend.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 022_shadowsocks.yml --syntax-check
+  - ansible-playbook -i ansible_localhost.ini 023_haproxy.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 030_ghost.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 040_geminabox.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 053_newrelic.yml --syntax-check

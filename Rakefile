@@ -99,6 +99,11 @@ task :shadowsocks do
   exec "ansible-playbook 022_shadowsocks.yml -l shadowsocks"
 end
 
+desc "Install haproxy server"
+task :haproxy do
+  exec "ansible-playbook 023_haproxy.yml"
+end
+
 desc "Install & config NewRelic agent"
 task :newrelic do
   exec "ansible-playbook 053_newrelic.yml"
