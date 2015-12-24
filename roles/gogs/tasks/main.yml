@@ -15,18 +15,31 @@
 
 - name: Download Gogs binary
   get_url: >
-    url=https://github.com/gogits/gogs/releases/download/v0.7.6/linux_amd64.zip
+    url=https://github.com/gogits/gogs/releases/download/v0.8.10/linux_amd64.zip
     dest=/tmp/gogs.zip
     mode=0660
   tags:
     - gogs
     - download
 
+- name: Remove existing gogs.zip
+  raw: rm -rf /tmp/gogs
+  tags:
+    - gogs
+    - remove
+
 - name: Unarchive Gogs
-  unarchive: src=/tmp/gogs.zip dest=/home/git/ copy=no
+  unarchive: src=/tmp/gogs.zip dest=/tmp/ copy=no owner=git
   tags:
     - gogs
     - unarchive
+
+- name: Stop existing Gogos
+  supervisorctl: name=gogs state=stopped
+  ignore_errors: yes
+  tags:
+    - gogs
+    - stop
 
 - name: Create directories
   file: path={{ item }} owner=git state=directory
@@ -38,6 +51,21 @@
   tags:
     - gogs
     - dir
+
+- name: Backup existing Gogs
+  raw: cp -R /home/git/gogs /home/git/gogs-backup
+  tags:
+    - gogs
+    - backup
+
+- name: Remove old templates
+  raw: rm -rf /home/git/gogs/templates
+  tags:
+    - gogs
+    - remove
+
+- name: Upgrade to new Gogs
+  raw: cp -a /tmp/gogs/. /home/git/gogs
 
 - name: Touch authorized_keys
   file: path=/home/git/.ssh/authorized_keys owner=git state=touch mode=0600
