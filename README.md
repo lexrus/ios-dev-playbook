@@ -94,8 +94,6 @@ __YOUR_SERVER_IP__   imap.gmail.com
 ## 准备加入的服务
 
 - [Phabricator](http://phabricator.org) Facebook 的项目管理工具。
-- [RedMine](http://www.redmine.org) 团队 WiKi 服务。
-- [Cachet](https://cachethq.io) 服务状态页面，如果有不少 Web 服务的话，会需要这样的服务。
 
 ## 使用方法
 
@@ -134,15 +132,6 @@ Vagrant 测试的 roles 都写在 [tests/vagrant_test.yml](https://github.com/le
 本地用 Vagrant 测试会消耗很多时间，尤其是在网速不理想的情况下。并且，请确保你的电脑有至少 2G 的空闲内存。
 
 Travis 设置了测试 playbook 的语法是否正确，以及 `001_common_utilities.yml` 是否能顺利跑通。
-
-
-## 赞助
-
-如果这个项目为你省下很多时间，那就请我喝一杯咖啡吧。我的支付宝帐号是: `lexrus@gmail.com`。我的微信收款二维码是：
-
-<img width="206" height="206" src="https://cloud.githubusercontent.com/assets/219689/8153217/cfbe5dcc-135c-11e5-9d07-8e8acefafc43.PNG" alt="Wechat"/>
-
-如果你还没有用 Uber 叫过私家车，欢迎你使用我的推荐码 `lext13`，你将获得第一次坐车减免 ¥30 的优惠。[从 App Store 下载 Uber](https://itunes.apple.com/cn/app/uber/id368677368)。 
 
 ## 上哪搞服务器?
 
