@@ -13,20 +13,21 @@
     - gogs
     - user
 
+- name: Remove existing gogs.zip
+  raw: rm -rf /tmp/gogs{,.zip}
+  tags:
+    - gogs
+    - remove
+
+
 - name: Download Gogs binary
   get_url: >
-    url=https://github.com/gogits/gogs/releases/download/v0.8.10/linux_amd64.zip
+    url=https://github.com/gogits/gogs/releases/download/v0.8.25/linux_amd64.zip
     dest=/tmp/gogs.zip
     mode=0660
   tags:
     - gogs
     - download
-
-- name: Remove existing gogs.zip
-  raw: rm -rf /tmp/gogs
-  tags:
-    - gogs
-    - remove
 
 - name: Unarchive Gogs
   unarchive: src=/tmp/gogs.zip dest=/tmp/ copy=no owner=git
