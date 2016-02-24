@@ -22,6 +22,9 @@ git.MY_SRV.com ansible_ssh_user=root
 install_ci=True
 gitlab_ci_domain=ci.example.com
 
+[phabricator]
+review.MY_SRV.com
+
 [gogs]
 g.MY_SRV.com
 

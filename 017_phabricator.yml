@@ -1,0 +1,5 @@
+---
+- hosts: phabricator
+  roles:
+    - role: geerlingguy.mysql
+    - role: nowait.phabricator

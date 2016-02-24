@@ -44,6 +44,11 @@ task :gitlab do
   exec "ansible-playbook 010_gitlab.yml -l gitlab"
 end
 
+desc "Install Phabricator server"
+task :phabricator do
+  exec "ansible-playbook 017_phabricator.yml"
+end
+
 desc "Install Jenkins server"
 task :jenkins do
   exec "ansible-playbook 011_jenkins.yml -l jenkins"

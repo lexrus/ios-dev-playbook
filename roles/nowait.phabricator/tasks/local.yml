@@ -1,0 +1,27 @@
+---
+- name: install packages for mysql (Debian)
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items: dependencies_ubuntu_local
+  when: ansible_os_family == "Debian"
+
+- name: install packages for mysql (RHEL)
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items: dependencies_rhel_local
+  when: ansible_os_family == "RedHat"
+
+- name: install required python module
+  pip:
+    name: MySQL-python
+
+- name: create mysql user
+  mysql_user:
+    name: "{{ database_config.user }}"
+    password: "{{ database_config.pass }}"
+    priv: "*.*:ALL,GRANT"
+    state: present

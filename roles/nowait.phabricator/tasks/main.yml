@@ -1,0 +1,101 @@
+---
+# tasks file for phabricator
+- name: install packages (Debian)
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items: dependencies_ubuntu
+  when: ansible_os_family == "Debian"
+
+- name: install packages (RHEL)
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items: dependencies_rhel
+  when: ansible_os_family == "RedHat"
+
+- name: install tools for local mysql
+  include: local.yml
+  when: database_config.host == "127.0.0.1"
+
+- name: create phabricator users
+  user:
+    name: "{{ item.value }}"
+  with_dict: users
+
+- name: config sudoers file vcs
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: "^{{ users.vcs }}"
+    line: "{{ users.vcs }} {{ permissions.vcs }}"
+    validate: 'visudo -cf %s'
+
+- name: configure sudoers file www
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: "^{{ users.web }}"
+    line: "{{ users.web }} {{ permissions.web }}"
+    validate: 'visudo -cf %s'
+
+- name: dont require tty
+  lineinfile:
+    dest: /etc/sudoers
+    state: absent
+    line: "Defaults    requiretty"
+
+- name: download phabricator from git repo
+  git:
+    repo: "{{ item.value }}"
+    dest: "{{ web_root }}/{{ item.key }}"
+    accept_hostkey: yes
+  with_dict: repos
+
+- name: enable phabricator in nginx
+  template:
+    src: phabricator.conf.j2
+    dest: /etc/nginx/sites-enabled/phabricator.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart nginx
+
+- name: add php.ini config
+  template:
+    src: php.ini.j2
+    dest: /etc/php5/fpm/conf.d/40-phabricator.ini
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart php5-fpm
+
+- name: add git binarys to path
+  file:
+    src: "{{ git_core_path }}/git-http-backend"
+    dest: /usr/bin/git-http-backend
+    owner: root
+    group: root
+    state: link
+  changed_when: False
+
+- name: include config
+  include: config.yml
+
+- name: install pygments for better syntax highlighting
+  pip:
+    name: pygments
+
+- name: Creates repo directory
+  file:
+    path: /var/repo
+    state: directory
+    owner: "{{ users.daemon }}"
+    group: "{{ users.daemon }}"
+
+- name: start phabricator daemons
+  command: "{{ web_root }}/phabricator/bin/phd restart"
+  sudo_user: "{{ users.daemon }}"
+  changed_when: False

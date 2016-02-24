@@ -32,6 +32,9 @@ GitLab 对内存有一定要求，建议使用最少 1G 内存的主机。
 另外，如果已经成功安装，再次运行 `rake gitlab` 可进行数据备份和程序升级。
 手动操作可以看[官方的说明](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/update.md)。
 
+#### [Phabricator](http://phabricator.org) `rake phabricator`
+Facebook 的 CodeReivew 工具。据说很多创业公司在用。
+
 #### [Countly Server](https://github.com/Countly/countly-server) :80 `rake countly`
 知名的开源统计服务，如果你不想用第三方服务，它是不错的选择。
 
@@ -91,9 +94,6 @@ __YOUR_SERVER_IP__   imap.gmail.com
 这个 role 没有做全面的测试，可能无法正常使用。
 使用内网或本地 RubyGems 镜像时，一般不想修改 Gemfile，那么可以这样操作(注意替换地址): `bundle config mirror.https://rubygems.org http://localhost:9922 ; bundle config mirror.http://rubygems.org http://localhost:9922`
 
-## 准备加入的服务
-
-- [Phabricator](http://phabricator.org) Facebook 的项目管理工具。
 
 ## 使用方法
 

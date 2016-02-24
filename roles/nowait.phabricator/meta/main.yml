@@ -1,0 +1,19 @@
+---
+galaxy_info:
+  author: michaeljs1990
+  description: phabricator installer
+  company: nowait
+  license: MIT
+  min_ansible_version: 1.8
+  platforms:
+    - name: RedHat
+      versions:
+        - all
+    - name: Debian
+      versions:
+        - all
+  categories:
+    - development
+    - system
+    - web
+  dependencies: []
