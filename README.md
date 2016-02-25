@@ -10,14 +10,14 @@
 
 因为精力有限，大部分 roles 只在 64bit __Debian Jessie__(Debian 8) 上跑通部署测试，理论上 Debian Wheezy 和 Ubuntu 14.04 以上也能用。
 请先阅读 [Ansible 的入门文档](http://docs.ansible.com)，不然遇到问题可能会没有方向。
-如果你用 Mac OS X，建议在 [Dash](http://kapeli.com/dash) 里安装 Ansible 的文档。
+如果你用 Mac OS X，建议在 [Dash](https://kapeli.com/dash) 里安装 Ansible 的文档。
 
 ## 服务列表
 
-#### [Docker](https://docker.com) `rake docker`
+#### [Docker](https://www.docker.com/) `rake docker`
 目前大部分服务都没有运行在 Docker 里。理想的运行方式是每一个服务都以 Docker container 的形式运行，互不干扰。等有空了再改。
 
-#### [Gogs](http://gogs.io) :80 `rake gogs`
+#### [Gogs](https://gogs.io/) :80 `rake gogs`
 用 Go 语言编写的 Git 服务，特点是功能精简和速度快，树莓派也能流畅运行。
 我自己就在用，用的人比较少的话内存占用稳定在 100M 左右。
 `rake gogs` 安装后默认开了注册功能，如果要禁用，运行 `rake gogsdr` 即可。
@@ -53,7 +53,7 @@ GitLab 对内存有一定要求，建议使用最少 1G 内存的主机。
 默认用户 `root`，密码 `admin`。
 非常轻巧的服务器可用率监控服务，监控小团队的服务可用率肯定是够了。
 如果不想自己搭的话推荐用完全免费的 [UptimeRobot](https://uptimerobot.com) 代替。
-更全面的监控应该用 [Munin](http://munin-monitoring.org) / [Nagios](http://www.nagios.org) / [Sensu](http://sensuapp.org) 等工具实现。
+更全面的监控应该用 [Munin](http://munin-monitoring.org) / [Nagios](https://www.nagios.org/) / [Sensu](https://sensuapp.org/) 等工具实现。
 
 #### [Ajenti](http://ajenti.org) :8000 `rake ajenti`
 这是服务器管理工具，功能全，比较重。
@@ -66,7 +66,7 @@ Ajenti 强烈建议使用 SSL 连接，但是 Safari 访问非 443 端口使用�
 算是 IFTTT 的 geek 版本，可以用来定制各种触发条件，可以自动完成很多事。
 默认用户 `admin`，密码 `password`。
 
-#### [Shadowsocks](https://github.com/clowwindy/shadowsocks) `rake shadowsocks`
+#### [Shadowsocks](https://github.com/shadowsocks/shadowsocks) `rake shadowsocks`
 知名的代理服务，iOS 开发上网必备。还有 `rake cow` 可以安装同类竞品 [COW](https://github.com/cyfdecyf/cow)。
 另外一些日常上网用的 VPN 服务配置可以移步 [vpn-deploy-playbook](https://github.com/lexrus/vpn-deploy-playbook)。
 
@@ -78,7 +78,7 @@ __YOUR_SERVER_IP__   pop.gmail.com
 __YOUR_SERVER_IP__   imap.gmail.com
 ```
 
-#### [Seafile](http://seafile.com) :80 `rake seafile`
+#### [Seafile](https://www.seafile.com/en/home/) :80 `rake seafile`
 开源的文件共享服务，有各种平台的客户端，适合网络比较慢的公司在内网搭着用来共享文件，我个人还是倾向于用 Dropbox。
 默认帐号: `seafile@localhost` 密码: `seafile`。
 
@@ -89,7 +89,7 @@ __YOUR_SERVER_IP__   imap.gmail.com
 #### [Gem in a Box](https://github.com/geminabox/geminabox) :9922 `rake geminabox`
 在内网建一个 RubyGems 镜像，加速 Rails 开发。
 这个 role 没有做全面的测试，可能无法正常使用。
-使用内网或本地 RubyGems 镜像时，一般不想修改 Gemfile，那么可以这样操作(注意替换地址): `bundle config mirror.https://rubygems.org http://localhost:9922 ; bundle config mirror.http://rubygems.org http://localhost:9922`
+使用内网或本地 RubyGems 镜像时，一般不想修改 Gemfile，那么可以这样操作(注意替换地址): `bundle config mirror.https://rubygems.org http://localhost:9922 ; bundle config mirror.https://rubygems.org/ http://localhost:9922`
 
 ## 准备加入的服务
 
