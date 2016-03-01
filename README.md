@@ -4,18 +4,20 @@
 [![GitHub tag](https://img.shields.io/github/tag/lexrus/ios-dev-playbook.svg?style=flat)](https://github.com/lexrus/ios-dev-playbook)
 ![License](https://img.shields.io/github/license/lexrus/ios-dev-playbook.svg?style=flat)
 
-作为一个 iOS 开发人员，会一些基础的运维技术能使工作环境更加顺手，并且为创业团队节省不少运维成本。
+作为一个 iOS 开发人员，会一些基础的运维技术能使工作流更加顺，并为创业团队节省不少运维成本。
 这个 [Ansible](http://www.ansible.com) Playbook 的仓库，可以用来快速配置 iOS 开发需要的一些服务。
 当然，如果经费充裕，直接使用优质的收费服务更省时间。
 
-因为精力有限，大部分 roles 只在 64bit __Debian Jessie__(Debian 8) 上跑通部署测试，理论上 Debian Wheezy 和 Ubuntu 14.04 以上也能用。
+因为精力有限，大部分配置只在 64bit __Debian Jessie__(Debian 8) 上跑通部署测试，
+理论上 Debian Wheezy 和 Ubuntu 14.04 以上也能用。
 请先阅读 [Ansible 的入门文档](http://docs.ansible.com)，不然遇到问题可能会没有方向。
 如果你用 Mac OS X，建议在 [Dash](http://kapeli.com/dash) 里安装 Ansible 的文档。
 
 ## 服务列表
 
 #### [Docker](https://docker.com) `rake docker`
-目前大部分服务都没有运行在 Docker 里。理想的运行方式是每一个服务都以 Docker container 的形式运行，互不干扰。等有空了再改。
+目前大部分服务都没有运行在 Docker 里。
+理想的运行方式是每一个服务都以 Docker container 的形式运行，互不干扰。等有空了再改。
 
 #### [Gogs](http://gogs.io) :80 `rake gogs`
 用 Go 语言编写的 Git 服务，特点是功能精简和速度快，树莓派也能流畅运行。
@@ -28,12 +30,11 @@
 安装完成后默认用户名是 `root`, 密码为 `5iveL!fe`。
 GitLab 对内存有一定要求，建议使用最少 1G 内存的主机。
 如果内存小于等于 512M 可以用 `ansible-playbook 003_swapon.yml -l gitlab` 把 swap 设置成内存的两倍，也能勉强运行 GitLab。
-注意虽然 512M 内存的 VPS 也能撑住 5 人以下的小团队，但是 clone 项目时会占用很多内存，而且一般运维会建议不要使用 swap，所以还是使用内存多的机器装 GitLab 比较好。
+注意虽然 512M 内存的 VPS 也能撑住 5 人以下的小团队，
+但是 clone 项目时会占用很多内存，通常运维会建议不要使用 swap，
+所以还是使用内存多的机器装 GitLab 比较好。
 另外，如果已经成功安装，再次运行 `rake gitlab` 可进行数据备份和程序升级。
 手动操作可以看[官方的说明](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/update.md)。
-
-#### [Phabricator](http://phabricator.org) `rake phabricator`
-Facebook 的 CodeReivew 工具。据说很多创业公司在用。
 
 #### [Countly Server](https://github.com/Countly/countly-server) :80 `rake countly`
 知名的开源统计服务，如果你不想用第三方服务，它是不错的选择。
@@ -56,7 +57,10 @@ Facebook 的 CodeReivew 工具。据说很多创业公司在用。
 默认用户 `root`，密码 `admin`。
 非常轻巧的服务器可用率监控服务，监控小团队的服务可用率肯定是够了。
 如果不想自己搭的话推荐用完全免费的 [UptimeRobot](https://uptimerobot.com) 代替。
-更全面的监控应该用 [Munin](http://munin-monitoring.org) / [Nagios](http://www.nagios.org) / [Sensu](http://sensuapp.org) 等工具实现。
+更全面的监控应该用
+[Munin](http://munin-monitoring.org) /
+[Nagios](http://www.nagios.org) /
+[Sensu](http://sensuapp.org) 等工具实现。
 
 #### [Ajenti](http://ajenti.org) :8000 `rake ajenti`
 这是服务器管理工具，功能全，比较重。
@@ -69,9 +73,11 @@ Ajenti 强烈建议使用 SSL 连接，但是 Safari 访问非 443 端口使用�
 算是 IFTTT 的 geek 版本，可以用来定制各种触发条件，可以自动完成很多事。
 默认用户 `admin`，密码 `password`。
 
-#### [Shadowsocks](https://github.com/clowwindy/shadowsocks) `rake shadowsocks`
-知名的代理服务，iOS 开发上网必备。还有 `rake cow` 可以安装同类竞品 [COW](https://github.com/cyfdecyf/cow)。
-另外一些日常上网用的 VPN 服务配置可以移步 [vpn-deploy-playbook](https://github.com/lexrus/vpn-deploy-playbook)。
+#### [S🀫🀫🀫🀫🀫🀫🀫🀫🀫s](https://github.com/clowwindy/shadowsocks)
+此处打码一百字。
+
+#### [COW](https://github.com/cyfdecyf/cow)
+此处打码一百字。
 
 #### [haproxy](http://www.haproxy.org) `rake haproxy`
 代理 Gmail，装完后设置本地的 `/etc/hosts`，加上:
