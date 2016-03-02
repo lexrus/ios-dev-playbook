@@ -1,8 +1,3 @@
-desc "Sync to/with Dropbox"
-task :dropbox do
-  exec "ansible-playbook 100_sync_with_dropbox.yml -i ansible_localhost.ini"
-end
-
 desc "Install dependencies"
 task :deps do
   exec "ansible-galaxy install --ignore-errors --force " \
@@ -44,11 +39,6 @@ task :gitlab do
   exec "ansible-playbook 010_gitlab.yml -l gitlab"
 end
 
-desc "Install Phabricator server"
-task :phabricator do
-  exec "ansible-playbook 017_phabricator.yml"
-end
-
 desc "Install Jenkins server"
 task :jenkins do
   exec "ansible-playbook 011_jenkins.yml -l jenkins"
@@ -75,11 +65,6 @@ task :seafile do
 end
 
 desc "Install MediaWiki server"
-task :mediawiki do
-  exec "ansible-playbook 016_mediawiki.yml -l mediawiki --skip-tags=upload_settings"
-end
-
-desc "Install MediaWiki server"
 task :mediawiki_settings do
   exec "ansible-playbook 016_mediawiki.yml -l mediawiki --tags=upload_settings"
 end
@@ -92,11 +77,6 @@ end
 desc "Install cow server"
 task :cow do
   exec "ansible-playbook 020_cow_backend.yml -l cow_backend"
-end
-
-desc "Install Gem in a Box"
-task :geminabox do
-  exec "ansible-playbook 040_geminabox.yml -l geminabox"
 end
 
 desc "Install shadowsocks server"

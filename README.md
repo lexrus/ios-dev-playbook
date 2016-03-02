@@ -6,7 +6,7 @@
 
 作为一个 iOS 开发人员，会一些基础的运维技术能使工作流更加顺，并为创业团队节省不少运维成本。
 这个 [Ansible](http://www.ansible.com) Playbook 的仓库，可以用来快速配置 iOS 开发需要的一些服务。
-当然，如果经费充裕，直接使用优质的收费服务更省时间。
+当然，如果经费充裕，直接使用优质的收费服务更省时省力。
 
 因为精力有限，大部分配置只在 64bit __Debian Jessie__(Debian 8) 上跑通部署测试，
 理论上 Debian Wheezy 和 Ubuntu 14.04 以上也能用。
@@ -90,15 +90,6 @@ __YOUR_SERVER_IP__   imap.gmail.com
 #### [Seafile](http://seafile.com) :80 `rake seafile`
 开源的文件共享服务，有各种平台的客户端，适合网络比较慢的公司在内网搭着用来共享文件，我个人还是倾向于用 Dropbox。
 默认帐号: `seafile@localhost` 密码: `seafile`。
-
-#### [MediaWiki](http://www.mediawiki.org/) :80 `rake mediawiki`
-最知名的 Wiki 程序。
-这个服务使用 docker 安装，安装后访问安装界面配置好 LocalSettings.php 后下载，把下载的文件放在 `roles/mediawiki/files` 目录下，再运行 `rake mediawiki_settings` 就可以把新的配置文件传到服务器上。
-
-#### [Gem in a Box](https://github.com/geminabox/geminabox) :9922 `rake geminabox`
-在内网建一个 RubyGems 镜像，加速 Rails 开发。
-这个 role 没有做全面的测试，可能无法正常使用。
-使用内网或本地 RubyGems 镜像时，一般不想修改 Gemfile，那么可以这样操作(注意替换地址): `bundle config mirror.https://rubygems.org http://localhost:9922 ; bundle config mirror.http://rubygems.org http://localhost:9922`
 
 
 ## 使用方法
