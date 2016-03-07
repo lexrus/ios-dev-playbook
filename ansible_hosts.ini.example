@@ -22,17 +22,8 @@ git.MY_SRV.com ansible_ssh_user=root
 install_ci=True
 gitlab_ci_domain=ci.example.com
 
-[phabricator]
-review.MY_SRV.com
-
 [gogs]
 g.MY_SRV.com
-
-[seafile]
-files.MY_SRV.com
-
-[mediawiki]
-wiki.MY_SRV.com
 
 [jenkins]
 jenkins.MY_SRV.com
@@ -68,5 +59,3 @@ uptime.MY_SRV.com
 [huginn]
 huginn.MY_SRV.com
 
-[geminabox]
-gems.MY_SRV.com

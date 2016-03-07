@@ -21,7 +21,7 @@
 
 - name: Download Gogs binary
   get_url: >
-    url=https://github.com/gogits/gogs/releases/download/v0.8.43/linux_amd64.zip
+    url=https://github.com/gogits/gogs/releases/download/v{{ GOGS_VERSION }}/linux_amd64.zip
     dest=/tmp/gogs.zip
     mode=0660
   tags:

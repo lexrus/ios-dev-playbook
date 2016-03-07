@@ -87,10 +87,6 @@ __YOUR_SERVER_IP__   pop.gmail.com
 __YOUR_SERVER_IP__   imap.gmail.com
 ```
 
-#### [Seafile](http://seafile.com) :80 `rake seafile`
-开源的文件共享服务，有各种平台的客户端，适合网络比较慢的公司在内网搭着用来共享文件，我个人还是倾向于用 Dropbox。
-默认帐号: `seafile@localhost` 密码: `seafile`。
-
 
 ## 使用方法
 

@@ -1,4 +1,5 @@
 ---
 name: default
+GOGS_VERSION: 0.9.0
 DISABLE_REGISTRATION: 'false'
 SHOW_REGISTRATION_BUTTON: 'true'

@@ -29,7 +29,6 @@ script:
   - ansible-playbook -i ansible_localhost.ini 012_countly.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 013_gogs.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 014_gogs_disable_registration.yml --syntax-check
-  - ansible-playbook -i ansible_localhost.ini 015_seafile.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 020_cow_backend.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 021_cow_frontend.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 022_shadowsocks.yml --syntax-check
