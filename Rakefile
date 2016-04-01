@@ -1,7 +1,7 @@
 desc "Install dependencies"
 task :deps do
   exec "ansible-galaxy install --ignore-errors --force " \
-    " --role-file=.ansible_galaxy_dependencies"
+    " --role-file=.dependencies.yml"
 end
 
 desc "Upgrade to jessie"

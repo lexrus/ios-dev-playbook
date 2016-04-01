@@ -1,0 +1,7 @@
+- src: laggyluke.add-ssh-keys-from-github
+- src: hiddentao.swapmem
+- src: lesmyrmidons.mongodb
+- src: avanov.jenkins
+- src: Rackspace_Automation.newrelic
+- src: geerlingguy.mysql
+- src: lexrus.ansible-role-docker
