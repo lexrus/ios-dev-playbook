@@ -2,5 +2,5 @@
 - hosts: all
 
   roles:
-    - docker
+    - lexrus.ansible-role-docker
     - huginn
