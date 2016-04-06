@@ -1,9 +1,7 @@
 server {
 	listen 80;
 	server_name {{ inventory_hostname }};
-
 	access_log off;
-
 	location / {
 		proxy_pass http://127.0.0.1:3300;
 		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;

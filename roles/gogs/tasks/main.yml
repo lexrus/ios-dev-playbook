@@ -19,7 +19,7 @@
     - gogs
     - remove
 
-- name: Download Gogs binary
+- name: Download Gogs binary {{ GOGS_VERSION }}
   get_url: >
     url=https://github.com/gogits/gogs/releases/download/v{{ GOGS_VERSION }}/linux_amd64.zip
     dest=/tmp/gogs.zip
@@ -79,21 +79,6 @@
     - gogs
     - key
 
-# - name: Generate certs
-#   shell: /home/git/gogs/gogs cert --host {{ inventory_hostname }} chdir=/home/git/gogs
-#   tags:
-#     - gogs
-#     - cert
-
-# - name: Set owner of certs
-#   file: path={{ item }} owner=git
-#   with_items:
-#     - /home/git/gogs/cert.pem
-#     - /home/git/gogs/key.pem
-#   tags:
-#     - gogs
-#     - cert
-
 - name: Generate SECRET_KEY
   shell: mkpasswd
   register: SECRET_KEY
@@ -130,19 +115,35 @@
 
 - name: Force start gogs
   action: supervisorctl name=gogs state=started
-  when: DISABLE_REGISTRATION == 'true'
   tags:
     - gogs
     - restart
 
+- name: Test cert file
+  command: find "/etc/nginx/ssl/{{ inventory_hostname }}/gogs.cer" -mmin +10080
+  register: cert_file
+  ignore_errors: true
+  tags:
+    - gogs
+    - cert
+
+- name: Include le_cert.yml
+  include: le_cert.yml
+  when: use_le_cert and cert_file.stdout.find('gogs.cer') == -1
+  tags:
+    - gogs
+    - cert
+
 - name: Copy nginx config
-  template: src=nginx.j2 dest=/etc/nginx/sites-available/gogs
+  template: src=nginx-insecure.j2 dest=/etc/nginx/sites-available/gogs
+  when: use_le_cert == false
   tags:
     - gogs
     - nginx
 
 - name: Enable nginx config
   file: src=/etc/nginx/sites-available/gogs dest=/etc/nginx/sites-enabled/gogs state=link
+  when: use_le_cert == false
   notify:
     - "reload nginx"
   tags:

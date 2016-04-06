@@ -1,0 +1,58 @@
+---
+
+- name: Create cert dir
+  file:
+    path: /home/git/cert
+    state: directory
+  tags:
+    - gogs
+    - cert
+    - dir
+
+- name: Copy nginx config
+  template: src=nginx-le.j2 dest=/etc/nginx/sites-available/gogs
+  tags:
+    - gogs
+    - cert
+    - nginx
+
+- name: Enable nginx config
+  file: src=/etc/nginx/sites-available/gogs dest=/etc/nginx/sites-enabled/gogs state=link
+  notify:
+    - "reload nginx"
+  tags:
+    - gogs
+    - cert
+    - nginx
+
+- name: Issue a cert for {{ inventory_hostname }}
+  raw: FORCE=1 ~/.le/le.sh issue /home/git/cert {{ inventory_hostname }}
+  tags:
+    - gogs
+    - cert
+    - issue
+
+- name: Create SSL dir
+  file:
+    path: /etc/nginx/ssl/{{ inventory_hostname }}
+    state: directory
+  tags:
+    - gogs
+    - cert
+    - dir
+
+- name: Install cert for {{ inventory_hostname }}
+  raw: ~/.le/le.sh installcert {{ inventory_hostname }} /etc/nginx/ssl/{{ inventory_hostname }}/gogs.cer /etc/nginx/ssl/{{ inventory_hostname }}/gogs.key /etc/nginx/ssl/{{ inventory_hostname }}/ca.cer
+  tags:
+    - gogs
+    - cert
+    - issue
+
+- name: Copy nginx config
+  template: src=nginx-ssl.j2 dest=/etc/nginx/sites-available/gogs
+  notify:
+    - "reload nginx"
+  tags:
+    - gogs
+    - cert
+    - nginx

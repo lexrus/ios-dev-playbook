@@ -1,0 +1,13 @@
+---
+
+- name: Install wget
+  apt: pkg=wget state=present
+  tags:
+    - le
+    - wget
+
+- name: Install le.sh
+  raw: wget -O - https://raw.githubusercontent.com/Neilpang/le/master/le.sh | INSTALLONLINE=1 bash
+  tags:
+    - le
+    - install

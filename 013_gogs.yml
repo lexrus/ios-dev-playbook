@@ -9,4 +9,5 @@
         - apt-transport-https
         - git
         - exim4
+    - 'le.sh'
     - gogs

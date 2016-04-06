@@ -1,0 +1,49 @@
+server {
+	listen 80;
+	server_name {{ inventory_hostname }};
+	access_log off;
+	return 301 https://{{ inventory_hostname }}$request_uri;
+}
+
+server {
+	listen 443 ssl;
+	server_name {{ inventory_hostname }};
+	access_log off;
+
+	# certs sent to the client in SERVER HELLO are concatenated in ssl_certificate
+  ssl_certificate /etc/nginx/ssl/{{ inventory_hostname }}/gogs.cer;
+  ssl_certificate_key /etc/nginx/ssl/{{ inventory_hostname }}/gogs.key;
+  ssl_session_timeout 1d;
+  ssl_session_cache shared:SSL:50m;
+  ssl_session_tickets off;
+
+  # Diffie-Hellman parameter for DHE ciphersuites, recommended 2048 bits
+  # Let's Encrypt doesn't care about it here, so comment it here.
+  #ssl_dhparam /etc/ssl/certs/dhparam.pem;
+
+  # configuration. tweak to your needs.
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+  ssl_ciphers "EECDH+AESGCM:EDH+AESGCM:AES256+EECDH:AES256+EDH";
+  ssl_prefer_server_ciphers on;
+
+  # HSTS
+  add_header Strict-Transport-Security "max-age=63072000; includeSubdomains; preload";
+
+  add_header X-Frame-Options DENY;
+  add_header X-Content-Type-Options nosniff;
+
+  # OCSP Stapling ---
+  # fetch OCSP records from URL in ssl_certificate and cache them
+  ssl_stapling on;
+  ssl_stapling_verify on;
+
+  # verify chain of trust of OCSP response using Root CA and Intermediate certs
+  ssl_trusted_certificate /etc/nginx/ssl/{{ inventory_hostname }}/ca.cer;
+
+	location / {
+		proxy_pass http://127.0.0.1:3300;
+		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header Host $http_host;
+	}
+}

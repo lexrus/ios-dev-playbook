@@ -19,11 +19,14 @@
 目前大部分服务都没有运行在 Docker 里。
 理想的运行方式是每一个服务都以 Docker container 的形式运行，互不干扰。等有空了再改。
 
-#### [Gogs](http://gogs.io) :80 `rake gogs`
+#### [Gogs](http://gogs.io) :443 `rake gogs`
 用 Go 语言编写的 Git 服务，特点是功能精简和速度快，树莓派也能流畅运行。
 我自己就在用，用的人比较少的话内存占用稳定在 100M 左右。
 `rake gogs` 安装后默认开了注册功能，如果要禁用，运行 `rake gogsdr` 即可。
 新版本升级后，再运行 `rake gogs` 和 `rake gogsdr` 可以自动完成升级。
+这个 role 默认会用 [le.sh](https://github.com/Neilpang/le) 自动生成 [LetsEncrypt](https://letsencrypt.org) 的 SSL 证书，
+每隔 80 天自动更新证书。
+如果不想用 SSL 可以加上 `use_le_cert=false` 这个参数。
 
 #### [GitLab](https://github.com/gitlabhq/gitlabhq) :80 `rake gitlab`
 知名的开源 Git 服务，特点是功能全面。
