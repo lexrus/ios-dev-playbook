@@ -46,9 +46,10 @@ GitLab 对内存有一定要求，建议使用最少 1G 内存的主机。
 开源的持续集成服务，很多人用它来做自动编译打包 IPA 的事。
 不过界面不好看，我个人更喜欢 Atlassian Bamboo。
 
-#### [Ghost](https://ghost.org/) :80 `rake ghost`
+#### [Ghost](https://ghost.org/) :443 `rake ghost`
 如果你想同时建一个 Blog 记录开发中的心得或者创业的艰辛，Ghost 是个不错的工具。
 它比 Wordpress 更轻巧，皮肤也都非常简洁。
+这个 role 使用 [Caddy](https://caddyserver.com) 提供了 HTTP2 支持，并自动生成 LetsEncrypt 的免费 SSL 证书。
 默认会自动装上这些皮肤: [ghostium](https://github.com/oswaldoacauan/ghostium)、[ghostrayder](https://github.com/k9ordon/ghostrayder)、[ghostwriter](https://github.com/roryg/ghostwriter)、[GhostScroll](https://github.com/grmmph/GhostScroll)、[Readium](https://github.com/starburst1977/Readium)
 
 #### [NewRelic agent](https://newrelic.com) `rake newrelic`

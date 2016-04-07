@@ -1,13 +1,5 @@
 ---
 
-# install & config ghost server
-
-- name: install nginx
-  apt: pkg=nginx
-  tags:
-    - ghost
-    - nginx
-
 - name: create ghost folder
   file: path=/usr/local/ghost state=directory
   tags:
@@ -15,10 +7,16 @@
     - directory
 
 - name: download ghost package
-  get_url: url=https://github.com/TryGhost/Ghost/releases/download/{{ ghost_version }}/Ghost-{{ ghost_version }}.zip dest=/tmp/
+  get_url: url=https://github.com/TryGhost/Ghost/releases/download/{{ ghost_version }}/Ghost-{{ ghost_version }}.zip dest=/tmp/ghost-{{ ghost_version }}.zip
   tags:
     - ghost
     - download
+
+- name: install unzip
+  apt: pkg=unzip state=present
+  tags:
+    - ghost
+    - unzip
 
 - name: unzip ghost package
   unarchive: src=/tmp/ghost-{{ ghost_version }}.zip dest=/usr/local/ghost copy=no
@@ -45,20 +43,6 @@
     - supervisor
   notify:
     - reload supervisor
-
-- name: add nginx config
-  template: src=nginx.j2 dest=/etc/nginx/sites-available/ghost.conf
-  tags:
-    - ghost
-    - nginx_config
-
-- name: enabled nginx config
-  file: src=/etc/nginx/sites-available/ghost.conf dest=/etc/nginx/sites-enabled/ghost.conf state=link
-  tags:
-    - ghost
-    - link_nginx_config
-  notify:
-    - reload nginx
 
 - name: install ghostium theme
   git: repo=https://github.com/oswaldoacauan/ghostium/ dest=/usr/local/ghost/content/themes/ghostium

@@ -4,4 +4,10 @@
   roles:
     - common
     - nodejs
+    - role: antoiner77.caddy
+      caddy_email: admin@{{ inventory_hostname }}
+      caddy_config: |
+        {{ inventory_hostname }}
+        gzip
+        proxy / 127.0.0.1:2368
     - ghost

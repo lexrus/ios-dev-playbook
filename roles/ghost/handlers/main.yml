@@ -1,9 +1,0 @@
-- name: reload supervisor
-  shell: /etc/init.d/supervisor force-reload
-  tags:
-    - ghost
-
-- name: reload nginx
-  service: name=nginx state=reloaded
-  tags:
-    - ghost
