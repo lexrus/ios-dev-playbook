@@ -143,7 +143,7 @@
 
 - name: Enable nginx config
   file: src=/etc/nginx/sites-available/gogs dest=/etc/nginx/sites-enabled/gogs state=link
-  when: use_le_cert == false
+  when: SSL == false
   notify:
     - "reload nginx"
   tags:
