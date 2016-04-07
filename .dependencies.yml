@@ -5,3 +5,4 @@
 - src: Rackspace_Automation.newrelic
 - src: geerlingguy.mysql
 - src: lexrus.ansible-role-docker
+- src: antoiner77.caddy
