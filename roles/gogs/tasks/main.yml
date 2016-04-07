@@ -129,14 +129,14 @@
 
 - name: Include le_cert.yml
   include: le_cert.yml
-  when: use_le_cert and cert_file.stdout.find('gogs.cer') == -1
+  when: SSL and cert_file.stdout.find('gogs.cer') == -1
   tags:
     - gogs
     - cert
 
 - name: Copy nginx config
   template: src=nginx-insecure.j2 dest=/etc/nginx/sites-available/gogs
-  when: use_le_cert == false
+  when: SSL == false
   tags:
     - gogs
     - nginx

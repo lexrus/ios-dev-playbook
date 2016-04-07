@@ -26,7 +26,7 @@
 新版本升级后，再运行 `rake gogs` 和 `rake gogsdr` 可以自动完成升级。
 这个 role 默认会用 [le.sh](https://github.com/Neilpang/le) 自动生成 [LetsEncrypt](https://letsencrypt.org) 的 SSL 证书，
 每隔 80 天自动更新证书。
-如果不想用 SSL 可以加上 `use_le_cert=false` 这个参数。
+如果不想用 SSL 可以加上 `SSL=false` 这个参数。
 
 #### [GitLab](https://github.com/gitlabhq/gitlabhq) :80 `rake gitlab`
 知名的开源 Git 服务，特点是功能全面。

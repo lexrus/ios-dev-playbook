@@ -3,4 +3,4 @@ name: default
 GOGS_VERSION: 0.9.13
 DISABLE_REGISTRATION: 'false'
 SHOW_REGISTRATION_BUTTON: 'true'
-use_le_cert: true
+SSL: true
