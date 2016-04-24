@@ -50,12 +50,6 @@
     - ghost
     - ghostium
 
-- name: install ghostrayder theme
-  git: repo=https://github.com/k9ordon/ghostrayder.git dest=/usr/local/ghost/content/themes/ghostrayder
-  tags:
-    - ghost
-    - ghostrayder
-
 - name: install ghostwriter theme
   git: repo=https://github.com/roryg/ghostwriter.git dest=/usr/local/ghost/content/themes/ghostwriter
   tags:
@@ -67,12 +61,6 @@
   tags:
     - ghost
     - GhostScroll
-
-- name: install readium theme
-  git: repo=https://github.com/starburst1977/readium.git dest=/usr/local/ghost/content/themes/readium
-  tags:
-    - ghost
-    - readium
 
 - name: restart ghost
   action: supervisorctl name=ghost state=restarted
