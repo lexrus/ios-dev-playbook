@@ -59,11 +59,6 @@ task :gogsdr do
   exec "ansible-playbook 014_gogs_disable_registration.yml --tags=config,wait,restart -l gogs"
 end
 
-desc "Install Seafile server"
-task :seafile do
-  exec "ansible-playbook 015_seafile.yml -l seafile"
-end
-
 desc "Install MediaWiki server"
 task :mediawiki_settings do
   exec "ansible-playbook 016_mediawiki.yml -l mediawiki --tags=upload_settings"
