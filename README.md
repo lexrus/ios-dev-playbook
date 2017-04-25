@@ -9,9 +9,9 @@
 当然，如果经费充裕，直接使用优质的收费服务更省时省力。
 
 因为精力有限，大部分配置只在 64bit __Debian Jessie__(Debian 8) 上跑通部署测试，
-理论上 Debian Wheezy 和 Ubuntu 14.04 以上也能用。
+理论上 Ubuntu 14.04 以上也能用。
 请先阅读 [Ansible 的入门文档](http://docs.ansible.com)，不然遇到问题可能会没有方向。
-如果你用 Mac OS X，建议在 [Dash](http://kapeli.com/dash) 里安装 Ansible 的文档。
+如果你用 macOS，建议在 [Dash](http://kapeli.com/dash) 里安装 Ansible 的文档。
 
 ## 服务列表
 
@@ -32,15 +32,8 @@
 知名的开源 Git 服务，特点是功能全面。
 安装完成后默认用户名是 `root`, 密码为 `5iveL!fe`。
 GitLab 对内存有一定要求，建议使用最少 1G 内存的主机。
-如果内存小于等于 512M 可以用 `ansible-playbook 003_swapon.yml -l gitlab` 把 swap 设置成内存的两倍，也能勉强运行 GitLab。
-注意虽然 512M 内存的 VPS 也能撑住 5 人以下的小团队，
-但是 clone 项目时会占用很多内存，通常运维会建议不要使用 swap，
-所以还是使用内存多的机器装 GitLab 比较好。
 另外，如果已经成功安装，再次运行 `rake gitlab` 可进行数据备份和程序升级。
 手动操作可以看[官方的说明](https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/doc/update.md)。
-
-#### [Countly Server](https://github.com/Countly/countly-server) :80 `rake countly`
-知名的开源统计服务，如果你不想用第三方服务，它是不错的选择。
 
 #### [Jenkins](http://jenkins-ci.org) :8080 `rake jenkins`
 开源的持续集成服务，很多人用它来做自动编译打包 IPA 的事。
@@ -51,11 +44,6 @@ GitLab 对内存有一定要求，建议使用最少 1G 内存的主机。
 它比 Wordpress 更轻巧，皮肤也都非常简洁。
 这个 role 使用 [Caddy](https://caddyserver.com) 提供了 HTTP2 支持，并自动生成 LetsEncrypt 的免费 SSL 证书。
 默认会自动装上这些皮肤: [ghostium](https://github.com/oswaldoacauan/ghostium)、[ghostrayder](https://github.com/k9ordon/ghostrayder)、[ghostwriter](https://github.com/roryg/ghostwriter)、[GhostScroll](https://github.com/grmmph/GhostScroll)、[Readium](https://github.com/starburst1977/Readium)
-
-#### [NewRelic agent](https://newrelic.com) `rake newrelic`
-懒人监控方案，先注册一个 NewRelic 帐号，所有服务器都运行这个 role，再装个 NewRelic iPhone 版，各种预警就有了。
-缺点是 agent 占用内存比较夸张，个人的这些小服务其实没有必要使用。
-到是可以装后面提到的 Uptime 或 Huginn 来实现简单的监控。
 
 #### [Uptime](http://www.redotheweb.com/uptime/) :8082 `rake uptime`
 默认用户 `root`，密码 `admin`。
@@ -80,9 +68,6 @@ Ajenti 强烈建议使用 SSL 连接，但是 Safari 访问非 443 端口使用�
 #### [S🀫🀫🀫🀫🀫🀫🀫🀫🀫s](https://github.com/clowwindy/shadowsocks)
 此处打码一百字。
 
-#### [COW](https://github.com/cyfdecyf/cow)
-此处打码一百字。
-
 #### [haproxy](http://www.haproxy.org) `rake haproxy`
 代理 Gmail，装完后设置本地的 `/etc/hosts`，加上:
 ```
@@ -104,7 +89,6 @@ __YOUR_SERVER_IP__   imap.gmail.com
 1. 确保你的服务器可以用 [SSH key 验证登录](http://www.debian-administration.org/article/530/SSH_with_authentication_key_instead_of_password)
 1. 安装相应的服务，如 GitLab: `rake gitlab`，更多命令用 `rake -T` 列出
 1. 如果遇到问题可以试着用 `rake deps` 更新第三方 roles，用 [Ansible Galaxy](https://galaxy.ansible.com) 更新依赖的 roles([.ansible_galaxy_dependencies](https://github.com/lexrus/ios-dev-playbook/blob/master/.ansible_galaxy_dependencies))
-1. `rake jessie` 自动升级 Debian Wheezy 没有经过测试，不保证能成功
 
 ### 在当前主机上做本地配置，适合 Debian 或 Ubuntu 单机手动操作
 
@@ -123,7 +107,7 @@ __YOUR_SERVER_IP__   imap.gmail.com
 ## 测试
 
 测试需要 [Vagrant](https://www.vagrantup.com/)，在本项目目录中 `rake test_ubuntu` 就会拉一个 ubuntu/trusty64 的镜像试着跑大部分配置，测 Debian Jessie 请用 `rake test_debian`。
-如果你用的是 Mac OS X，推荐先装 [Brew](http://brew.sh) 和 [Cask](http://caskroom.io)，然后运行 `brew cask install vagrant virtualbox`。
+如果你用的是 macOS，推荐先装 [Brew](http://brew.sh) 和 [Cask](http://caskroom.io)，然后运行 `brew cask install vagrant virtualbox`。
 Vagrant 测试的 roles 都写在 [tests/vagrant_test.yml](https://github.com/lexrus/ios-dev-playbook/blob/master/tests/vagrant_test.yml) 里了。
 
 本地用 Vagrant 测试会消耗很多时间，尤其是在网速不理想的情况下。并且，请确保你的电脑有至少 2G 的空闲内存。
@@ -136,9 +120,9 @@ Travis 设置了测试 playbook 的语法是否正确，以及 `001_common_utili
 
 [我的 DigitalOcean 推广链接](https://www.digitalocean.com/?refcode=3eb5cf371fc9) 新加坡节点延时都很低，每月 5 刀起，通过推广链接注册就送 10 刀。
 
-[我的 Vultr 推广链接](http://www.vultr.com/?ref=6822054) 最低每月 5 刀，使用优惠码 SSDVPS 就送 20 刀。
+[我的 Linode 推广链接](http://www.linode.com/?r=9f144941e797d495a10c2841c3137ce1acde5f15) Linode 服务非常稳定，性能也不错。
 
-[我的 Linode 推广链接](http://www.linode.com/?r=9f144941e797d495a10c2841c3137ce1acde5f15) Linode 虽然贵一点(每月 10 刀起)，但是服务非常稳定，性能也不错。
+[我的 Vultr 推广链接](http://www.vultr.com/?ref=6822054) 最低每月 5 刀，使用优惠码 SSDVPS 就送 20 刀。
 
 
 ## 协议

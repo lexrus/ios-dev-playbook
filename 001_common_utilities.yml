@@ -2,4 +2,3 @@
 - hosts: all
   roles:
     - role: common
-      skip-tags: ['upgrade']

@@ -2,11 +2,16 @@
 
 - name: RedHat | Install dependencies packages
   yum: name={{ item }} state=installed
-  with_items: mongodb_packages_dependencies
+  with_items: "{{ mongodb_packages_dependencies }}"
 
 - name: RedHat | Add source sources
-  template: src=mongodb.repo.j2 dest=/etc/yum.repos.d/mongodb.repo
+  yum_repository:
+    name: mongodb-org-{{ mongodb_version }}
+    description: MongoDB Repository
+    baseurl: "{{ mongodb_repo_baseurl }}"
+    gpgcheck: "{{ mongodb_repo_gpgcheck }}"
+    gpgkey: "{{ mongodb_repo_gpgkey }}"
 
 - name: RedHat | Install Packages
   yum: name={{ item }} state=installed
-  with_items: mongodb_packages
+  with_items: "{{ mongodb_packages }}"

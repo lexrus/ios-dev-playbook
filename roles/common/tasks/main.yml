@@ -1,28 +1,5 @@
 ---
 
-# Upgrade
-
-- name: upgrade sources list
-  action: template src=../templates/sources_list.j2 dest=/etc/apt/sources.list owner=root group=root mode=0644
-  when: upgrade_source_use_template
-  tags:
-    - common
-    - upgrade
-
-- name: upgrade sources list to jessie(stable)
-  action: replace dest=/etc/apt/sources.list regexp='(\s+)wheezy(\s+.*)?$' replace='\jessie\3' backup=yes
-  when: upgrade_source_use_template == false and replace_source_to_jessie
-  tags:
-    - common
-    - upgrade
-
-# Update all packages to the latest stable version
-- apt: upgrade=dist
-  when: upgrade_source_use_template or replace_source_to_jessie
-  tags:
-    - common
-    - upgrade
-
 # Update apt cache
 
 - apt: update_cache=yes cache_valid_time=3600
@@ -87,55 +64,18 @@
     - common
     - editor
 
-- name: install version control tools
+- name: install common utilities
   action: apt pkg={{ item }} state=installed
   with_items:
     - git
-  tags:
-    - common
-    - git
-
-- name: install mosh
-  action: apt pkg=mosh state=installed
-  tags:
-    - common
     - mosh
-
-- name: install ranger
-  action: apt pkg=ranger state=installed
-  tags:
-    - common
     - ranger
-
-- name: install imagemagick
-  action: apt pkg=imagemagick state=installed
-  tags:
-    - common
+    - htop
     - imagemagick
-
-- name: remove sendmail
-  apt: pkg={{ item }} state=absent
-  with_items:
-    - sendmail
-    - sendmail-bin
+    - curl
   tags:
     - common
-    - exim4
-
-- name: install exim4
-  action: apt pkg={{ item }} state=installed
-  with_items:
-    - exim4
-  tags:
-    - common
-    - exim4
-
-- name: copy exim4 config
-  template: src=exim4.conf dest=/etc/update-exim4.conf.conf mode=644
-  notify: restart exim4
-  tags:
-    - common
-    - exim4
+    - utilities
 
 - name: install common python packages
   action: apt pkg={{ item }} state=installed

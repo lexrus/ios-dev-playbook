@@ -1,5 +1,5 @@
-# source: https://github.com/mholt/caddy/blob/master/dist/init/linux-upstart/caddy.conf
-# version: fea0d5a
+# source: https://github.com/mholt/caddy/blob/master/dist/init/linux-upstart/caddy.conf.ubuntu-12.04
+# version: 7dc23b1
 # changes: none
 
 description "Caddy HTTP/2 web server"
@@ -15,7 +15,8 @@ setgid www-data
 respawn
 respawn limit 10 5
 
-reload signal SIGUSR1
+# 12.04 upstart version does not support reload
+#reload signal SIGUSR1
 
 # Let's Encrypt certificates will be written to this directory.
 env CADDYPATH=/etc/caddy

@@ -16,6 +16,13 @@ For Debian / Ubuntu :
 	url_apt_key: "http://keyserver.ubuntu.com/pks/lookup?op=get&search="
 	mongodb_repository: "deb http://downloads-distro.mongodb.org/repo/debian-sysvinit dist 10gen"
 
+For RedHat / CentOS :
+
+    mongodb_version: "3.4"
+    mongodb_repo_baseurl: "http://local.repository.server/mongodb/"
+    mongodb_repo_gpgcheck: no
+    mongodb_repo_gpgkey: "http://www.example.com/pgp/server-{{ mongodb_version }}.asc"
+
 To change the list of packages to install:
 
 	mongodb_packages:

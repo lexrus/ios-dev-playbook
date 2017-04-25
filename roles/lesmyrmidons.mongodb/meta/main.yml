@@ -4,9 +4,10 @@ dependencies: []
 galaxy_info:
   author: lesmyrmidons
   description: MongoDB for RedHat/CentOS/Debian 64Bit.
-  company: ""
+  company: "ARBOUIN Consulting"
+  issue_tracker_url: https://github.com/lesmyrmidons/ansible-role-mongodb/issues
   license: "license (BSD, MIT)"
-  min_ansible_version: 1.4
+  min_ansible_version: 2.1
   platforms:
   - name: EL
     versions:

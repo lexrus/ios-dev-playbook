@@ -1,6 +1,0 @@
-[newrelic]
-name=New Relic packages for Enterprise Linux - $basearch
-baseurl=http://yum.newrelic.com/pub/newrelic/el5/$basearch
-enabled=1
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-NewRelic

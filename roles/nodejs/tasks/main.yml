@@ -1,11 +1,5 @@
 ---
 
-- name: install curl
-  apt: pkg=curl state=present
-  tags:
-    - nodejs
-    - curl
-
 - name: check node
   stat: path=/usr/bin/node
   register: node

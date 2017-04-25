@@ -1,11 +1,12 @@
 ---
 # defaults file for caddy-ansible
-caddy_email: foo@foo.bar
+caddy_user: www-data
+caddy_home: /home/caddy
 caddy_features: git
 caddy_update: yes
-caddy_init_system: false
 caddy_config: |
   localhost:2020
   gzip
+  # tls email@example.com
   root /var/www
-  git github.com/antoiner77/caddy-ansible /
+  git github.com/antoiner77/caddy-ansible

@@ -1,0 +1,11 @@
+---
+
+- name: Update cache
+  apt: update_cache=yes cache_valid_time=43200 #12 hours
+
+- name: Install git
+  apt: name=git state=present
+  when: caddy_features | search('git')
+
+- name: Install libcap
+  apt: name=libcap2-bin state=present

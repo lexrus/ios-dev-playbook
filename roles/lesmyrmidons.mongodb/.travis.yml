@@ -11,10 +11,10 @@ before_install:
 
 install:
   # Install Ansible.
-  - pip install ansible==1.5.0
+  - pip install ansible==2.1.0
 
   # Add ansible.cfg to pick up roles path.
-  - "printf '[defaults]\nroles_path = ../' > ansible.cfg"
+  - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
 
 script:
   # Check the role/playbook's syntax.
@@ -32,3 +32,6 @@ script:
 
   # Request a page via Apache, to make sure Apache is running and responds.
   - "curl http://localhost:27017/"
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/

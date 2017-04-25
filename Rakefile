@@ -4,24 +4,9 @@ task :deps do
     " --role-file=.dependencies.yml"
 end
 
-desc "Upgrade to jessie"
-task :jessie do
-  exec "ansible-playbook 000_prepare_jessie.yml -l cloud"
-end
-
 desc "Install common utitilies"
 task :common do
   exec "ansible-playbook 001_common_utilities.yml"
-end
-
-desc "Add SSH keys from GitHub"
-task :github_keys do
-  exec "ansible-playbook 002_ssh_keys_from_github.yml -l cloud"
-end
-
-desc "Set swap on"
-task :swapon do
-  exec "ansible-playbook 003_swapon.yml"
 end
 
 desc "Install docker"
@@ -44,11 +29,6 @@ task :jenkins do
   exec "ansible-playbook 011_jenkins.yml -l jenkins"
 end
 
-desc "Install Countly server"
-task :countly do
-  exec "ansible-playbook 012_countly.yml -l countly"
-end
-
 desc "Install Gogs server"
 task :gogs do
   exec "ansible-playbook 013_gogs.yml -l gogs"
@@ -59,19 +39,9 @@ task :gogsdr do
   exec "ansible-playbook 014_gogs_disable_registration.yml --tags=config,wait,restart -l gogs"
 end
 
-desc "Install MediaWiki server"
-task :mediawiki_settings do
-  exec "ansible-playbook 016_mediawiki.yml -l mediawiki --tags=upload_settings"
-end
-
 desc "Install Ghost server"
 task :ghost do
   exec "ansible-playbook 030_ghost.yml -l ghost"
-end
-
-desc "Install cow server"
-task :cow do
-  exec "ansible-playbook 020_cow_backend.yml -l cow_backend"
 end
 
 desc "Install shadowsocks server"
@@ -82,11 +52,6 @@ end
 desc "Install haproxy server"
 task :haproxy do
   exec "ansible-playbook 023_haproxy.yml"
-end
-
-desc "Install & config NewRelic agent"
-task :newrelic do
-  exec "ansible-playbook 053_newrelic.yml"
 end
 
 desc "Install uptime"

@@ -4,13 +4,6 @@ python: "2.7"
 
 before_install:
 
-  # Remove MySQL.
-  - sudo apt-get -y purge 'mysql*'
-  - sudo apt-get -y autoremove
-  - sudo apt-get -y autoclean
-  - sudo rm -rf /var/lib/mysql
-  - sudo truncate -s 0 /var/log/mysql/error.log
-
   - sudo apt-get update
 
 install:
@@ -20,17 +13,13 @@ install:
 script:
 
   # Check the role/playbook's syntax.
-  - ansible-playbook -i ansible_localhost.ini 000_prepare_jessie.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 001_common_utilities.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 004_docker.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 009_ajenti.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 010_gitlab.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 011_jenkins.yml --syntax-check
-  - ansible-playbook -i ansible_localhost.ini 012_countly.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 013_gogs.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 014_gogs_disable_registration.yml --syntax-check
-  - ansible-playbook -i ansible_localhost.ini 020_cow_backend.yml --syntax-check
-  - ansible-playbook -i ansible_localhost.ini 021_cow_frontend.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 022_shadowsocks.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 023_haproxy.yml --syntax-check
   - ansible-playbook -i ansible_localhost.ini 030_ghost.yml --syntax-check
@@ -40,7 +29,6 @@ script:
 
   # Run the role/playbook with ansible-playbook.
   - ansible-playbook -i ansible_localhost.ini 001_common_utilities.yml -c local --sudo
-  - ansible-playbook -i ansible_localhost.ini 020_cow_backend.yml -c local --sudo --skip-tags sysctl
   - ansible-playbook -i ansible_localhost.ini 022_shadowsocks.yml -c local --sudo --skip-tags sysctl
 
   # Requests to make sure web respond.

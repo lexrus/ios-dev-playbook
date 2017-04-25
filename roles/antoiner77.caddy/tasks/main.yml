@@ -1,79 +1,77 @@
 ---
+- include: packages-{{ ansible_pkg_mgr }}.yml
+
 - name: Create Caddy user
-  user: name=caddy system=yes createhome=yes
+  user: name={{ caddy_user }} system=yes createhome=yes home={{ caddy_home }}
 
 - name: Get all Caddy releases
-  get_url: url=https://api.github.com/repos/mholt/caddy/git/refs/tags dest=/home/caddy/releases.txt force=yes
+  get_url: url=https://api.github.com/repos/mholt/caddy/git/refs/tags dest={{ caddy_home }}/releases.txt force=yes
   when: caddy_update
   register: caddy_releases_cache
 
 - name: Set Caddy features
-  copy: content="{{caddy_features}}" dest=/home/caddy/features.txt
+  copy: content="{{ caddy_features }}" dest={{ caddy_home }}/features.txt
   when: caddy_update
   register: caddy_features_cache
 
 - name: Download Caddy
-  get_url: url=https://caddyserver.com/download/build?os=linux&arch=amd64&features={{caddy_features}} dest=/home/caddy/caddy.tar.gz force=yes
+  get_url: url=https://caddyserver.com/download/build?os=linux&arch=amd64&features={{ caddy_features }} dest={{ caddy_home }}/caddy.tar.gz force=yes
   when: caddy_releases_cache.changed or caddy_features_cache.changed
   register: caddy_binary_cache
 
 - name: Download Caddy
-  get_url: url=https://caddyserver.com/download/build?os=linux&arch=amd64&features={{caddy_features}} dest=/home/caddy/caddy.tar.gz
+  get_url: url=https://caddyserver.com/download/build?os=linux&arch=amd64&features={{ caddy_features }} dest={{ caddy_home }}/caddy.tar.gz
 
 - name: Extract Caddy
-  unarchive: src=/home/caddy/caddy.tar.gz dest=/usr/bin/ copy=no
+  unarchive: src={{ caddy_home }}/caddy.tar.gz dest={{ caddy_home }} copy=no owner={{ caddy_user }}
   when: caddy_binary_cache.changed
 
 - name: Extract Caddy
-  unarchive: src=/home/caddy/caddy.tar.gz dest=/usr/bin/ creates=/usr/bin/caddy copy=no
+  unarchive: src={{ caddy_home }}/caddy.tar.gz dest={{ caddy_home }} creates={{ caddy_home }}/caddy copy=no owner={{ caddy_user }}
 
-- name: Install libraries
-  apt: name=libcap2-bin
-  when: ansible_os_family == "Debian"
+- name: Copy Caddy Binary
+  copy: src={{ caddy_home }}/caddy dest=/usr/local/bin/ mode=0755 remote_src=True
+  notify: Restart Caddy
+
+- name: Create directories
+  file: path={{ item }} state=directory owner={{ caddy_user }} mode=0700
+  with_items:
+    - /etc/caddy
+    - /etc/ssl/caddy
+    - /var/www
+    - /var/log/caddy
+
+- name: Create Caddyfile
+  copy: content="{{caddy_config}}" dest=/etc/caddy/Caddyfile owner={{ caddy_user }}
+  notify: Restart Caddy
+
+- name: Check if systemd is running
+  stat: path=/run/systemd/system
+  register: systemd
+
+- name: Upstart service
+  template: src={{ item }} dest=/etc/init/caddy.conf mode=0644
+  when: not systemd.stat.exists
+  with_first_found:
+    - "caddy.conf.{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version }}"
+    - "caddy.conf.{{ ansible_distribution | lower }}-{{ ansible_distribution_version }}"
+    - "caddy.conf"
+  notify: Restart Caddy
+
+- name: Systemd service
+  template: src=caddy.service dest=/etc/systemd/system/caddy.service mode=0755
+  when: systemd.stat.exists
+  notify: Reload systemd service file
 
 - name: Check if the binary can bind to TCP port <1024
-  shell: getcap /usr/bin/caddy | grep cap_net_bind_service
+  shell: getcap /usr/local/bin/caddy | grep cap_net_bind_service
   failed_when: False
   changed_when: False
   register: caddy_bind_cap
 
 - name: Set capability on the binary file to be able to bind to TCP port <1024
-  command: setcap cap_net_bind_service=+ep /usr/bin/caddy
+  command: setcap cap_net_bind_service=+ep /usr/local/bin/caddy
   when: caddy_bind_cap.rc > 0
-
-- name: Create directories
-  file: path={{ item }} state=directory owner=caddy
-  with_items:
-    - /etc/caddy
-    - /var/www
-
-- name: Create Caddyfile
-  copy: content="{{caddy_config}}" dest=/etc/caddy/Caddyfile
-  notify: Restart Caddy
-
-- name: apt | Install git
-  apt: name=git update_cache=yes
-  when: ansible_pkg_mgr == 'apt' and caddy_features | search('git')
-
-- name: yum | Install git
-  yum: name=git
-  when: ansible_pkg_mgr == 'yum' and caddy_features | search('git')
-
-- name: dnf | Install git
-  dnf: name=git
-  when: ansible_pkg_mgr == 'dnf' and caddy_features | search('git')
-
-- name: Upstart service
-  template: src=caddy.conf dest=/etc/init/caddy.conf
-  ignore_errors: yes
-  when: not caddy_init_system or caddy_init_system == "upstart"
-  notify: Restart Caddy
-
-- name: Systemd service
-  template: src=caddy.service dest=/etc/systemd/system/caddy.service
-  ignore_errors: yes
-  when: not caddy_init_system or caddy_init_system == "systemd"
-  notify: Reload systemd service file
 
 - name: Start Caddy service
   service: name=caddy state=started enabled=yes
