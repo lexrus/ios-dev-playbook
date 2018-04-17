@@ -114,6 +114,12 @@ Vagrant 测试的 roles 都写在 [tests/vagrant_test.yml](https://github.com/le
 
 Travis 设置了测试 playbook 的语法是否正确，以及 `001_common_utilities.yml` 是否能顺利跑通。
 
+## 捐赠
+
+非常感谢请我喝咖啡的朋友们，我的钱包地址是:
+BTC: `3MnMu3Q1UK63dRbwjhwqWSBVLWxy8SPk6b`
+ETH: `0x2884F4bE2cBA05395EE0EF997a44aA9B90fD2E2A`
+
 ## 上哪搞服务器?
 
 欢迎你使用我的推广链接注册自己的虚拟服务器：
